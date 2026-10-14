@@ -122,12 +122,49 @@
 
     </section>
 
+    <!-- ================= SECTION 2: THE FILM INDUSTRY COLLAPSES ================= -->
+    <section class="section" id="film-collapse">
+      <div class="section-head film">
+        <span class="section-num">02</span>
+        <h2>The film industry collapses</h2>
+      </div>
+
+      <!-- Chart 3: proportional symbol maps, small multiples (layout B) -->
+      <div class="row-b">
+        <div class="text grid">
+          <h3 class="span-1">Film cameras <span class="film">almost vanished</span> in ten years</h3>
+          <p class="span-1">In 2000 the world exported US$3.6 billion of 35mm film cameras, over half from Hong Kong and China. By 2010 the trade had fallen by 96%.</p>
+          <p class="span-1 how">How to read: each map is one year. Circles show each country's film camera exports, using the same scale on every map. The red ring marks Australia.</p>
+        </div>
+        <div id="vis_s2_exports" class="vis"></div>
+        <div class="insights grid">
+          <div class="insight film">
+            <div class="insight-label">2000 · US$3.6 billion</div>
+            <div class="insight-number">55% from Hong Kong and China</div>
+            <p>The last big year for film cameras. Hong Kong alone exported over US$1 billion worth.</p>
+          </div>
+          <div class="insight film">
+            <div class="insight-label">2010 · down 96%</div>
+            <div class="insight-number">US$158 million worldwide</div>
+            <p>Digital cameras took over within a decade. By 2015 exports were just US$58 million.</p>
+          </div>
+          <div class="insight" style="border-color: var(--australia);">
+            <div class="insight-label aus">Australia · down 98%</div>
+            <div class="insight-number">US$5.2m (2000) → US$0.1m (2010)</div>
+            <p>Australia's own film camera exports collapsed at the same pace, falling 98% in ten years.</p>
+          </div>
+        </div>
+        <p class="how">Proportional symbol maps in small multiples · Circle area shows exports in US$ (current prices) · Hover over a circle for details · Source: UN Comtrade via World Bank WITS, HS code 900653 (cameras for 35mm roll film).</p>
+      </div>
+    </section>
+
     <!-- ================= FOOTER ================= -->
     <footer class="grid">
       <div class="span-2">
         <strong>Data sources</strong>
         <p><a href="https://collection.sciencemuseumgroup.org.uk/" target="_blank">Science Museum Group Collection</a> (CC0 / CC BY 4.0), © The Board of Trustees of the Science Museum</p>
         <p><a href="https://collections.museumsvictoria.com.au/" target="_blank">Museums Victoria Collections</a> (CC0 / CC BY 4.0)</p>
+        <p><a href="https://wits.worldbank.org/" target="_blank">UN Comtrade via World Bank WITS</a>: exports of 35mm film cameras (HS 900653), 2000–2023</p>
         <p>Map: <a href="https://www.naturalearthdata.com/" target="_blank">Natural Earth</a> 1:110m countries (public domain)</p>
       </div>
       <div class="span-1">
@@ -142,6 +179,7 @@
   <script>
     vegaEmbed('#vis_s1_types', 'js/s1_camera_types_heatmap.vg.json', { actions: false }).catch(console.error);
     vegaEmbed('#vis_s1_flow', 'js/s1_flow_map.vg.json', { actions: false }).catch(console.error);
+    vegaEmbed('#vis_s2_exports', 'js/s2_film_camera_exports_map.vg.json', { actions: false }).catch(console.error);
   </script>
 </body>
 
