@@ -1,44 +1,90 @@
+/* ==========================================================
+   From Film to Phone: page styles
+   One colour = one meaning across the whole page (DV1 feedback)
+   ========================================================== */
+:root {
+  --film: #C8862A;      /* film era */
+  --digital: #1B7F8C;   /* digital cameras */
+  --phone: #6A4C93;     /* mobile phones */
+  --australia: #C23B22; /* Australia ONLY */
+  --context: #C9C6BF;   /* everything else */
+  --ink: #1F1F1F;
+  --ink-soft: #3A3A3A;
+  --muted: #6B6B6B;
+  --rule: #E0DCD2;
+  --paper: #FAF8F3;
+  --display: 'Bebas Neue', 'Arial Narrow', sans-serif;
+  --body: 'Source Sans 3', Helvetica, Arial, sans-serif;
+}
+
+* { box-sizing: border-box; }
+
 body {
-  font-family: 'Source Sans 3', sans-serif;
-  color: #222;
-  background: #fafaf7;
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--body);
+  font-size: 18px;
+  line-height: 1.6;
 }
 
-.page {
-  max-width: 1100px;
-  margin: 0 auto;
-  padding: 24px 16px 48px;
-}
+/* One centred column for the whole page: every row shares the same two edges (fewer sight lines) */
+.page { max-width: 1120px; margin: 0 auto; padding: 0 24px; }
 
-h1 {
-  font-size: 2.6em;
-  margin-bottom: 0.2em;
-}
+a { color: var(--digital); }
+a:hover { color: #0B3F46; }
 
-h2 {
-  font-size: 1.4em;
-  margin-top: 0.4em;
-}
+/* ---------- Intro ---------- */
+.intro { padding: 88px 0 56px; }
+.kicker { font-family: var(--display); font-size: 20px; letter-spacing: 0.12em; color: var(--film); margin: 0 0 8px; }
+h1 { font-family: var(--display); font-weight: 400; font-size: clamp(56px, 9vw, 96px); line-height: 0.95; margin: 0 0 16px; }
+.lead { font-size: 22px; line-height: 1.45; color: var(--ink-soft); max-width: 21em; margin: 0; }
 
-.lead {
-  font-size: 1.2em;
-  color: #555;
-}
+.stats { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px; margin-top: 48px; }
+.stat { border-top: 4px solid; padding-top: 14px; }
+.stat-number { font-family: var(--display); font-size: 52px; line-height: 1; }
+.stat-text { font-size: 17px; line-height: 1.45; color: var(--ink-soft); margin: 6px 0 0; }
 
-.description {
-  padding-right: 24px;
-  line-height: 1.55;
-  max-width: 34em;
-}
+.key { display: flex; flex-wrap: wrap; gap: 12px 28px; margin-top: 40px; padding-top: 20px; border-top: 1px solid var(--rule); font-size: 16px; }
+.key-title { font-family: var(--display); font-size: 22px; letter-spacing: 0.06em; width: 100%; }
+.key span { display: inline-flex; align-items: center; gap: 8px; }
+.swatch { width: 18px; height: 18px; border-radius: 4px; display: inline-block; }
 
-.vis-container {
-  width: 100%;
-  margin-bottom: 40px;
-}
+/* ---------- Sections ---------- */
+.section { padding: 64px 0 24px; }
+.section-head { display: flex; align-items: baseline; gap: 18px; border-bottom: 3px solid; padding-bottom: 10px; margin-bottom: 48px; }
+.section-num { font-family: var(--display); font-size: 72px; line-height: 1; }
+.section-head h2 { font-family: var(--display); font-weight: 400; font-size: 56px; line-height: 1; margin: 0; }
 
-.footer {
-  border-top: 1px solid #ddd;
-  margin-top: 40px;
-  font-size: 0.85em;
-  color: #666;
+/* The only two row layouts on the page */
+.row-a { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 2fr); gap: 48px; align-items: start; margin-bottom: 80px; }
+.row-b { margin-bottom: 80px; }
+
+.text h3 { font-size: 26px; line-height: 1.2; margin: 0 0 12px; }
+.text p { margin: 0 0 12px; max-width: 21em; }   /* about 10 words per line (DV1 feedback) */
+.row-b .text { max-width: 40em; margin-bottom: 20px; }
+.row-b .text p { max-width: 34em; }
+
+.how { font-size: 15px; line-height: 1.5; color: var(--muted); }
+.hint { display: flex; align-items: center; gap: 10px; font-size: 15px; color: var(--muted); }
+.pill { border: 1px solid; border-radius: 999px; padding: 3px 12px; font-weight: 600; white-space: nowrap; }
+
+.vis { width: 100%; }
+
+/* Section colours */
+.film { color: var(--film); border-color: var(--film); }
+.digital { color: var(--digital); border-color: var(--digital); }
+.phone { color: var(--phone); border-color: var(--phone); }
+.aus { color: var(--australia); }
+
+/* ---------- Footer ---------- */
+footer { border-top: 1px solid var(--rule); margin-top: 40px; padding: 24px 0 64px; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 32px; font-size: 14px; line-height: 1.6; color: #4A4A4A; }
+footer strong { color: var(--ink); display: block; margin-bottom: 4px; }
+footer p { margin: 0 0 4px; }
+
+/* ---------- Small screens ---------- */
+@media (max-width: 860px) {
+  .row-a, .stats, footer { grid-template-columns: 1fr; }
+  .section-head h2 { font-size: 40px; }
+  .section-num { font-size: 52px; }
 }
