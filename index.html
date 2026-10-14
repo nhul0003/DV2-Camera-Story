@@ -92,6 +92,34 @@
       </div>
 
       <!-- Chart 2 (flow map) goes here next -->
+             <!-- Chart 2: flow map + year histogram (layout B: one row of text, then a full-width chart) -->
+      <div class="row-b">
+        <div class="text grid">
+          <h3 class="span-1">Where <span class="aus">Melbourne's</span> cameras came from</h3>
+          <p class="span-1">Most cameras in Museums Victoria were made overseas, first in the USA, Britain and Germany, later in Japan. Eighteen were made here, mostly by Kodak in Melbourne.</p>
+          <p class="span-1 how">How to read: each line runs from where cameras were made to Melbourne. Thicker lines and bigger circles mean more cameras. Drag across the years below the map to filter it.</p>
+        </div>
+        <div id="vis_s1_flow" class="vis"></div>
+        <div class="insights grid">
+          <div class="insight film">
+            <div class="insight-label">USA · 40%</div>
+            <div class="insight-number">65 of 163 cameras</div>
+            <p>The biggest source. 38 of them were made by Kodak, whose head office was in Rochester, New York.</p>
+          </div>
+          <div class="insight film">
+            <div class="insight-label">Japan · after 1950</div>
+            <div class="insight-number">16 cameras, all from 1950 on</div>
+            <p>Japanese cameras only appear after the Second World War. Select 1950–1990 on the bar chart to see them.</p>
+          </div>
+          <div class="insight" style="border-color: var(--australia);">
+            <div class="insight-label aus">Made in Australia · 18</div>
+            <div class="insight-number">11 by Kodak Australasia</div>
+            <p>Kodak built cameras in Melbourne for Australian families until its Coburg plant closed in 2004.</p>
+          </div>
+        </div>
+        <p class="how">Flow map with a linked bar chart · Equal Earth projection, centred on the Pacific so Australia sits near the middle · 163 cameras with a known country and year · Country and year are read from the museum record, or from the object title when the record is blank · Source: Museums Victoria Collections.</p>
+      </div>
+
     </section>
 
     <!-- ================= FOOTER ================= -->
@@ -99,8 +127,10 @@
       <div class="span-2">
         <strong>Data sources</strong>
         <p><a href="https://collection.sciencemuseumgroup.org.uk/" target="_blank">Science Museum Group Collection</a> (CC0 / CC BY 4.0), © The Board of Trustees of the Science Museum</p>
+        <p><a href="https://collections.museumsvictoria.com.au/" target="_blank">Museums Victoria Collections</a> (CC0 / CC BY 4.0)</p>
+        <p>Map: <a href="https://www.naturalearthdata.com/" target="_blank">Natural Earth</a> 1:110m countries (public domain)</p>
+      </div>
       <div class="span-1">
-      <div>
         <strong>About</strong>
         <p>Created by Nevan Hulu for FIT3179 Data Visualisation 2, Monash University, October 2026.</p>
         <p>Charts built with Vega-Lite.</p>
@@ -111,6 +141,7 @@
 
   <script>
     vegaEmbed('#vis_s1_types', 'js/s1_camera_types_heatmap.vg.json', { actions: false }).catch(console.error);
+    vegaEmbed('#vis_s1_flow', 'js/s1_flow_map.vg.json', { actions: false }).catch(console.error);
   </script>
 </body>
 

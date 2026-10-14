@@ -1,0 +1,279 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "description": "Flow map: where the cameras in Museums Victoria (Melbourne) were made, with a year-made histogram that filters the map.",
+  "data": {"url": "data/museums_victoria_cameras.csv"},
+  "transform": [
+    {"filter": "test(/^[A-Za-z ]*Camera - /, datum.object_name) && !test(/^Camera Case/, datum.object_name)"},
+    {
+      "calculate": "datum.country_made == 'England, Great Britain' || datum.country_made == 'England' || datum.country_made == 'Great Britain' ? 'United Kingdom' : datum.country_made == 'West Germany' ? 'Germany' : datum.country_made ? datum.country_made : test(/Hong Kong/, datum.title) ? 'Hong Kong' : test(/U\\.S\\.A|USA|United States|America|New York|Rochester|Michigan|Chicago|Massachusetts/, datum.title) ? 'United States of America' : test(/England|London|Great Britain|United Kingdom|Scotland|Birmingham/, datum.title) ? 'United Kingdom' : test(/Germany|Berlin|Dresden|Munich|Stuttgart|Braunschweig|Brunswick/, datum.title) ? 'Germany' : test(/Japan|Tokyo|Osaka/, datum.title) ? 'Japan' : test(/Australia|Melbourne|Coburg|Sydney|Abbotsford/, datum.title) ? 'Australia' : test(/France|Paris/, datum.title) ? 'France' : test(/China/, datum.title) ? 'China' : test(/Austria|Vienna/, datum.title) ? 'Austria' : test(/Italy/, datum.title) ? 'Italy' : test(/Czech/, datum.title) ? 'Czech Republic' : test(/Switzerland/, datum.title) ? 'Switzerland' : test(/USSR|Russia|Soviet/, datum.title) ? 'Russia' : test(/Canada/, datum.title) ? 'Canada' : test(/Netherlands|Holland/, datum.title) ? 'Netherlands' : test(/Taiwan/, datum.title) ? 'Taiwan' : test(/Thailand/, datum.title) ? 'Thailand' : test(/Sweden/, datum.title) ? 'Sweden' : ''",
+      "as": "country"
+    },
+    {
+      "calculate": "datum.year_made ? toNumber(datum.year_made) : test(/\\b(1[89]\\d\\d|20\\d\\d)\\b/, datum.title) ? toNumber(replace(datum.title, /^.*?\\b(1[89]\\d\\d|20\\d\\d)\\b.*$/, '$1')) : null",
+      "as": "year"
+    },
+    {"filter": "datum.country != '' && isValid(datum.year)"},
+    {
+      "lookup": "country",
+      "from": {"data": {"url": "data/countryInfo.csv"}, "key": "name", "fields": ["latitude", "longitude"]}
+    },
+    {
+      "calculate": "datum.country == 'United States of America' ? 'USA' : datum.country == 'United Kingdom' ? 'UK' : datum.country",
+      "as": "short_name"
+    }
+  ],
+  "vconcat": [
+    {
+      "width": 1072,
+      "height": 464,
+      "projection": {"type": "equalEarth", "rotate": [-150, 0, 0], "scale": 193, "translate": [536.0, 257.5]},
+      "layer": [
+        {
+          "data": {
+            "url": "js/ne_110m_admin_0_countries.topojson",
+            "format": {"type": "topojson", "feature": "ne_110m_admin_0_countries"}
+          },
+          "transform": [{"filter": "datum.properties.NAME != 'Antarctica'"}],
+          "mark": {"type": "geoshape", "fill": "#DAD5CA", "stroke": "#FAF8F3", "strokeWidth": 0.6}
+        },
+        {
+          "transform": [
+            {"filter": {"param": "brush"}},
+            {"filter": "datum.country != 'Australia'"},
+            {
+              "aggregate": [{"op": "count", "as": "cameras"}],
+              "groupby": ["country", "short_name", "latitude", "longitude"]
+            }
+          ],
+          "mark": {"type": "rule", "color": "#C8862A", "opacity": 0.55, "strokeCap": "round"},
+          "encoding": {
+            "longitude": {"field": "longitude", "type": "quantitative"},
+            "latitude": {"field": "latitude", "type": "quantitative"},
+            "longitude2": {"datum": 144.96},
+            "latitude2": {"datum": -37.81},
+            "strokeWidth": {
+              "field": "cameras",
+              "type": "quantitative",
+              "scale": {"domain": [1, 65], "range": [1.2, 12]},
+              "legend": null
+            }
+          }
+        },
+        {
+          "transform": [
+            {"filter": {"param": "brush"}},
+            {
+              "aggregate": [
+                {"op": "count", "as": "cameras"},
+                {"op": "min", "field": "year", "as": "first_year"},
+                {"op": "max", "field": "year", "as": "last_year"}
+              ],
+              "groupby": ["country", "short_name", "latitude", "longitude"]
+            },
+            {"joinaggregate": [{"op": "sum", "field": "cameras", "as": "total"}]},
+            {"calculate": "datum.cameras / datum.total", "as": "share"},
+            {
+              "calculate": "datum.first_year == datum.last_year ? '' + datum.first_year : datum.first_year + '–' + datum.last_year",
+              "as": "years"
+            },
+            {"calculate": "datum.country == 'Australia' ? 144.96 : datum.longitude", "as": "lon"},
+            {"calculate": "datum.country == 'Australia' ? -37.81 : datum.latitude", "as": "lat"},
+            {
+              "calculate": "datum.country == 'Australia' ? 'Made in Australia' : 'Made overseas'",
+              "as": "origin"
+            },
+            {
+              "calculate": "datum.country == 'Australia' ? 'Melbourne: ' + datum.cameras + ' made in Australia' : datum.short_name + ' ' + datum.cameras",
+              "as": "label"
+            }
+          ],
+          "layer": [
+            {
+              "mark": {"type": "circle", "opacity": 0.9, "stroke": "#FAF8F3", "strokeWidth": 1.2},
+              "encoding": {
+                "longitude": {"field": "lon", "type": "quantitative"},
+                "latitude": {"field": "lat", "type": "quantitative"},
+                "size": {
+                  "field": "cameras",
+                  "type": "quantitative",
+                  "title": "Cameras made there",
+                  "scale": {"domain": [1, 65], "range": [25, 900]},
+                  "legend": {
+                    "orient": "bottom-left",
+                    "direction": "horizontal",
+                    "values": [1, 10, 30, 60],
+                    "symbolFillColor": "#C8862A",
+                    "symbolStrokeColor": "#FAF8F3",
+                    "titleFontSize": 13,
+                    "labelFontSize": 12,
+                    "fillColor": "#FAF8F3",
+                    "padding": 8
+                  }
+                },
+                "color": {
+                  "field": "origin",
+                  "type": "nominal",
+                  "scale": {"domain": ["Made overseas", "Made in Australia"], "range": ["#C8862A", "#C23B22"]},
+                  "legend": null
+                },
+                "tooltip": [
+                  {"field": "country", "type": "nominal", "title": "Made in"},
+                  {"field": "cameras", "type": "quantitative", "title": "Cameras"},
+                  {"field": "share", "type": "quantitative", "title": "Share of cameras", "format": ".0%"},
+                  {"field": "years", "type": "nominal", "title": "Years made"}
+                ]
+              }
+            },
+            {
+              "transform": [
+                {
+                  "filter": "datum.cameras >= 5 && datum.country != 'Australia' && datum.country != 'United Kingdom' && datum.country != 'Germany'"
+                }
+              ],
+              "mark": {"type": "text", "dy": -16, "fontSize": 13, "fontWeight": 700, "color": "#1F1F1F"},
+              "encoding": {
+                "longitude": {"field": "lon", "type": "quantitative"},
+                "latitude": {"field": "lat", "type": "quantitative"},
+                "text": {"field": "label", "type": "nominal"}
+              }
+            },
+            {
+              "transform": [{"filter": "datum.country == 'United Kingdom'"}],
+              "mark": {
+                "type": "text",
+                "align": "right",
+                "dx": -12,
+                "dy": -6,
+                "fontSize": 13,
+                "fontWeight": 700,
+                "color": "#1F1F1F"
+              },
+              "encoding": {
+                "longitude": {"field": "lon", "type": "quantitative"},
+                "latitude": {"field": "lat", "type": "quantitative"},
+                "text": {"field": "label", "type": "nominal"}
+              }
+            },
+            {
+              "transform": [{"filter": "datum.country == 'Germany'"}],
+              "mark": {
+                "type": "text",
+                "align": "left",
+                "dx": 14,
+                "dy": -2,
+                "fontSize": 13,
+                "fontWeight": 700,
+                "color": "#1F1F1F"
+              },
+              "encoding": {
+                "longitude": {"field": "lon", "type": "quantitative"},
+                "latitude": {"field": "lat", "type": "quantitative"},
+                "text": {"field": "label", "type": "nominal"}
+              }
+            },
+            {
+              "transform": [{"filter": "datum.country == 'Australia'"}],
+              "mark": {
+                "type": "text",
+                "align": "left",
+                "dx": 18,
+                "dy": 4,
+                "fontSize": 13,
+                "fontWeight": 700,
+                "color": "#C23B22"
+              },
+              "encoding": {
+                "longitude": {"field": "lon", "type": "quantitative"},
+                "latitude": {"field": "lat", "type": "quantitative"},
+                "text": {"field": "label", "type": "nominal"}
+              }
+            }
+          ],
+          "resolve": {"legend": {"size": "independent"}}
+        }
+      ],
+      "resolve": {"legend": {"size": "independent", "strokeWidth": "independent"}}
+    },
+    {
+      "width": 1027,
+      "height": 90,
+      "layer": [
+        {
+          "params": [{"name": "brush", "select": {"type": "interval", "encodings": ["x"]}}],
+          "mark": {"type": "bar", "cornerRadiusTopLeft": 2, "cornerRadiusTopRight": 2, "color": "#D6D1C6"},
+          "encoding": {
+            "x": {
+              "field": "year",
+              "type": "quantitative",
+              "bin": {"step": 5, "extent": [1860, 2015]},
+              "title": null,
+              "axis": {
+                "format": "d",
+                "labelFontSize": 12,
+                "values": [1860, 1880, 1900, 1920, 1940, 1960, 1980, 2000],
+                "labelOverlap": true
+              }
+            },
+            "y": {
+              "aggregate": "count",
+              "type": "quantitative",
+              "title": "Cameras",
+              "axis": {"tickCount": 3, "grid": false, "titleFontSize": 12, "titleFontWeight": 600}
+            },
+            "tooltip": [
+              {
+                "field": "year",
+                "bin": {"step": 5, "extent": [1860, 2015]},
+                "type": "quantitative",
+                "title": "Years made"
+              },
+              {"aggregate": "count", "type": "quantitative", "title": "Cameras"}
+            ]
+          }
+        },
+        {
+          "transform": [{"filter": {"param": "brush"}}],
+          "mark": {"type": "bar", "cornerRadiusTopLeft": 2, "cornerRadiusTopRight": 2, "color": "#C8862A"},
+          "encoding": {
+            "x": {
+              "field": "year",
+              "type": "quantitative",
+              "bin": {"step": 5, "extent": [1860, 2015]},
+              "title": null,
+              "axis": {
+                "format": "d",
+                "labelFontSize": 12,
+                "values": [1860, 1880, 1900, 1920, 1940, 1960, 1980, 2000],
+                "labelOverlap": true
+              }
+            },
+            "y": {
+              "aggregate": "count",
+              "type": "quantitative",
+              "title": "Cameras",
+              "axis": {"tickCount": 3, "grid": false, "titleFontSize": 12, "titleFontWeight": 600}
+            },
+            "tooltip": [
+              {
+                "field": "year",
+                "bin": {"step": 5, "extent": [1860, 2015]},
+                "type": "quantitative",
+                "title": "Years made"
+              },
+              {"aggregate": "count", "type": "quantitative", "title": "Cameras"}
+            ]
+          }
+        }
+      ]
+    }
+  ],
+  "spacing": 12,
+  "config": {
+    "background": null,
+    "view": {"stroke": null},
+    "font": "Source Sans 3",
+    "axis": {"domain": false, "ticks": false, "labelColor": "#4A4A4A", "titleColor": "#4A4A4A", "labelFontSize": 13},
+    "legend": {"labelColor": "#4A4A4A", "titleColor": "#4A4A4A", "titleFontWeight": 600}
+  },
+  "padding": {"left": 0, "right": 0, "top": 5, "bottom": 5}
+}
