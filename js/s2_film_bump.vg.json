@@ -1,0 +1,110 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "description": "Bump chart: world rank of the top 10 colour film exporters of 2000, from 2000 to 2023. Australia highlighted.",
+  "width": 540,
+  "height": 380,
+  "data": {"url": "data/s2_colour_film.csv"},
+  "transform": [
+    {"filter": "datum.Reporter != 'European Union' && datum.Reporter != 'World'"},
+    {
+      "calculate": "datum.Reporter == 'Hong Kong, China' ? 'Hong Kong' : datum.Reporter == 'United States' ? 'USA' : datum.Reporter == 'United Kingdom' ? 'UK' : datum.Reporter",
+      "as": "country"
+    },
+    {"calculate": "datum['Trade Value 1000USD'] / 1000", "as": "exports"},
+    {
+      "window": [{"op": "row_number", "as": "rank"}],
+      "sort": [{"field": "exports", "order": "descending"}],
+      "groupby": ["Year"]
+    },
+    {"calculate": "datum.Year == 2000 ? datum.rank : 999", "as": "rank_in_2000"},
+    {
+      "joinaggregate": [
+        {"op": "min", "field": "rank_in_2000", "as": "start_rank"},
+        {"op": "max", "field": "Year", "as": "last_year"}
+      ],
+      "groupby": ["country"]
+    },
+    {"filter": "datum.start_rank <= 10"},
+    {"calculate": "min(datum.rank, 21)", "as": "rank_plot"},
+    {"calculate": "datum.country == 'Australia' ? 'Australia' : 'Other countries'", "as": "group"},
+    {"calculate": "'#' + datum.rank", "as": "rank_label"}
+  ],
+  "encoding": {
+    "x": {
+      "field": "Year",
+      "type": "ordinal",
+      "title": null,
+      "axis": {"labelAngle": 0, "labelFontSize": 13, "labelPadding": 10, "domain": false, "ticks": false}
+    },
+    "y": {
+      "field": "rank_plot",
+      "type": "quantitative",
+      "title": "World rank",
+      "scale": {"domain": [1, 21], "reverse": true, "nice": false},
+      "axis": {
+        "values": [1, 5, 10, 15, 20, 21],
+        "labelExpr": "datum.value == 21 ? 'below 20' : '#' + datum.value",
+        "grid": true,
+        "gridColor": "#ECE8DF",
+        "domain": false,
+        "ticks": false,
+        "titleFontWeight": 600,
+        "titleColor": "#6B6B6B"
+      }
+    },
+    "color": {
+      "field": "group",
+      "type": "nominal",
+      "scale": {"domain": ["Other countries", "Australia"], "range": ["#A9A49A", "#C23B22"]},
+      "legend": null
+    },
+    "opacity": {"condition": {"param": "hover", "empty": true, "value": 1}, "value": 0.2}
+  },
+  "layer": [
+    {
+      "params": [
+        {
+          "name": "hover",
+          "select": {"type": "point", "fields": ["country"], "on": "pointerover", "clear": "pointerout"}
+        }
+      ],
+      "mark": {"type": "line", "interpolate": "monotone", "strokeWidth": 3, "strokeCap": "round"},
+      "encoding": {
+        "detail": {"field": "country"},
+        "strokeWidth": {"condition": {"test": "datum.country == 'Australia'", "value": 4}, "value": 2.5}
+      }
+    },
+    {
+      "mark": {"type": "circle", "size": 70, "stroke": "#FAF8F3", "strokeWidth": 1.5},
+      "encoding": {
+        "tooltip": [
+          {"field": "Reporter", "type": "nominal", "title": "Country"},
+          {"field": "Year", "type": "ordinal", "title": "Year"},
+          {"field": "rank", "type": "quantitative", "title": "World rank"},
+          {"field": "exports", "type": "quantitative", "title": "Exports (US$ m)", "format": ",.1f"}
+        ]
+      }
+    },
+    {
+      "transform": [{"filter": "datum.Year == datum.last_year && datum.country != 'Australia'"}],
+      "mark": {"type": "text", "align": "left", "baseline": "middle", "dx": 12, "fontSize": 13},
+      "encoding": {"text": {"field": "country"}}
+    },
+    {
+      "transform": [{"filter": "datum.Year == datum.last_year && datum.country == 'Australia'"}],
+      "mark": {"type": "text", "align": "left", "baseline": "middle", "dx": 12, "fontSize": 13, "fontWeight": 700},
+      "encoding": {"text": {"field": "country"}}
+    },
+    {
+      "transform": [{"filter": "datum.country == 'Australia'"}],
+      "mark": {"type": "text", "align": "center", "baseline": "bottom", "dy": -9, "fontSize": 12, "fontWeight": 700},
+      "encoding": {"text": {"field": "rank_label"}}
+    }
+  ],
+  "config": {
+    "background": null,
+    "view": {"stroke": null},
+    "font": "Source Sans 3",
+    "axis": {"labelColor": "#4A4A4A", "labelFontSize": 13}
+  }
+}
