@@ -1,0 +1,75 @@
+{
+  "chart": {
+    "title": "Adoption of communication technologies per 100 people",
+    "note": "Landline Internet subscriptions are defined as a fixed access to the public Internet with a download speed of at least 256 kbit/s. Internet users are people who have accessed the Internet from any location in the last three months.",
+    "citation": "International Telecommunication Union (ITU), via World Bank (2026); World Telecommunication/ICT Indicators Database - International Telecommunication Union (ITU), via World Bank (2026)",
+    "originalChartUrl": "https://ourworldindata.org/grapher/ict-adoption-per-100-people?v=1&csvType=full&useColumnShortNames=false",
+    "selection": [
+      "World"
+    ]
+  },
+  "columns": {
+    "Fixed telephone subscriptions (per 100 people)": {
+      "titleShort": "Landline phone subscriptions",
+      "titleLong": "Landline phone subscriptions",
+      "unit": "per 100 people",
+      "timespan": "1960-2025",
+      "type": "Numeric",
+      "owidVariableId": 1294123,
+      "shortName": "it_mlt_main_p2",
+      "lastUpdated": "2026-07-27",
+      "nextUpdate": "2027-01-23",
+      "citationShort": "International Telecommunication Union (ITU), via World Bank (2026) – processed by Our World in Data",
+      "citationLong": "International Telecommunication Union (ITU), via World Bank (2026) – processed by Our World in Data. “Landline phone subscriptions” [dataset]. International Telecommunication Union (ITU), via World Bank, “World Development Indicators 129” [original data].",
+      "fullMetadata": "https://api.ourworldindata.org/v1/indicators/1294123.metadata.json"
+    },
+    "Fixed broadband subscriptions (per 100 people)": {
+      "titleShort": "Landline Internet subscriptions",
+      "titleLong": "Landline Internet subscriptions",
+      "unit": "per 100 people",
+      "timespan": "1998-2025",
+      "type": "Numeric",
+      "owidVariableId": 1294125,
+      "shortName": "it_net_bbnd_p2",
+      "lastUpdated": "2026-07-27",
+      "nextUpdate": "2027-01-23",
+      "citationShort": "International Telecommunication Union (ITU), via World Bank (2026) – processed by Our World in Data",
+      "citationLong": "International Telecommunication Union (ITU), via World Bank (2026) – processed by Our World in Data. “Landline Internet subscriptions” [dataset]. International Telecommunication Union (ITU), via World Bank, “World Development Indicators 129” [original data].",
+      "fullMetadata": "https://api.ourworldindata.org/v1/indicators/1294125.metadata.json"
+    },
+    "Mobile cellular subscriptions (per 100 people)": {
+      "titleShort": "Mobile phone subscriptions",
+      "titleLong": "Mobile phone subscriptions",
+      "unit": "per 100 people",
+      "timespan": "1960-2025",
+      "type": "Numeric",
+      "owidVariableId": 1294121,
+      "shortName": "it_cel_sets_p2",
+      "lastUpdated": "2026-07-27",
+      "nextUpdate": "2027-01-23",
+      "citationShort": "International Telecommunication Union (ITU), via World Bank (2026) – processed by Our World in Data",
+      "citationLong": "International Telecommunication Union (ITU), via World Bank (2026) – processed by Our World in Data. “Mobile phone subscriptions” [dataset]. International Telecommunication Union (ITU), via World Bank, “World Development Indicators 129” [original data].",
+      "fullMetadata": "https://api.ourworldindata.org/v1/indicators/1294121.metadata.json"
+    },
+    "Individuals using the Internet (% of population)": {
+      "titleShort": "Share of the population using the Internet",
+      "titleLong": "Share of the population using the Internet - International Telecommunication Union",
+      "descriptionShort": "Share of the population who used the Internet in the last three months.",
+      "descriptionKey": "- An Internet user is defined by the International Telecommunication Union as anyone who has accessed the Internet from any location in the last three months.\n- This can be from any type of device, including a computer, mobile phone, personal digital assistant, games machine, digital TV, and other technological devices.\n- We calculated the figures for Africa, Asia, Europe, North America, South America, and Oceania [ourselves](https://ourworldindata.org/world-region-map-definitions#our-world-in-data), and only show a year for a continent if countries with data make up at least 90% of its population.",
+      "descriptionProcessing": "For Africa, Asia, Europe, North America, South America, and Oceania, we calculated the share ourselves, using [our definition of the continents](https://ourworldindata.org/world-region-map-definitions#our-world-in-data). For each continent and year, we took the average of the shares of the countries with data, weighted by each country's population. This assumes that countries without data have the same share as the rest of their continent.\n\nWe only kept a year for a continent if the countries with data make up at least 90% of its population. This removes 2025 for every continent, some or all of the years 1991–1995 depending on the continent, and 2002–2004 for Oceania, when there is no data for Australia.\n\nAll population figures come from the World Development Indicators. Countries that the World Development Indicators do not cover, such as Taiwan, are not included in the continents.\n\nFigures for the world and for the World Bank's regions and income groups come from the World Bank.",
+      "shortUnit": "%",
+      "unit": "% of population",
+      "timespan": "1990-2025",
+      "type": "Numeric",
+      "owidVariableId": 1294130,
+      "shortName": "it_net_user_zs",
+      "lastUpdated": "2026-07-27",
+      "nextUpdate": "2027-01-23",
+      "citationShort": "World Telecommunication/ICT Indicators Database - International Telecommunication Union (ITU), via World Bank (2026) – with major processing by Our World in Data",
+      "citationLong": "World Telecommunication/ICT Indicators Database - International Telecommunication Union (ITU), via World Bank (2026) – with major processing by Our World in Data. “Share of the population using the Internet – International Telecommunication Union” [dataset]. World Telecommunication/ICT Indicators Database - International Telecommunication Union (ITU), via World Bank, “World Development Indicators 129” [original data].",
+      "fullMetadata": "https://api.ourworldindata.org/v1/indicators/1294130.metadata.json"
+    }
+  },
+  "dateDownloaded": "2026-10-14",
+  "activeFilters": {}
+}
