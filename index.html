@@ -11,7 +11,7 @@
   <script src="https://cdn.jsdelivr.net/npm/vega-lite@5.21.0"></script>
   <script src="https://cdn.jsdelivr.net/npm/vega-embed@6.26.0"></script>
 
-  <!-- Fonts: Bebas Neue (headings, like a film canister label) + Source Sans 3 (body) -->
+  <!-- Fonts: Playfair Display (serif: titles and headings) + Source Sans 3 (sans serif: paragraphs and charts) -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Source+Sans+3:wght@400;600;700&display=swap" rel="stylesheet">
@@ -23,7 +23,6 @@
   <div class="page">
 
     <!-- ================= INTRO ================= -->
-        <!-- ================= INTRO ================= -->
     <header class="intro grid">
       <p class="kicker span-3">A data story about cameras · Australia · 1840–2025</p>
       <h1 class="span-3">From Film to Phone</h1>
@@ -67,8 +66,7 @@
       <div class="row-b">
         <div class="text grid">
           <h3 class="span-1">For a century, cameras kept <span class="film">changing shape</span></h3>
-          <p class="span-1">Glass plates gave way to box cameras, then folding, roll-film and 35mm cameras. Each new type took over from the one before.</p>
-          <!-- <p class="span-1 how">How to read: each row is a type of camera. Darker squares mean more surviving cameras from that decade. Hover for numbers; outlined squares are explained below.</p> -->
+          <p class="span-2">Glass plates gave way to box cameras, then folding, roll-film and 35mm cameras. Each new type took over from the one before.</p>
         </div>
         <div id="vis_s1_types" class="vis"></div>
         <div class="insights grid">
@@ -88,16 +86,14 @@
             <p>In its first decade, digital was already the most common camera type in the collection.</p>
           </div>
         </div>
-        <p class="how">Heatmap · 3,007 cameras with a known type and year · Source: Science Museum Group Collection. Counts show what the museum holds, not how many cameras were sold.</p>
+        <p class="how">Heatmap · Hover over a square for numbers; the outlined squares are explained above · 3,007 cameras with a known type and year · Source: Science Museum Group Collection. Counts show what the museum holds, not how many cameras were sold.</p>
       </div>
 
-      <!-- Chart 2 (flow map) goes here next -->
-             <!-- Chart 2: flow map + year histogram (layout B: one row of text, then a full-width chart) -->
+      <!-- Chart 2: flow map + year histogram (layout B: one row of text, then a full-width chart) -->
       <div class="row-b">
         <div class="text grid">
           <h3 class="span-1">Where <span class="aus">Melbourne's</span> cameras came from</h3>
-          <p class="span-1">Most cameras in Museums Victoria were made overseas, first in the USA, Britain and Germany, later in Japan. Eighteen were made here, mostly by Kodak in Melbourne.</p>
-          <!-- <p class="span-1 how">How to read: each line runs from where cameras were made to Melbourne. Thicker lines and bigger circles mean more cameras. Drag across the years below the map to filter it.</p> -->
+          <p class="span-2">Most cameras in Museums Victoria were made overseas, first in the USA, Britain and Germany, later in Japan. Eighteen were made here, mostly by Kodak in Melbourne.</p>
         </div>
         <div id="vis_s1_flow" class="vis"></div>
         <div class="insights grid">
@@ -117,7 +113,7 @@
             <p>Kodak built cameras in Melbourne for Australian families until its Coburg plant closed in 2004.</p>
           </div>
         </div>
-        <p class="how">Flow map with a linked bar chart · Equal Earth projection, centred on the Pacific so Australia sits near the middle · 163 cameras with a known country and year · Country and year are read from the museum record, or from the object title when the record is blank · Source: Museums Victoria Collections.</p>
+        <p class="how">Flow map with a linked bar chart · Drag across the bar chart to filter the map by year made · Equal Earth projection, centred on the Pacific so Australia sits near the middle · 163 cameras with a known country and year · Country and year are read from the museum record, or from the object title when the record is blank · Source: Museums Victoria Collections.</p>
       </div>
 
     </section>
@@ -133,8 +129,7 @@
       <div class="row-b">
         <div class="text grid">
           <h3 class="span-1">Film cameras <span class="film">almost vanished</span> in ten years</h3>
-          <p class="span-1">In 2000 the world exported US$3.6 billion of 35mm film cameras, over half from Hong Kong and China. By 2010 the trade had fallen by 96%.</p>
-          <!-- <p class="span-1 how">How to read: each map is one year. Circles show each country's film camera exports, using the same scale on every map. The red ring marks Australia.</p> -->
+          <p class="span-2">In 2000 the world exported US$3.6 billion of 35mm film cameras, over half from Hong Kong and China. By 2010 the trade had fallen by 96%.</p>
         </div>
         <div id="vis_s2_exports" class="vis"></div>
         <div class="insights grid">
@@ -154,19 +149,32 @@
             <p>Australia's own film camera exports collapsed at the same pace, falling 98% in ten years.</p>
           </div>
         </div>
-        <p class="how">Proportional symbol maps in small multiples · Circle area shows exports in US$ (current prices) · Hover over a circle for details · Source: UN Comtrade via World Bank WITS, HS code 900653 (cameras for 35mm roll film).</p>
+        <p class="how">Proportional symbol maps in small multiples · Circle area shows exports in US$ (current prices) · Hover over a circle for details; the red ring marks Australia · Source: UN Comtrade via World Bank WITS, HS code 900653 (cameras for 35mm roll film).</p>
       </div>
+
       <!-- Chart 4: bump chart (layout A: text in column 1, chart in columns 2-3) -->
       <div class="row-a grid">
         <div class="text span-1">
           <h3><span class="aus">Australia</span> was a top-10 film maker</h3>
           <p>In 2000, Australia ranked 9th in the world for colour film exports, ahead of Singapore.</p>
           <p>By 2005 it had dropped to 17th, and by 2015 to 31st, out of the top 20 altogether.</p>
-          <!-- <p class="how">How to read: each line follows one of the top 10 exporters of 2000. Higher means a better world rank. Hover over a line to highlight it.</p> -->
         </div>
         <div class="span-2">
           <div id="vis_s2_bump" class="vis"></div>
-          <p class="how">Bump chart · rank by export value of colour film for 35mm cameras · Mexico stops reporting after 2010 · Source: UN Comtrade via World Bank WITS, HS code 370254.</p>
+          <p class="how">Bump chart · Hover over a line to highlight it · Rank by export value of colour film for 35mm cameras · Mexico stops reporting after 2010 · Source: UN Comtrade via World Bank WITS, HS code 370254.</p>
+        </div>
+      </div>
+
+      <!-- Chart 5: line chart with annotation (layout A: text in column 1, chart in columns 2-3) -->
+      <div class="row-a grid">
+        <div class="text span-1">
+          <h3>Then the <span class="aus">factory closed</span></h3>
+          <p>In November 2004, Kodak shut its Coburg plant in Melbourne, which made film, photo paper and chemicals. Kodak blamed the switch to digital photography.</p>
+          <p>Australia's colour film exports fell 93% in five years, from US$74 million in 2000 to US$4.9 million in 2005.</p>
+        </div>
+        <div class="span-2">
+          <div id="vis_s2_aus" class="vis"></div>
+          <p class="how">Line chart · Hover over a point for the exact value · Australia's exports of colour film for 35mm cameras, US$ (current prices) · Sources: UN Comtrade via World Bank WITS, HS code 370254; Photo Review (2004) for the plant closure.</p>
         </div>
       </div>
     </section>
@@ -178,6 +186,7 @@
         <p><a href="https://collection.sciencemuseumgroup.org.uk/" target="_blank">Science Museum Group Collection</a> (CC0 / CC BY 4.0), © The Board of Trustees of the Science Museum</p>
         <p><a href="https://collections.museumsvictoria.com.au/" target="_blank">Museums Victoria Collections</a> (CC0 / CC BY 4.0)</p>
         <p><a href="https://wits.worldbank.org/" target="_blank">UN Comtrade via World Bank WITS</a>: exports of 35mm film cameras (HS 900653) and colour film (HS 370254), 2000–2023</p>
+        <p><a href="https://www.photoreview.com.au/news/kodak-to-close-coburg-plant/" target="_blank">Photo Review (2004), "Kodak to close Coburg plant"</a></p>
         <p>Map: <a href="https://www.naturalearthdata.com/" target="_blank">Natural Earth</a> 1:110m countries (public domain)</p>
       </div>
       <div class="span-1">
@@ -194,6 +203,7 @@
     vegaEmbed('#vis_s1_flow', 'js/s1_flow_map.vg.json', { actions: false }).catch(console.error);
     vegaEmbed('#vis_s2_exports', 'js/s2_film_camera_exports_map.vg.json', { actions: false }).catch(console.error);
     vegaEmbed('#vis_s2_bump', 'js/s2_film_bump.vg.json', { actions: false }).catch(console.error);
+    vegaEmbed('#vis_s2_aus', 'js/s2_australia_film_line.vg.json', { actions: false }).catch(console.error);
   </script>
 </body>
 

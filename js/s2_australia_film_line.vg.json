@@ -1,0 +1,125 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "description": "Line chart: Australia's colour film exports 2000-2023, with the November 2004 closure of Kodak's Coburg plant marked.",
+  "width": 610,
+  "height": 340,
+  "data": {"url": "data/s2_colour_film.csv"},
+  "transform": [
+    {"filter": "datum.Reporter == 'Australia'"},
+    {"calculate": "datum['Trade Value 1000USD'] / 1000", "as": "exports"},
+    {
+      "calculate": "datum.exports >= 1 ? 'US$' + format(datum.exports, '.1f') + 'm' : 'US$' + format(datum.exports * 1000, ',.0f') + 'k'",
+      "as": "value_label"
+    }
+  ],
+  "layer": [
+    {
+      "data": {"values": [{"year": 2004.87}]},
+      "mark": {"type": "rule", "color": "#1F1F1F", "strokeDash": [4, 4], "strokeWidth": 1.5},
+      "encoding": {"x": {"field": "year", "type": "quantitative", "scale": {"domain": [2000, 2023], "nice": false}}}
+    },
+    {
+      "data": {
+        "values": [
+          {"year": 2005.3, "y": 72, "text": "Nov 2004: Kodak closes its"},
+          {"year": 2005.3, "y": 66.5, "text": "Coburg film plant in Melbourne."},
+          {"year": 2005.3, "y": 61, "text": "About 600 jobs are lost."}
+        ]
+      },
+      "mark": {"type": "text", "align": "left", "fontSize": 14, "fontWeight": 600, "color": "#1F1F1F"},
+      "encoding": {
+        "x": {"field": "year", "type": "quantitative", "scale": {"domain": [2000, 2023], "nice": false}},
+        "y": {"field": "y", "type": "quantitative", "scale": {"domain": [0, 80]}},
+        "text": {"field": "text"}
+      }
+    },
+    {
+      "mark": {"type": "area", "color": "#C23B22", "opacity": 0.08, "interpolate": "monotone"},
+      "encoding": {
+        "x": {"field": "Year", "type": "quantitative", "scale": {"domain": [2000, 2023], "nice": false}},
+        "y": {"field": "exports", "type": "quantitative", "scale": {"domain": [0, 80]}}
+      }
+    },
+    {
+      "mark": {"type": "line", "color": "#C23B22", "strokeWidth": 3.5, "interpolate": "monotone"},
+      "encoding": {
+        "x": {
+          "field": "Year",
+          "type": "quantitative",
+          "title": null,
+          "scale": {"domain": [2000, 2023], "nice": false},
+          "axis": {
+            "format": "d",
+            "values": [2000, 2005, 2010, 2015, 2019, 2023],
+            "grid": false,
+            "labelFontSize": 13,
+            "labelPadding": 8
+          }
+        },
+        "y": {
+          "field": "exports",
+          "type": "quantitative",
+          "title": "Exports (US$ million)",
+          "scale": {"domain": [0, 80]},
+          "axis": {
+            "values": [0, 20, 40, 60, 80],
+            "grid": true,
+            "gridColor": "#ECE8DF",
+            "titleFontWeight": 600,
+            "titleColor": "#6B6B6B"
+          }
+        }
+      }
+    },
+    {
+      "mark": {
+        "type": "circle",
+        "color": "#C23B22",
+        "size": 80,
+        "stroke": "#FAF8F3",
+        "strokeWidth": 1.5,
+        "opacity": 1
+      },
+      "encoding": {
+        "x": {"field": "Year", "type": "quantitative", "scale": {"domain": [2000, 2023], "nice": false}},
+        "y": {"field": "exports", "type": "quantitative", "scale": {"domain": [0, 80]}},
+        "tooltip": [
+          {"field": "Year", "type": "ordinal", "title": "Year"},
+          {"field": "value_label", "type": "nominal", "title": "Colour film exports"}
+        ]
+      }
+    },
+    {
+      "transform": [{"filter": "datum.Year == 2000 || datum.Year == 2005"}],
+      "mark": {
+        "type": "text",
+        "align": "left",
+        "dx": 10,
+        "dy": -12,
+        "fontSize": 14,
+        "fontWeight": 700,
+        "color": "#C23B22"
+      },
+      "encoding": {
+        "x": {"field": "Year", "type": "quantitative", "scale": {"domain": [2000, 2023], "nice": false}},
+        "y": {"field": "exports", "type": "quantitative", "scale": {"domain": [0, 80]}},
+        "text": {"field": "value_label"}
+      }
+    },
+    {
+      "transform": [{"filter": "datum.Year > 2005"}],
+      "mark": {"type": "text", "align": "center", "dy": -14, "fontSize": 12, "fontWeight": 600, "color": "#C23B22"},
+      "encoding": {
+        "x": {"field": "Year", "type": "quantitative", "scale": {"domain": [2000, 2023], "nice": false}},
+        "y": {"field": "exports", "type": "quantitative", "scale": {"domain": [0, 80]}},
+        "text": {"field": "value_label"}
+      }
+    }
+  ],
+  "config": {
+    "background": null,
+    "view": {"stroke": null},
+    "font": "Source Sans 3",
+    "axis": {"domain": false, "ticks": false, "labelColor": "#4A4A4A", "labelFontSize": 13}
+  }
+}

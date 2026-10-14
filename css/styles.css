@@ -85,6 +85,7 @@ h1 { font-weight: 700; font-size: clamp(48px, 7vw, 76px); line-height: 1.02; let
 .text p { margin: 0 0 var(--s2); }
 /* Row B text: heading in column 1, explanation in column 2, how-to-read in column 3 */
 .text.grid h3 { margin: 0; }
+.text.grid p.span-2 { columns: 2; column-gap: var(--gap); }
 
 /* Row A: text in the first third, chart in the other two thirds */
 .row-a { align-items: start; margin-bottom: var(--s5); }
@@ -151,6 +152,7 @@ footer p { margin: 0 0 4px; }
 @media (max-width: 860px) {
   .grid { grid-template-columns: 1fr; }
   .span-1, .span-2, .span-3 { grid-column: 1 / -1; }
+  .text.grid p.span-2 { columns: 1; }
   .stat, .insight { margin-bottom: var(--s3); }
   .key { margin-top: var(--s3); }
   .section-head h2 { font-size: 36px; }
