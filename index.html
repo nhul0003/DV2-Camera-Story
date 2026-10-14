@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>From Film to Phone | The Story of the Camera</title>
+
+  <!-- Vega, Vega-Lite and Vega-Embed -->
+  <script src="https://cdn.jsdelivr.net/npm/vega@5.30.0"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vega-lite@5.21.0"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vega-embed@6.26.0"></script>
+
+  <!-- Fonts: Bebas Neue (headings, like a film canister label) + Source Sans 3 (body) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Source+Sans+3:wght@400;600;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+
+<body>
+  <div class="page">
+
+    <!-- ================= INTRO ================= -->
+    <header class="intro">
+      <p class="kicker">A data story about cameras · Australia · 1840–2025</p>
+      <h1>From Film to Phone</h1>
+      <p class="lead">How the camera changed over 150 years, and what the switch from film to digital cost Australia.</p>
+
+      <div class="stats">
+        <div class="stat" style="border-color: var(--australia);">
+          <div class="stat-number aus">US$74m → US$4.9m</div>
+          <p class="stat-text">Australia's colour film exports, 2000 to 2005, as Kodak's Melbourne plant closed</p>
+        </div>
+        <div class="stat" style="border-color: var(--digital);">
+          <div class="stat-number digital">62</div>
+          <p class="stat-text">new Fujifilm camera models in 2010 alone, the peak of the digital boom</p>
+        </div>
+        <div class="stat" style="border-color: var(--phone);">
+          <div class="stat-number phone">97.5%</div>
+          <p class="stat-text">of Australians own a mobile phone (2024), and almost every phone is a camera</p>
+        </div>
+      </div>
+
+      <div class="key">
+        <div class="key-title">How to read the colours on this page</div>
+        <span><i class="swatch" style="background: var(--film);"></i>Film</span>
+        <span><i class="swatch" style="background: var(--digital);"></i>Digital cameras</span>
+        <span><i class="swatch" style="background: var(--phone);"></i>Mobile phones</span>
+        <span><i class="swatch" style="background: var(--australia);"></i>Australia (always red)</span>
+        <span><i class="swatch" style="background: var(--context);"></i>Everything else</span>
+      </div>
+    </header>
+
+    <!-- ================= SECTION 1: THE FILM ERA ================= -->
+    <section class="section" id="film-era">
+      <div class="section-head film">
+        <span class="section-num">01</span>
+        <h2 style="color: var(--ink);">The film era</h2>
+      </div>
+
+      <!-- Chart 1: heatmap (layout B: text above, full-width chart) -->
+      <div class="row-b">
+        <div class="text">
+          <h3>For a century, cameras kept <span class="film">changing shape</span></h3>
+          <p>Glass plates gave way to box cameras, then folding and roll-film cameras, then the 35mm camera most families owned. Each new type took over from the one before.</p>
+          <p>Each row is a type of camera in the Science Museum Group collection. Darker squares mean more surviving cameras made in that decade. Hover over a square to see the count.</p>
+        </div>
+        <div id="vis_s1_types" class="vis"></div>
+        <p class="how">Heatmap · 3,007 cameras with a known type and year · Source: Science Museum Group Collection. Counts show what the museum holds, not how many cameras were sold.</p>
+      </div>
+
+      <!-- Chart 2 (flow map) goes here next -->
+    </section>
+
+    <!-- ================= FOOTER ================= -->
+    <footer>
+      <div>
+        <strong>Data sources</strong>
+        <p><a href="https://collection.sciencemuseumgroup.org.uk/" target="_blank">Science Museum Group Collection</a> (CC0 / CC BY 4.0), © The Board of Trustees of the Science Museum</p>
+      </div>
+      <div>
+        <strong>About</strong>
+        <p>Created by Nevan Hulu for FIT3179 Data Visualisation 2, Monash University, October 2026.</p>
+        <p>Charts built with Vega-Lite.</p>
+      </div>
+    </footer>
+
+  </div>
+
+  <script>
+    vegaEmbed('#vis_s1_types', 'js/s1_camera_types_heatmap.vg.json', { actions: false }).catch(console.error);
+  </script>
+</body>
+
+</html>
