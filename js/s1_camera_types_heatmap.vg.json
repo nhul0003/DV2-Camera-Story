@@ -3,8 +3,11 @@
   "description": "Heatmap: number of cameras in the Science Museum Group collection by camera type (rows) and decade made (columns).",
   "width": "container",
   "height": 448,
+  "autosize": {"type": "fit-x", "contains": "padding"},
+  "padding": {"left": 24, "right": 8, "top": 5, "bottom": 5},
   "data": {"url": "data/s1_camera_types.csv"},
   "transform": [
+    {"calculate": "datum.camera_type == 'Pocket & cartridge' ? 'Pocket' : datum.camera_type", "as": "camera_type"},
     {"calculate": "floor(datum.year_made / 10) * 10", "as": "decade"},
     {"calculate": "datum.decade + 's'", "as": "decade_label"}
   ],
@@ -23,14 +26,14 @@
           "field": "camera_type",
           "type": "nominal",
           "title": null,
-          "sort": ["Plate & field", "Stereo", "Box", "Folding", "Reflex", "Roll film", "Movie (cine)", "Miniature", "35mm", "Compact", "Pocket & cartridge", "Instant", "Digital", "Disposable"]
+          "sort": ["Plate & field", "Stereo", "Box", "Folding", "Reflex", "Roll film", "Movie (cine)", "Miniature", "35mm", "Compact", "Pocket", "Instant", "Digital", "Disposable"]
         },
         "color": {
           "aggregate": "count",
           "type": "quantitative",
           "title": "Cameras in the collection",
           "scale": {"type": "sqrt", "range": ["#FBF1E0", "#EDC27A", "#C8862A", "#7A4A10"]},
-          "legend": {"orient": "bottom", "direction": "horizontal", "gradientLength": 220, "titleOrient": "left", "values": [1, 25, 50, 100, 180]}
+          "legend": {"orient": "bottom", "direction": "horizontal", "gradientLength": 260, "titlePadding": 8, "offset": 16, "values": [1, 25, 50, 100, 180]}
         },
         "tooltip": [
           {"field": "camera_type", "type": "nominal", "title": "Camera type"},
@@ -50,7 +53,7 @@
       "mark": {"type": "rect", "fill": null, "stroke": "#1F1F1F", "strokeWidth": 2, "cornerRadius": 3},
       "encoding": {
         "x": {"field": "decade", "type": "ordinal"},
-        "y": {"field": "camera_type", "type": "nominal", "sort": ["Plate & field", "Stereo", "Box", "Folding", "Reflex", "Roll film", "Movie (cine)", "Miniature", "35mm", "Compact", "Pocket & cartridge", "Instant", "Digital", "Disposable"]}
+        "y": {"field": "camera_type", "type": "nominal", "sort": ["Plate & field", "Stereo", "Box", "Folding", "Reflex", "Roll film", "Movie (cine)", "Miniature", "35mm", "Compact", "Pocket", "Instant", "Digital", "Disposable"]}
       }
     },
     {
@@ -62,7 +65,7 @@
       "mark": {"type": "text", "align": "left", "baseline": "middle", "dx": -22, "fontSize": 13, "fontWeight": 600, "color": "#1F1F1F"},
       "encoding": {
         "x": {"field": "decade", "type": "ordinal"},
-        "y": {"field": "camera_type", "type": "nominal", "sort": ["Plate & field", "Stereo", "Box", "Folding", "Reflex", "Roll film", "Movie (cine)", "Miniature", "35mm", "Compact", "Pocket & cartridge", "Instant", "Digital", "Disposable"]},
+        "y": {"field": "camera_type", "type": "nominal", "sort": ["Plate & field", "Stereo", "Box", "Folding", "Reflex", "Roll film", "Movie (cine)", "Miniature", "35mm", "Compact", "Pocket", "Instant", "Digital", "Disposable"]},
         "text": {"field": "label"}
       }
     },
@@ -76,7 +79,7 @@
       "mark": {"type": "text", "align": "right", "baseline": "middle", "dx": 22, "fontSize": 13, "fontWeight": 600, "color": "#1F1F1F"},
       "encoding": {
         "x": {"field": "decade", "type": "ordinal"},
-        "y": {"field": "camera_type", "type": "nominal", "sort": ["Plate & field", "Stereo", "Box", "Folding", "Reflex", "Roll film", "Movie (cine)", "Miniature", "35mm", "Compact", "Pocket & cartridge", "Instant", "Digital", "Disposable"]},
+        "y": {"field": "camera_type", "type": "nominal", "sort": ["Plate & field", "Stereo", "Box", "Folding", "Reflex", "Roll film", "Movie (cine)", "Miniature", "35mm", "Compact", "Pocket", "Instant", "Digital", "Disposable"]},
         "text": {"field": "label"}
       }
     }
