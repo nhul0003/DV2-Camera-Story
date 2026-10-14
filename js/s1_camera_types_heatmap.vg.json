@@ -1,0 +1,91 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "description": "Heatmap: number of cameras in the Science Museum Group collection by camera type (rows) and decade made (columns).",
+  "width": "container",
+  "height": 448,
+  "data": {"url": "data/s1_camera_types.csv"},
+  "transform": [
+    {"calculate": "floor(datum.year_made / 10) * 10", "as": "decade"},
+    {"calculate": "datum.decade + 's'", "as": "decade_label"}
+  ],
+  "layer": [
+    {
+      "mark": {"type": "rect", "stroke": "#FAF8F3", "strokeWidth": 2, "cornerRadius": 3},
+      "encoding": {
+        "x": {
+          "field": "decade",
+          "type": "ordinal",
+          "title": null,
+          "scale": {"domain": [1840, 1850, 1860, 1870, 1880, 1890, 1900, 1910, 1920, 1930, 1940, 1950, 1960, 1970, 1980, 1990, 2000, 2010]},
+          "axis": {"labelExpr": "datum.value + 's'", "labelAngle": 0, "orient": "bottom"}
+        },
+        "y": {
+          "field": "camera_type",
+          "type": "nominal",
+          "title": null,
+          "sort": ["Plate & field", "Stereo", "Box", "Folding", "Reflex", "Roll film", "Movie (cine)", "Miniature", "35mm", "Compact", "Pocket & cartridge", "Instant", "Digital", "Disposable"]
+        },
+        "color": {
+          "aggregate": "count",
+          "type": "quantitative",
+          "title": "Cameras in the collection",
+          "scale": {"type": "sqrt", "range": ["#FBF1E0", "#EDC27A", "#C8862A", "#7A4A10"]},
+          "legend": {"orient": "bottom", "direction": "horizontal", "gradientLength": 220, "titleOrient": "left", "values": [1, 25, 50, 100, 180]}
+        },
+        "tooltip": [
+          {"field": "camera_type", "type": "nominal", "title": "Camera type"},
+          {"field": "decade_label", "type": "nominal", "title": "Decade made"},
+          {"aggregate": "count", "type": "quantitative", "title": "Cameras in the collection"}
+        ]
+      }
+    },
+    {
+      "data": {
+        "values": [
+          {"camera_type": "Roll film", "decade": 1910},
+          {"camera_type": "35mm", "decade": 1960},
+          {"camera_type": "Digital", "decade": 1990}
+        ]
+      },
+      "mark": {"type": "rect", "fill": null, "stroke": "#1F1F1F", "strokeWidth": 2, "cornerRadius": 3},
+      "encoding": {
+        "x": {"field": "decade", "type": "ordinal"},
+        "y": {"field": "camera_type", "type": "nominal", "sort": ["Plate & field", "Stereo", "Box", "Folding", "Reflex", "Roll film", "Movie (cine)", "Miniature", "35mm", "Compact", "Pocket & cartridge", "Instant", "Digital", "Disposable"]}
+      }
+    },
+    {
+      "data": {
+        "values": [
+          {"camera_type": "Roll film", "decade": 1990, "label": "← Roll film peaks, 1910s"}
+        ]
+      },
+      "mark": {"type": "text", "align": "left", "baseline": "middle", "dx": -22, "fontSize": 13, "fontWeight": 600, "color": "#1F1F1F"},
+      "encoding": {
+        "x": {"field": "decade", "type": "ordinal"},
+        "y": {"field": "camera_type", "type": "nominal", "sort": ["Plate & field", "Stereo", "Box", "Folding", "Reflex", "Roll film", "Movie (cine)", "Miniature", "35mm", "Compact", "Pocket & cartridge", "Instant", "Digital", "Disposable"]},
+        "text": {"field": "label"}
+      }
+    },
+    {
+      "data": {
+        "values": [
+          {"camera_type": "35mm", "decade": 1880, "label": "35mm peaks in the 1960s →"},
+          {"camera_type": "Digital", "decade": 1980, "label": "Digital arrives in the 1990s →"}
+        ]
+      },
+      "mark": {"type": "text", "align": "right", "baseline": "middle", "dx": 22, "fontSize": 13, "fontWeight": 600, "color": "#1F1F1F"},
+      "encoding": {
+        "x": {"field": "decade", "type": "ordinal"},
+        "y": {"field": "camera_type", "type": "nominal", "sort": ["Plate & field", "Stereo", "Box", "Folding", "Reflex", "Roll film", "Movie (cine)", "Miniature", "35mm", "Compact", "Pocket & cartridge", "Instant", "Digital", "Disposable"]},
+        "text": {"field": "label"}
+      }
+    }
+  ],
+  "config": {
+    "background": null,
+    "view": {"fill": "#F1EEE7", "stroke": null},
+    "font": "Source Sans 3",
+    "axis": {"domain": false, "ticks": false, "grid": false, "labelColor": "#4A4A4A", "labelFontSize": 13, "labelPadding": 8},
+    "legend": {"labelColor": "#4A4A4A", "labelFontSize": 12, "titleColor": "#4A4A4A", "titleFontSize": 13, "titleFontWeight": 600}
+  }
+}
