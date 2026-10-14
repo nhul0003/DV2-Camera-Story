@@ -1,0 +1,208 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "description": "Heatmap with a linked bar chart: new digital camera models released each year by the 15 brands with the most models, 1994-2025.",
+  "data": {"url": "data/cameras.csv", "format": {"parse": {"year": "number"}}},
+  "spacing": 12,
+  "vconcat": [
+    {
+      "width": 984,
+      "height": 90,
+      "layer": [
+        {
+          "transform": [{"aggregate": [{"op": "count", "as": "models"}], "groupby": ["year"]}],
+          "mark": {"type": "bar", "color": "#A9D3D8", "cornerRadiusTopLeft": 2, "cornerRadiusTopRight": 2},
+          "encoding": {
+            "x": {
+              "field": "year",
+              "type": "ordinal",
+              "scale": {
+                "domain": [1994, 1995, 1996, 1997, 1998, 1999, 2000, 2001, 2002, 2003, 2004, 2005, 2006, 2007, 2008, 2009, 2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024, 2025],
+                "paddingInner": 0.08
+              },
+              "axis": null
+            },
+            "y": {
+              "field": "models",
+              "type": "quantitative",
+              "title": null,
+              "scale": {"domain": [0, 400]},
+              "axis": {
+                "values": [0, 200, 400],
+                "grid": true,
+                "gridColor": "#ECE8DF",
+                "minExtent": 80,
+                "labelPadding": 8
+              }
+            },
+            "tooltip": [
+              {"field": "year", "type": "ordinal", "title": "Year"},
+              {"field": "models", "type": "quantitative", "title": "New models, all brands"}
+            ]
+          }
+        },
+        {
+          "transform": [
+            {"joinaggregate": [{"op": "count", "as": "brand_total"}], "groupby": ["brand"]},
+            {
+              "window": [{"op": "dense_rank", "as": "brand_rank"}],
+              "sort": [{"field": "brand_total", "order": "descending"}]
+            },
+            {"filter": "datum.brand_rank <= 15"},
+            {"filter": {"param": "brand_hover", "empty": false}},
+            {"aggregate": [{"op": "count", "as": "models"}], "groupby": ["year", "brand"]}
+          ],
+          "mark": {"type": "bar", "color": "#1B7F8C", "cornerRadiusTopLeft": 2, "cornerRadiusTopRight": 2},
+          "encoding": {
+            "x": {
+              "field": "year",
+              "type": "ordinal",
+              "scale": {
+                "domain": [1994, 1995, 1996, 1997, 1998, 1999, 2000, 2001, 2002, 2003, 2004, 2005, 2006, 2007, 2008, 2009, 2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024, 2025],
+                "paddingInner": 0.08
+              },
+              "axis": null
+            },
+            "y": {"field": "models", "type": "quantitative", "scale": {"domain": [0, 400]}},
+            "tooltip": [
+              {"field": "brand", "title": "Brand"},
+              {"field": "year", "type": "ordinal", "title": "Year"},
+              {"field": "models", "type": "quantitative", "title": "New models"}
+            ]
+          }
+        },
+        {
+          "data": {"values": [{"year": 2010, "y": 360, "text": "2010: 340 new models, the peak"}]},
+          "mark": {
+            "type": "text",
+            "align": "left",
+            "baseline": "middle",
+            "dx": 20,
+            "fontSize": 13,
+            "fontWeight": 700,
+            "color": "#1F1F1F"
+          },
+          "encoding": {
+            "x": {
+              "field": "year",
+              "type": "ordinal",
+              "scale": {
+                "domain": [1994, 1995, 1996, 1997, 1998, 1999, 2000, 2001, 2002, 2003, 2004, 2005, 2006, 2007, 2008, 2009, 2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024, 2025],
+                "paddingInner": 0.08
+              },
+              "axis": null
+            },
+            "y": {"field": "y", "type": "quantitative", "scale": {"domain": [0, 400]}},
+            "text": {"field": "text"}
+          }
+        }
+      ]
+    },
+    {
+      "width": 984,
+      "height": 372,
+      "transform": [
+        {"joinaggregate": [{"op": "count", "as": "year_total"}], "groupby": ["year"]},
+        {"joinaggregate": [{"op": "count", "as": "brand_total"}], "groupby": ["brand"]},
+        {
+          "window": [{"op": "dense_rank", "as": "brand_rank"}],
+          "sort": [{"field": "brand_total", "order": "descending"}]
+        },
+        {"filter": "datum.brand_rank <= 15"},
+        {
+          "aggregate": [{"op": "count", "as": "models"}],
+          "groupby": ["brand", "year", "brand_total", "year_total"]
+        },
+        {"calculate": "datum.models / datum.year_total", "as": "share"},
+        {
+          "calculate": "datum.models < 5 ? '1–4' : datum.models < 10 ? '5–9' : datum.models < 20 ? '10–19' : datum.models < 40 ? '20–39' : '40 or more'",
+          "as": "band"
+        }
+      ],
+      "encoding": {
+        "x": {
+          "field": "year",
+          "type": "ordinal",
+          "scale": {
+            "domain": [1994, 1995, 1996, 1997, 1998, 1999, 2000, 2001, 2002, 2003, 2004, 2005, 2006, 2007, 2008, 2009, 2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024, 2025],
+            "paddingInner": 0.08
+          },
+          "title": null,
+          "axis": {"values": [1995, 2000, 2005, 2010, 2015, 2020, 2025], "labelAngle": 0, "labelPadding": 8}
+        },
+        "y": {
+          "field": "brand",
+          "type": "nominal",
+          "title": null,
+          "sort": {"field": "brand_total", "op": "max", "order": "descending"},
+          "axis": {"minExtent": 80, "labelLimit": 80, "labelPadding": 8, "labelFontSize": 13}
+        }
+      },
+      "layer": [
+        {
+          "params": [
+            {
+              "name": "brand_hover",
+              "select": {"type": "point", "fields": ["brand"], "on": "pointerover", "clear": "pointerout"}
+            }
+          ],
+          "mark": {"type": "rect", "stroke": "#FAF8F3", "strokeWidth": 1, "cornerRadius": 2},
+          "encoding": {
+            "color": {
+              "field": "band",
+              "type": "ordinal",
+              "title": "New models that year",
+              "scale": {
+                "domain": ["1–4", "5–9", "10–19", "20–39", "40 or more"],
+                "range": ["#D6EBED", "#A9D3D8", "#64ADB6", "#1B7F8C", "#0B4A52"]
+              },
+              "legend": {"orient": "top", "direction": "horizontal", "offset": 12, "columns": 5}
+            },
+            "opacity": {"condition": {"param": "brand_hover", "empty": true, "value": 1}, "value": 0.25},
+            "tooltip": [
+              {"field": "brand", "title": "Brand"},
+              {"field": "year", "type": "ordinal", "title": "Year"},
+              {"field": "models", "type": "quantitative", "title": "New models"},
+              {
+                "field": "share",
+                "type": "quantitative",
+                "title": "Share of all models that year",
+                "format": ".0%"
+              },
+              {
+                "field": "brand_total",
+                "type": "quantitative",
+                "title": "Brand total, 1994–2025",
+                "format": ","
+              }
+            ]
+          }
+        },
+        {
+          "transform": [{"filter": "datum.brand == 'Fujifilm' && datum.year == 2010"}],
+          "mark": {"type": "rect", "fill": null, "stroke": "#1F1F1F", "strokeWidth": 2.5, "cornerRadius": 2}
+        },
+        {
+          "transform": [{"filter": "datum.models >= 40"}],
+          "mark": {"type": "text", "fontSize": 12, "fontWeight": 700, "color": "#FFFFFF"},
+          "encoding": {"text": {"field": "models", "type": "quantitative"}}
+        }
+      ]
+    }
+  ],
+  "config": {
+    "background": null,
+    "view": {"stroke": null},
+    "font": "Source Sans 3",
+    "axis": {"domain": false, "ticks": false, "labelColor": "#4A4A4A", "labelFontSize": 13},
+    "legend": {
+      "labelColor": "#4A4A4A",
+      "titleColor": "#4A4A4A",
+      "titleFontWeight": 600,
+      "titleFontSize": 13,
+      "labelFontSize": 12,
+      "symbolType": "square",
+      "symbolSize": 180
+    }
+  },
+  "padding": {"left": 0, "right": 8, "top": 5, "bottom": 5}
+}

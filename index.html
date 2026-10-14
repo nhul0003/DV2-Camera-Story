@@ -179,6 +179,41 @@
       </div>
     </section>
 
+        <!-- ================= SECTION 3: THE DIGITAL BOOM ================= -->
+    <section class="section" id="digital-boom">
+      <div class="section-head digital">
+        <span class="section-num">03</span>
+        <h2>The digital boom</h2>
+      </div>
+
+      <!-- Chart 6: brand x year heatmap with a linked bar chart (layout B) -->
+      <div class="row-b">
+        <div class="text grid">
+          <h3 class="span-1">A flood of <span class="digital">new cameras</span>, then a drought</h3>
+          <p class="span-2">Digital cameras needed no film, and every photo could be checked straight away. Camera makers raced to release new models every year, and two-thirds of all models came out between 2004 and 2012. After 2010, the flood slowed to a trickle.</p>
+        </div>
+        <div id="vis_s3_brands" class="vis"></div>
+        <div class="insights grid">
+          <div class="insight digital">
+            <div class="insight-label">2010 · the peak</div>
+            <div class="insight-number">340 new models in one year</div>
+            <p>Almost one new camera every day. 2,575 of the 3,860 models came out in 2004–2012.</p>
+          </div>
+          <div class="insight digital">
+            <div class="insight-label">Fujifilm · 62 models</div>
+            <div class="insight-number">The busiest square, in 2010</div>
+            <p>A new Fujifilm model about every six days. Samsung released 48 that same year.</p>
+          </div>
+          <div class="insight digital">
+            <div class="insight-label">2015 · down 79%</div>
+            <div class="insight-number">Only 70 new models</div>
+            <p>Kodak and Casio released their last models in 2014, Samsung in 2015. Seven of these 15 brands have none after 2015.</p>
+          </div>
+        </div>
+        <p class="how">Heatmap with a linked bar chart · Hover over a brand's row to show its models in the bar chart above · The 15 brands with the most models (85% of all models) · Source: CameraDatabase (leavestylecode, GitHub), 3,860 digital camera models, 1994–2025.</p>
+      </div>
+    </section>
+
     <!-- ================= FOOTER ================= -->
     <footer class="grid">
       <div class="span-2">
@@ -186,6 +221,7 @@
         <p><a href="https://collection.sciencemuseumgroup.org.uk/" target="_blank">Science Museum Group Collection</a> (CC0 / CC BY 4.0), © The Board of Trustees of the Science Museum</p>
         <p><a href="https://collections.museumsvictoria.com.au/" target="_blank">Museums Victoria Collections</a> (CC0 / CC BY 4.0)</p>
         <p><a href="https://wits.worldbank.org/" target="_blank">UN Comtrade via World Bank WITS</a>: exports of 35mm film cameras (HS 900653) and colour film (HS 370254), 2000–2023</p>
+        <p><a href="https://github.com/leavestylecode/CameraDatabase" target="_blank">CameraDatabase (leavestylecode, GitHub)</a>: specifications of 3,860 digital camera models, 1994–2025</p>
         <p><a href="https://www.photoreview.com.au/news/kodak-to-close-coburg-plant/" target="_blank">Photo Review (2004), "Kodak to close Coburg plant"</a></p>
         <p>Map: <a href="https://www.naturalearthdata.com/" target="_blank">Natural Earth</a> 1:110m countries (public domain)</p>
       </div>
@@ -204,6 +240,7 @@
     vegaEmbed('#vis_s2_exports', 'js/s2_film_camera_exports_map.vg.json', { actions: false }).catch(console.error);
     vegaEmbed('#vis_s2_bump', 'js/s2_film_bump.vg.json', { actions: false }).catch(console.error);
     vegaEmbed('#vis_s2_aus', 'js/s2_australia_film_line.vg.json', { actions: false }).catch(console.error);
+    vegaEmbed('#vis_s3_brands', 'js/s3_brand_heatmap.vg.json', { actions: false }).catch(console.error);
   </script>
 </body>
 
