@@ -71,6 +71,51 @@ h1 { font-family: var(--display); font-weight: 400; font-size: clamp(56px, 9vw, 
 
 .vis { width: 100%; }
 
+/* Text above a full-width chart: heading across the top, paragraphs in two columns
+   so the text fills the width while each line stays around 10 words */
+.row-b .text.wide { max-width: none; }
+.cols { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0 48px; }
+.cols p { max-width: none; }
+
+/* Short analysis cards under a chart */
+.insights { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px; margin: 24px 0 16px; }
+.insight { border-top: 3px solid; padding-top: 10px; }
+.insight-label { font-family: var(--display); font-size: 26px; line-height: 1.1; letter-spacing: 0.02em; }
+.insight-number { font-weight: 700; font-size: 17px; margin: 4px 0 6px; }
+.insight p { font-size: 16px; line-height: 1.5; margin: 0; color: var(--ink-soft); }
+
+/* Tooltips: one consistent, left-aligned style for every chart */
+#vg-tooltip-element {
+  font-family: var(--body) !important;
+  font-size: 14px !important;
+  line-height: 1.4 !important;
+  color: var(--ink) !important;
+  background: #FFFFFF !important;
+  border: 1px solid var(--rule) !important;
+  border-radius: 8px !important;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.12) !important;
+  padding: 10px 14px !important;
+  max-width: 320px;
+}
+#vg-tooltip-element table { border-collapse: collapse; }
+#vg-tooltip-element table tr { display: table-row !important; }
+#vg-tooltip-element table tr td { display: table-cell !important; border: none !important; padding: 3px 0 !important; vertical-align: top; }
+#vg-tooltip-element table tr td.key {
+  text-align: left !important;
+  color: var(--muted) !important;
+  font-weight: 600;
+  font-size: 13px;
+  padding-right: 14px !important;
+  white-space: nowrap;
+  max-width: none !important;
+}
+#vg-tooltip-element table tr td.value {
+  text-align: left !important;
+  font-size: 14px;
+  white-space: normal !important;
+  max-width: 200px;
+}
+
 /* Section colours */
 .film { color: var(--film); border-color: var(--film); }
 .digital { color: var(--digital); border-color: var(--digital); }
@@ -84,7 +129,7 @@ footer p { margin: 0 0 4px; }
 
 /* ---------- Small screens ---------- */
 @media (max-width: 860px) {
-  .row-a, .stats, footer { grid-template-columns: 1fr; }
+  .row-a, .stats, footer, .cols, .insights { grid-template-columns: 1fr; }
   .section-head h2 { font-size: 40px; }
   .section-num { font-size: 52px; }
 }

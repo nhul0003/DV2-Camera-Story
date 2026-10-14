@@ -62,12 +62,31 @@
 
       <!-- Chart 1: heatmap (layout B: text above, full-width chart) -->
       <div class="row-b">
-        <div class="text">
+        <div class="text wide">
           <h3>For a century, cameras kept <span class="film">changing shape</span></h3>
-          <p>Glass plates gave way to box cameras, then folding and roll-film cameras, then the 35mm camera most families owned. Each new type took over from the one before.</p>
-          <p>Each row is a type of camera in the Science Museum Group collection. Darker squares mean more surviving cameras made in that decade. Hover over a square to see the count.</p>
+          <div class="cols">
+            <p>Glass plates gave way to box cameras, then folding and roll-film cameras, then the 35mm camera most families owned. Each new type took over from the one before.</p>
+            <p>Each row is a type of camera in the Science Museum Group collection. Darker squares mean more surviving cameras made in that decade. Hover over a square to see the numbers.</p>
+          </div>
         </div>
         <div id="vis_s1_types" class="vis"></div>
+        <div class="insights">
+          <div class="insight film">
+            <div class="insight-label">Roll film · 1910s</div>
+            <div class="insight-number" style="color: var(--ink);">181 cameras · 46% of the decade</div>
+            <p>The busiest square on the chart. Roll film could be loaded in daylight, so photography became a family hobby.</p>
+          </div>
+          <div class="insight film">
+            <div class="insight-label">35mm · 1960s</div>
+            <div class="insight-number" style="color: var(--ink);">75 cameras · 35% of the decade</div>
+            <p>The most common camera of the 1960s. 35mm film became the standard for family cameras.</p>
+          </div>
+          <div class="insight film">
+            <div class="insight-label">Digital · 1990s</div>
+            <div class="insight-number" style="color: var(--ink);">51 cameras · 65% of the decade</div>
+            <p>In its first decade, digital was already the most common camera type in the collection.</p>
+          </div>
+        </div>
         <p class="how">Heatmap · 3,007 cameras with a known type and year · Source: Science Museum Group Collection. Counts show what the museum holds, not how many cameras were sold.</p>
       </div>
 
