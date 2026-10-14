@@ -1,6 +1,9 @@
 /* ==========================================================
    From Film to Phone: page styles
-   One colour = one meaning across the whole page (DV1 feedback)
+   - One colour = one meaning across the whole page (DV1 feedback)
+   - Two typefaces: serif for titles and headings, sans serif for reading text
+   - One 3-column grid for every row, so the page has only 4 vertical sight lines:
+     the left edge, the 1/3 line, the 2/3 line and the right edge
    ========================================================== */
 :root {
   --film: #C8862A;      /* film era */
@@ -13,8 +16,15 @@
   --muted: #6B6B6B;
   --rule: #E0DCD2;
   --paper: #FAF8F3;
-  --display: 'Bebas Neue', 'Arial Narrow', sans-serif;
-  --body: 'Source Sans 3', Helvetica, Arial, sans-serif;
+  --serif: 'Playfair Display', Georgia, 'Times New Roman', serif;   /* titles, subtitles, headings */
+  --body: 'Source Sans 3', Helvetica, Arial, sans-serif;            /* paragraphs, labels, charts */
+  --gap: 40px;          /* the one column gap used everywhere */
+  /* One spacing scale: small gaps inside a group, large gaps between groups (layout notes: white space groups and separates) */
+  --s1: 8px;
+  --s2: 16px;
+  --s3: 24px;
+  --s4: 40px;
+  --s5: 64px;
 }
 
 * { box-sizing: border-box; }
@@ -28,63 +38,84 @@ body {
   line-height: 1.6;
 }
 
-/* One centred column for the whole page: every row shares the same two edges (fewer sight lines) */
 .page { max-width: 1120px; margin: 0 auto; padding: 0 24px; }
 
 a { color: var(--digital); }
 a:hover { color: #0B3F46; }
 
+/* ---------- The grid: 3 equal columns ---------- */
+.grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); column-gap: var(--gap); }
+.span-1 { grid-column: span 1; }
+.span-2 { grid-column: span 2; }
+.span-3 { grid-column: 1 / -1; }
+
+/* ---------- Headings (serif) ---------- */
+h1, h2, h3, .lead, .section-num, .stat-number, .key-title, .insight-label {
+  font-family: var(--serif);
+}
+
 /* ---------- Intro ---------- */
-.intro { padding: 88px 0 56px; }
-.kicker { font-family: var(--display); font-size: 20px; letter-spacing: 0.12em; color: var(--film); margin: 0 0 8px; }
-h1 { font-family: var(--display); font-weight: 400; font-size: clamp(56px, 9vw, 96px); line-height: 0.95; margin: 0 0 16px; }
-.lead { font-size: 22px; line-height: 1.45; color: var(--ink-soft); max-width: 21em; margin: 0; }
+.intro { padding: var(--s5) 0 var(--s3); row-gap: 0; align-items: start; }
+.kicker {
+  font-family: var(--body); font-size: 14px; font-weight: 600; letter-spacing: 0.14em;
+  text-transform: uppercase; color: var(--film); margin: 0 0 var(--s1);
+}
+h1 { font-weight: 700; font-size: clamp(48px, 7vw, 76px); line-height: 1.02; letter-spacing: -0.01em; margin: 0 0 var(--s3); }
+.lead { font-size: 24px; font-style: italic; line-height: 1.45; color: var(--ink-soft); margin: 0; }
 
-.stats { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px; margin-top: 48px; }
+.stats { margin-top: var(--s4); }
 .stat { border-top: 4px solid; padding-top: 14px; }
-.stat-number { font-family: var(--display); font-size: 52px; line-height: 1; }
-.stat-text { font-size: 17px; line-height: 1.45; color: var(--ink-soft); margin: 6px 0 0; }
+.stat-number { font-size: 34px; font-weight: 700; line-height: 1.15; }
+.stat-text { font-size: 16px; line-height: 1.5; color: var(--ink-soft); margin: 8px 0 0; }
 
-.key { display: flex; flex-wrap: wrap; gap: 12px 28px; margin-top: 40px; padding-top: 20px; border-top: 1px solid var(--rule); font-size: 16px; }
-.key-title { font-family: var(--display); font-size: 22px; letter-spacing: 0.06em; width: 100%; }
-.key span { display: inline-flex; align-items: center; gap: 8px; }
-.swatch { width: 18px; height: 18px; border-radius: 4px; display: inline-block; }
+/* Colour key sits in the third column beside the subtitle, so the intro has no empty column */
+.key { padding-top: 6px; }
+.key-title { font-size: 18px; font-weight: 700; margin-bottom: var(--s1); }
+.key-items { display: grid; gap: 4px; font-size: 15px; }
+.key-items span { display: inline-flex; align-items: center; gap: 8px; }
+.swatch { width: 16px; height: 16px; border-radius: 3px; display: inline-block; }
 
 /* ---------- Sections ---------- */
-.section { padding: 64px 0 24px; }
-.section-head { display: flex; align-items: baseline; gap: 18px; border-bottom: 3px solid; padding-bottom: 10px; margin-bottom: 48px; }
-.section-num { font-family: var(--display); font-size: 72px; line-height: 1; }
-.section-head h2 { font-family: var(--display); font-weight: 400; font-size: 56px; line-height: 1; margin: 0; }
+.section { padding: var(--s4) 0 0; }
+.section-head { display: flex; align-items: baseline; gap: var(--s2); border-bottom: 3px solid; padding-bottom: var(--s1); margin-bottom: var(--s4); }
+.section-num { font-size: 44px; font-weight: 700; line-height: 1; }
+.section-head h2 { font-weight: 700; font-size: 38px; line-height: 1.1; margin: 0; color: var(--ink); }
 
-/* The only two row layouts on the page */
-.row-a { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 2fr); gap: 48px; align-items: start; margin-bottom: 80px; }
-.row-b { margin-bottom: 80px; }
+.text h3 { font-size: 26px; font-weight: 700; line-height: 1.2; margin: 0 0 var(--s2); }
+.text p { margin: 0 0 var(--s2); }
+/* Row B text: heading in column 1, explanation in column 2, how-to-read in column 3 */
+.text.grid h3 { margin: 0; }
 
-.text h3 { font-size: 26px; line-height: 1.2; margin: 0 0 12px; }
-.text p { margin: 0 0 12px; max-width: 21em; }   /* about 10 words per line (DV1 feedback) */
-.row-b .text { max-width: 40em; margin-bottom: 20px; }
-.row-b .text p { max-width: 34em; }
+/* Row A: text in the first third, chart in the other two thirds */
+.row-a { align-items: start; margin-bottom: var(--s5); }
+/* Row B: one row of text across the three columns, then a full-width chart */
+.row-b { margin-bottom: var(--s5); }
 
-.how { font-size: 15px; line-height: 1.5; color: var(--muted); }
+.how { font-size: 15px; line-height: 1.5; color: var(--muted); margin: var(--s1) 0 0; }
 .hint { display: flex; align-items: center; gap: 10px; font-size: 15px; color: var(--muted); }
 .pill { border: 1px solid; border-radius: 999px; padding: 3px 12px; font-weight: 600; white-space: nowrap; }
 
-.vis { width: 100%; }
+.vis { width: 100%; margin-top: var(--s2); }
 
-/* Text above a full-width chart: heading across the top, paragraphs in two columns
-   so the text fills the width while each line stays around 10 words */
-.row-b .text.wide { max-width: none; }
-.cols { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0 48px; }
-.cols p { max-width: none; }
-
-/* Short analysis cards under a chart */
-.insights { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px; margin: 24px 0 16px; }
-.insight { border-top: 3px solid; padding-top: 10px; }
-.insight-label { font-family: var(--display); font-size: 26px; line-height: 1.1; letter-spacing: 0.02em; }
-.insight-number { font-weight: 700; font-size: 17px; margin: 4px 0 6px; }
+/* Short analysis cards under a chart, one per third */
+.insights { margin: var(--s3) 0 0; }
+.insight { border-top: 3px solid; padding-top: 12px; }
+.insight-label { font-size: 22px; font-weight: 700; line-height: 1.2; }
+.insight-number { font-weight: 700; font-size: 16px; margin: 6px 0; color: var(--ink); }
 .insight p { font-size: 16px; line-height: 1.5; margin: 0; color: var(--ink-soft); }
 
-/* Tooltips: one consistent, left-aligned style for every chart */
+/* Section colours */
+.film { color: var(--film); border-color: var(--film); }
+.digital { color: var(--digital); border-color: var(--digital); }
+.phone { color: var(--phone); border-color: var(--phone); }
+.aus { color: var(--australia); }
+
+/* ---------- Footer: sources in two thirds, about in one third ---------- */
+footer { border-top: 1px solid var(--rule); margin-top: var(--s4); padding: var(--s3) 0 var(--s4); font-size: 14px; line-height: 1.6; color: #4A4A4A; }
+footer strong { color: var(--ink); display: block; margin-bottom: 4px; }
+footer p { margin: 0 0 4px; }
+
+/* ---------- Tooltips: one consistent, left-aligned style for every chart ---------- */
 #vg-tooltip-element {
   font-family: var(--body) !important;
   font-size: 14px !important;
@@ -116,20 +147,12 @@ h1 { font-family: var(--display); font-weight: 400; font-size: clamp(56px, 9vw, 
   max-width: 200px;
 }
 
-/* Section colours */
-.film { color: var(--film); border-color: var(--film); }
-.digital { color: var(--digital); border-color: var(--digital); }
-.phone { color: var(--phone); border-color: var(--phone); }
-.aus { color: var(--australia); }
-
-/* ---------- Footer ---------- */
-footer { border-top: 1px solid var(--rule); margin-top: 40px; padding: 24px 0 64px; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 32px; font-size: 14px; line-height: 1.6; color: #4A4A4A; }
-footer strong { color: var(--ink); display: block; margin-bottom: 4px; }
-footer p { margin: 0 0 4px; }
-
-/* ---------- Small screens ---------- */
+/* ---------- Small screens: everything in one column ---------- */
 @media (max-width: 860px) {
-  .row-a, .stats, footer, .cols, .insights { grid-template-columns: 1fr; }
-  .section-head h2 { font-size: 40px; }
-  .section-num { font-size: 52px; }
+  .grid { grid-template-columns: 1fr; }
+  .span-1, .span-2, .span-3 { grid-column: 1 / -1; }
+  .stat, .insight { margin-bottom: var(--s3); }
+  .key { margin-top: var(--s3); }
+  .section-head h2 { font-size: 36px; }
+  .section-num { font-size: 48px; }
 }

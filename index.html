@@ -14,7 +14,7 @@
   <!-- Fonts: Bebas Neue (headings, like a film canister label) + Source Sans 3 (body) -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Source+Sans+3:wght@400;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Source+Sans+3:wght@400;600;700&display=swap" rel="stylesheet">
 
   <link rel="stylesheet" href="css/styles.css">
 </head>
@@ -23,12 +23,24 @@
   <div class="page">
 
     <!-- ================= INTRO ================= -->
-    <header class="intro">
-      <p class="kicker">A data story about cameras · Australia · 1840–2025</p>
-      <h1>From Film to Phone</h1>
-      <p class="lead">How the camera changed over 150 years, and what the switch from film to digital cost Australia.</p>
+        <!-- ================= INTRO ================= -->
+    <header class="intro grid">
+      <p class="kicker span-3">A data story about cameras · Australia · 1840–2025</p>
+      <h1 class="span-3">From Film to Phone</h1>
+      <p class="lead span-2">How the camera changed over 150 years, and what the switch from film to digital cost Australia.</p>
 
-      <div class="stats">
+      <div class="key span-1">
+        <div class="key-title">How to read the colours</div>
+        <div class="key-items">
+          <span><i class="swatch" style="background: var(--film);"></i>Film</span>
+          <span><i class="swatch" style="background: var(--digital);"></i>Digital cameras</span>
+          <span><i class="swatch" style="background: var(--phone);"></i>Mobile phones</span>
+          <span><i class="swatch" style="background: var(--australia);"></i>Australia (always red)</span>
+          <span><i class="swatch" style="background: var(--context);"></i>Everything else</span>
+        </div>
+      </div>
+
+      <div class="stats grid span-3">
         <div class="stat" style="border-color: var(--australia);">
           <div class="stat-number aus">US$74m → US$4.9m</div>
           <p class="stat-text">Australia's colour film exports, 2000 to 2005, as Kodak's Melbourne plant closed</p>
@@ -42,48 +54,37 @@
           <p class="stat-text">of Australians own a mobile phone (2024), and almost every phone is a camera</p>
         </div>
       </div>
-
-      <div class="key">
-        <div class="key-title">How to read the colours on this page</div>
-        <span><i class="swatch" style="background: var(--film);"></i>Film</span>
-        <span><i class="swatch" style="background: var(--digital);"></i>Digital cameras</span>
-        <span><i class="swatch" style="background: var(--phone);"></i>Mobile phones</span>
-        <span><i class="swatch" style="background: var(--australia);"></i>Australia (always red)</span>
-        <span><i class="swatch" style="background: var(--context);"></i>Everything else</span>
-      </div>
     </header>
 
     <!-- ================= SECTION 1: THE FILM ERA ================= -->
     <section class="section" id="film-era">
       <div class="section-head film">
         <span class="section-num">01</span>
-        <h2 style="color: var(--ink);">The film era</h2>
+        <h2>The film era</h2>
       </div>
 
-      <!-- Chart 1: heatmap (layout B: text above, full-width chart) -->
+      <!-- Chart 1: heatmap (layout B: one row of text, then a full-width chart) -->
       <div class="row-b">
-        <div class="text wide">
-          <h3>For a century, cameras kept <span class="film">changing shape</span></h3>
-          <div class="cols">
-            <p>Glass plates gave way to box cameras, then folding and roll-film cameras, then the 35mm camera most families owned. Each new type took over from the one before.</p>
-            <p>Each row is a type of camera in the Science Museum Group collection. Darker squares mean more surviving cameras made in that decade. Hover over a square to see the numbers.</p>
-          </div>
+        <div class="text grid">
+          <h3 class="span-1">For a century, cameras kept <span class="film">changing shape</span></h3>
+          <p class="span-1">Glass plates gave way to box cameras, then folding, roll-film and 35mm cameras. Each new type took over from the one before.</p>
+          <p class="span-1 how">How to read: each row is a type of camera. Darker squares mean more surviving cameras from that decade. Hover for numbers; outlined squares are explained below.</p>
         </div>
         <div id="vis_s1_types" class="vis"></div>
-        <div class="insights">
+        <div class="insights grid">
           <div class="insight film">
             <div class="insight-label">Roll film · 1910s</div>
-            <div class="insight-number" style="color: var(--ink);">181 cameras · 46% of the decade</div>
+            <div class="insight-number">181 cameras · 46% of the decade</div>
             <p>The busiest square on the chart. Roll film could be loaded in daylight, so photography became a family hobby.</p>
           </div>
           <div class="insight film">
             <div class="insight-label">35mm · 1960s</div>
-            <div class="insight-number" style="color: var(--ink);">75 cameras · 35% of the decade</div>
+            <div class="insight-number">75 cameras · 35% of the decade</div>
             <p>The most common camera of the 1960s. 35mm film became the standard for family cameras.</p>
           </div>
           <div class="insight film">
             <div class="insight-label">Digital · 1990s</div>
-            <div class="insight-number" style="color: var(--ink);">51 cameras · 65% of the decade</div>
+            <div class="insight-number">51 cameras · 65% of the decade</div>
             <p>In its first decade, digital was already the most common camera type in the collection.</p>
           </div>
         </div>
@@ -94,11 +95,11 @@
     </section>
 
     <!-- ================= FOOTER ================= -->
-    <footer>
-      <div>
+    <footer class="grid">
+      <div class="span-2">
         <strong>Data sources</strong>
         <p><a href="https://collection.sciencemuseumgroup.org.uk/" target="_blank">Science Museum Group Collection</a> (CC0 / CC BY 4.0), © The Board of Trustees of the Science Museum</p>
-      </div>
+      <div class="span-1">
       <div>
         <strong>About</strong>
         <p>Created by Nevan Hulu for FIT3179 Data Visualisation 2, Monash University, October 2026.</p>
