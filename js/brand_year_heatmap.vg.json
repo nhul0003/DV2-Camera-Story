@@ -1,0 +1,32 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "title": {
+    "text": "New digital camera models released each year, by brand",
+    "subtitle": "Top 15 brands by number of models, 1994–2025",
+    "anchor": "start"
+  },
+  "width": "container",
+  "height": 360,
+  "data": {"url": "data/cameras.csv"},
+  "transform": [
+    {"joinaggregate": [{"op": "count", "as": "brand_total"}], "groupby": ["brand"]},
+    {"window": [{"op": "dense_rank", "as": "brand_rank"}], "sort": [{"field": "brand_total", "order": "descending"}]},
+    {"filter": "datum.brand_rank <= 15"}
+  ],
+  "mark": {"type": "rect", "stroke": "white", "strokeWidth": 0.5},
+  "encoding": {
+    "x": {"field": "year", "type": "ordinal", "title": null, "axis": {"labelAngle": -90}},
+    "y": {"field": "brand", "type": "nominal", "title": null, "sort": {"field": "brand_total", "op": "max", "order": "descending"}},
+    "color": {
+      "aggregate": "count",
+      "type": "quantitative",
+      "title": "Models released",
+      "scale": {"scheme": "oranges"}
+    },
+    "tooltip": [
+      {"field": "brand", "title": "Brand"},
+      {"field": "year", "title": "Year"},
+      {"aggregate": "count", "title": "Models released"}
+    ]
+  }
+}

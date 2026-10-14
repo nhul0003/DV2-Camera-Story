@@ -1,0 +1,45 @@
+{
+  "chart": {
+    "title": "Share of the population that owns a mobile phone",
+    "subtitle": "Share of the population that has a mobile phone device with at least one active SIM card for personal use.",
+    "citation": "International Telecommunication Union",
+    "originalChartUrl": "https://ourworldindata.org/grapher/share-population-mobile-phone?v=1&csvType=full&useColumnShortNames=false",
+    "selection": [
+      "Brazil",
+      "Argentina",
+      "Mexico",
+      "France",
+      "Italy",
+      "Russia",
+      "South Korea",
+      "Japan",
+      "Indonesia",
+      "South Africa",
+      "Egypt",
+      "Mozambique",
+      "Pakistan",
+      "Ethiopia",
+      "Burundi"
+    ]
+  },
+  "columns": {
+    "5.b.1 - Proportion of individuals who own a mobile telephone, by sex (%) - IT_MOB_OWN - Both sexes": {
+      "titleShort": "Proportion of individuals who own a mobile telephone",
+      "titleLong": "Proportion of individuals who own a mobile telephone",
+      "descriptionShort": "Proportion of individuals who own a mobile telephone, by sex (%).",
+      "shortUnit": "%",
+      "unit": "%",
+      "timespan": "2013-2025",
+      "type": "Numeric",
+      "owidVariableId": 1305149,
+      "shortName": "_5_b_1__it_mob_own__both_sexes",
+      "lastUpdated": "2026-07-31",
+      "nextUpdate": "2027-07-31",
+      "citationShort": "International Telecommunication Union – processed by Our World in Data",
+      "citationLong": "International Telecommunication Union – processed by Our World in Data. “Proportion of individuals who own a mobile telephone” [dataset]. International Telecommunication Union, “Data from multiple sources” [original data].",
+      "fullMetadata": "https://api.ourworldindata.org/v1/indicators/1305149.metadata.json"
+    }
+  },
+  "dateDownloaded": "2026-10-13",
+  "activeFilters": {}
+}
