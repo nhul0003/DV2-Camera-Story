@@ -1,0 +1,123 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "description": "Box plots with overview and detail: megapixels of new digital camera models by year, 1996-2025. Drag across the small chart to zoom the box plots.",
+  "data": {"url": "data/cameras.csv", "format": {"parse": {"year": "number", "megapixels": "number"}}},
+  "transform": [{"filter": "datum.year >= 1996"}],
+  "spacing": 20,
+  "vconcat": [
+    {
+      "width": 640,
+      "height": 300,
+      "transform": [{"filter": {"param": "brush"}}],
+      "encoding": {
+        "x": {
+          "field": "year",
+          "type": "ordinal",
+          "title": null,
+          "axis": {
+            "labelAngle": 0,
+            "labelPadding": 8,
+            "labelExpr": "datum.value % 5 == 0 ? datum.label : ''",
+            "grid": false
+          }
+        }
+      },
+      "layer": [
+        {
+          "mark": {
+            "type": "boxplot",
+            "extent": 1.5,
+            "size": 13,
+            "color": "#64ADB6",
+            "median": {"color": "#FAF8F3", "strokeWidth": 2},
+            "rule": {"color": "#8FBFC5"},
+            "ticks": false,
+            "outliers": {"size": 10, "opacity": 0.5, "color": "#64ADB6"}
+          },
+          "encoding": {
+            "y": {
+              "field": "megapixels",
+              "type": "quantitative",
+              "title": "Megapixels",
+              "scale": {"domain": [0, 70]},
+              "axis": {
+                "values": [0, 10, 20, 30, 40, 50, 60],
+                "grid": true,
+                "gridColor": "#ECE8DF",
+                "titleFontWeight": 600,
+                "titleColor": "#6B6B6B",
+                "minExtent": 40
+              }
+            }
+          }
+        },
+        {
+          "transform": [{"filter": "datum.year == 2000 || datum.year == 2010 || datum.year == 2019"}],
+          "mark": {
+            "type": "boxplot",
+            "extent": 1.5,
+            "size": 13,
+            "color": "#0B4A52",
+            "median": {"color": "#FAF8F3", "strokeWidth": 2},
+            "rule": {"color": "#0B4A52"},
+            "ticks": false,
+            "outliers": false
+          },
+          "encoding": {"y": {"field": "megapixels", "type": "quantitative", "scale": {"domain": [0, 70]}, "title": null}}
+        },
+        {
+          "transform": [
+            {"filter": "datum.year == 2000 || datum.year == 2010 || datum.year == 2019"},
+            {"aggregate": [{"op": "median", "field": "megapixels", "as": "med"}], "groupby": ["year"]},
+            {"calculate": "datum.year + ': ' + format(datum.med, '.0f') + ' MP'", "as": "label"},
+            {"calculate": "67", "as": "ypos"}
+          ],
+          "mark": {"type": "text", "fontSize": 13, "fontWeight": 700, "color": "#0B4A52"},
+          "encoding": {
+            "y": {"field": "ypos", "type": "quantitative", "scale": {"domain": [0, 70]}, "title": null},
+            "text": {"field": "label"}
+          }
+        }
+      ]
+    },
+    {
+      "width": 640,
+      "height": 60,
+      "transform": [{"aggregate": [{"op": "median", "field": "megapixels", "as": "med"}], "groupby": ["year"]}],
+      "params": [{"name": "brush", "select": {"type": "interval", "encodings": ["x"]}}],
+      "mark": {
+        "type": "area",
+        "color": "#A9D3D8",
+        "line": {"color": "#1B7F8C", "strokeWidth": 1.5},
+        "interpolate": "monotone"
+      },
+      "encoding": {
+        "x": {
+          "field": "year",
+          "type": "quantitative",
+          "title": null,
+          "scale": {"domain": [1996, 2025], "nice": false},
+          "axis": {"format": "d", "values": [2000, 2005, 2010, 2015, 2020, 2025], "labelPadding": 6, "grid": false}
+        },
+        "y": {
+          "field": "med",
+          "type": "quantitative",
+          "title": "Median",
+          "scale": {"domain": [0, 30]},
+          "axis": {"values": [0, 25], "grid": false, "titleFontWeight": 600, "titleColor": "#6B6B6B", "minExtent": 40}
+        },
+        "tooltip": [
+          {"field": "year", "type": "ordinal", "title": "Year"},
+          {"field": "med", "type": "quantitative", "title": "Median megapixels", "format": ".1f"}
+        ]
+      }
+    }
+  ],
+  "config": {
+    "background": null,
+    "view": {"stroke": null},
+    "font": "Source Sans 3",
+    "axis": {"domain": false, "ticks": false, "labelColor": "#4A4A4A", "labelFontSize": 13}
+  },
+  "padding": {"left": 0, "right": 8, "top": 5, "bottom": 5}
+}

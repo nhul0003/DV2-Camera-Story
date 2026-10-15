@@ -212,6 +212,19 @@
         </div>
         <p class="how">Heatmap with a linked bar chart · Hover over a brand's row to show its models in the bar chart above · The 15 brands with the most models (85% of all models) · Source: CameraDatabase (leavestylecode, GitHub), 3,860 digital camera models, 1994–2025.</p>
       </div>
+      
+      <!-- Chart 7: box plots with overview + detail (layout A: text in column 1, chart in columns 2-3) -->
+      <div class="row-a grid">
+        <div class="text span-1">
+          <h3>The <span class="digital">megapixel race</span></h3>
+          <p>Every year, new cameras packed more pixels onto their sensors. The typical new model had 2 megapixels in 2000, 12 in 2010 and 24 by 2019.</p>
+          <p>Then the race stalled. Since 2017, most new cameras have had about 20 to 26 megapixels.</p>
+        </div>
+        <div class="span-2">
+          <div id="vis_s3_mp" class="vis"></div>
+          <p class="how">Box plots with overview and detail · Drag across the small chart to zoom into those years; double-click to reset · Each box shows the middle half of that year's models, and the pale line is the median · Source: CameraDatabase.</p>
+        </div>
+      </div>
     </section>
 
     <!-- ================= FOOTER ================= -->
@@ -241,6 +254,7 @@
     vegaEmbed('#vis_s2_bump', 'js/s2_film_bump.vg.json', { actions: false }).catch(console.error);
     vegaEmbed('#vis_s2_aus', 'js/s2_australia_film_line.vg.json', { actions: false }).catch(console.error);
     vegaEmbed('#vis_s3_brands', 'js/s3_brand_heatmap.vg.json', { actions: false }).catch(console.error);
+    vegaEmbed('#vis_s3_mp', 'js/s3_megapixel_boxplot.vg.json', { actions: false }).catch(console.error);
   </script>
 </body>
 
