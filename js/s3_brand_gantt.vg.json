@@ -1,0 +1,169 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "description": "Gantt chart: years in which each brand with at least 40 digital camera models released new models, 1994-2025.",
+  "width": 974,
+  "height": 440,
+  "data": {"url": "data/cameras.csv", "format": {"parse": {"year": "number"}}},
+  "transform": [
+    {"aggregate": [{"op": "count", "as": "models_in_year"}], "groupby": ["brand", "year"]},
+    {
+      "window": [{"op": "row_number", "as": "busy_rank"}],
+      "sort": [{"field": "models_in_year", "order": "descending"}, {"field": "year", "order": "descending"}],
+      "groupby": ["brand"]
+    },
+    {"calculate": "datum.busy_rank == 1 ? datum.year : null", "as": "peak_year_only"},
+    {"calculate": "datum.busy_rank == 1 ? datum.models_in_year : null", "as": "peak_n_only"},
+    {
+      "aggregate": [
+        {"op": "min", "field": "year", "as": "first"},
+        {"op": "max", "field": "year", "as": "last"},
+        {"op": "sum", "field": "models_in_year", "as": "models"},
+        {"op": "max", "field": "peak_year_only", "as": "peak"},
+        {"op": "max", "field": "peak_n_only", "as": "peak_n"}
+      ],
+      "groupby": ["brand"]
+    },
+    {"filter": "datum.models >= 40"},
+    {"calculate": "datum.last + 1", "as": "end"},
+    {
+      "calculate": "datum.last >= 2023 ? 'Still releasing models' : 'Stopped releasing models'",
+      "as": "status"
+    },
+    {"calculate": "datum.first * 1000 - datum.models", "as": "order"},
+    {"calculate": "datum.first + '–' + datum.last", "as": "span"},
+    {"calculate": "format(datum.models, ',') + ' models'", "as": "models_label"}
+  ],
+  "layer": [
+    {
+      "data": {"values": [{"year": 2007}, {"year": 2010}]},
+      "mark": {"type": "rule", "color": "#6B6B6B", "strokeDash": [4, 4], "strokeWidth": 1.2},
+      "encoding": {"x": {"field": "year", "type": "quantitative", "scale": {"domain": [1994, 2026], "nice": false}}}
+    },
+    {
+      "data": {"values": [{"year": 2007, "label": "2007: the first iPhone"}]},
+      "mark": {
+        "type": "text",
+        "y": -10,
+        "fontSize": 13,
+        "fontWeight": 700,
+        "color": "#3A3A3A",
+        "baseline": "middle",
+        "align": "right",
+        "dx": -6
+      },
+      "encoding": {
+        "x": {"field": "year", "type": "quantitative", "scale": {"domain": [1994, 2026], "nice": false}},
+        "text": {"field": "label"}
+      }
+    },
+    {
+      "data": {"values": [{"year": 2010, "label": "2010: most new models"}]},
+      "mark": {
+        "type": "text",
+        "y": -10,
+        "fontSize": 13,
+        "fontWeight": 700,
+        "color": "#3A3A3A",
+        "baseline": "middle",
+        "align": "left",
+        "dx": 6
+      },
+      "encoding": {
+        "x": {"field": "year", "type": "quantitative", "scale": {"domain": [1994, 2026], "nice": false}},
+        "text": {"field": "label"}
+      }
+    },
+    {
+      "mark": {"type": "bar", "cornerRadius": 4, "height": 14},
+      "encoding": {
+        "x": {
+          "field": "first",
+          "type": "quantitative",
+          "title": null,
+          "scale": {"domain": [1994, 2026], "nice": false},
+          "axis": {
+            "format": "d",
+            "values": [1995, 2000, 2005, 2010, 2015, 2020, 2025],
+            "grid": true,
+            "gridColor": "#ECE8DF",
+            "labelPadding": 8,
+            "orient": "bottom"
+          }
+        },
+        "x2": {"field": "end"},
+        "color": {
+          "field": "status",
+          "type": "nominal",
+          "title": null,
+          "scale": {"domain": ["Still releasing models", "Stopped releasing models"], "range": ["#1B7F8C", "#C9C6BF"]},
+          "legend": {
+            "orient": "top",
+            "direction": "horizontal",
+            "offset": 28,
+            "symbolType": "square",
+            "symbolSize": 180,
+            "labelFontSize": 13,
+            "labelLimit": 250
+          }
+        },
+        "tooltip": [
+          {"field": "brand", "title": "Brand"},
+          {"field": "span", "title": "Years with new models"},
+          {"field": "models", "type": "quantitative", "title": "Models released", "format": ","},
+          {"field": "peak", "type": "ordinal", "title": "Busiest year"},
+          {"field": "peak_n", "type": "quantitative", "title": "Models that year"}
+        ],
+        "y": {
+          "field": "brand",
+          "type": "nominal",
+          "title": null,
+          "sort": {"field": "order", "op": "min", "order": "ascending"},
+          "axis": {"minExtent": 90, "labelLimit": 90, "labelPadding": 8, "labelFontSize": 13}
+        }
+      }
+    },
+    {
+      "mark": {"type": "circle", "size": 40, "color": "#1F1F1F", "stroke": "#FAF8F3", "strokeWidth": 1.5},
+      "encoding": {
+        "x": {
+          "field": "peak",
+          "type": "quantitative",
+          "title": null,
+          "scale": {"domain": [1994, 2026], "nice": false}
+        },
+        "tooltip": [
+          {"field": "brand", "title": "Brand"},
+          {"field": "peak", "type": "ordinal", "title": "Busiest year"},
+          {"field": "peak_n", "type": "quantitative", "title": "Models that year"}
+        ],
+        "y": {
+          "field": "brand",
+          "type": "nominal",
+          "title": null,
+          "sort": {"field": "order", "op": "min", "order": "ascending"}
+        }
+      }
+    },
+    {
+      "mark": {"type": "text", "align": "left", "baseline": "middle", "dx": 6, "fontSize": 12, "color": "#6B6B6B"},
+      "encoding": {
+        "x": {"field": "end", "type": "quantitative", "scale": {"domain": [1994, 2026], "nice": false}},
+        "text": {"field": "models_label"},
+        "y": {
+          "field": "brand",
+          "type": "nominal",
+          "title": null,
+          "sort": {"field": "order", "op": "min", "order": "ascending"}
+        }
+      }
+    }
+  ],
+  "config": {
+    "background": null,
+    "view": {"stroke": null},
+    "font": "Source Sans 3",
+    "axis": {"domain": false, "ticks": false, "labelColor": "#4A4A4A", "labelFontSize": 13},
+    "legend": {"labelColor": "#4A4A4A"}
+  },
+  "padding": {"left": 0, "right": 8, "top": 5, "bottom": 5}
+}

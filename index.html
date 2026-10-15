@@ -225,6 +225,33 @@
           <p class="how">Box plots with overview and detail · Drag across the small chart to zoom into those years; double-click to reset · Each box shows the middle half of that year's models, and the pale line is the median · Source: CameraDatabase.</p>
         </div>
       </div>
+      
+      <!-- Chart 8: Gantt chart of brand lifespans (layout B: one row of text, then a full-width chart) -->
+      <div class="row-b">
+        <div class="text grid">
+          <h3 class="span-1">Big names <span class="digital">left the market</span></h3>
+          <p class="span-2">Twenty-two brands released at least 40 digital camera models. Thirteen of them have stopped, and every one of those had released its last model by 2015, within eight years of the first iPhone. Most brands had their busiest year around 2010, just before the fall.</p>
+        </div>
+        <div id="vis_s3_gantt" class="vis"></div>
+        <div class="insights grid">
+          <div class="insight digital">
+            <div class="insight-label">13 of 22 · gone by 2015</div>
+            <div class="insight-number">No brand quit after 2015</div>
+            <p>Household names such as HP, Kodak, Casio and Samsung released their last models between 2010 and 2015.</p>
+          </div>
+          <div class="insight digital">
+            <div class="insight-label">Kodak · 1994–2014</div>
+            <div class="insight-number">207 models in 21 years</div>
+            <p>The oldest brand in the database. Its busiest year was 2009, only five years before its last model.</p>
+          </div>
+          <div class="insight digital">
+            <div class="insight-label">9 still going</div>
+            <div class="insight-number">8 of them from Japan</div>
+            <p>The survivors are mostly camera and lens makers, such as Canon, Nikon and Fujifilm, plus Sony and Panasonic.</p>
+          </div>
+        </div>
+        <p class="how">Gantt chart · Each bar runs from a brand's first to last new model; the black dot marks its busiest year · Hover over a bar for details · Brands with at least 40 models (94% of all models) · Source: CameraDatabase.</p>
+      </div>
     </section>
 
     <!-- ================= FOOTER ================= -->
@@ -255,6 +282,7 @@
     vegaEmbed('#vis_s2_aus', 'js/s2_australia_film_line.vg.json', { actions: false }).catch(console.error);
     vegaEmbed('#vis_s3_brands', 'js/s3_brand_heatmap.vg.json', { actions: false }).catch(console.error);
     vegaEmbed('#vis_s3_mp', 'js/s3_megapixel_boxplot.vg.json', { actions: false }).catch(console.error);
+    vegaEmbed('#vis_s3_gantt', 'js/s3_brand_gantt.vg.json', { actions: false }).catch(console.error);
   </script>
 </body>
 
