@@ -77,7 +77,23 @@ h1 { font-weight: 700; font-size: clamp(48px, 7vw, 76px); line-height: 1.02; let
 
 /* ---------- Sections ---------- */
 .section { padding: var(--s4) 0 0; }
-.section-head { display: flex; align-items: baseline; gap: var(--s2); border-bottom: 3px solid; padding-bottom: var(--s1); margin-bottom: var(--s4); }
+.section-head { display: flex; align-items: baseline; gap: var(--s2); position: relative; padding-bottom: calc(var(--s3) + 40px); margin-bottom: var(--s4); }
+/* Film-strip divider under each section title: a strip in the section colour, with
+   sprocket holes along both edges and a row of frames in the middle */
+.section-head::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 40px;
+  border-radius: 4px;
+  background:
+    linear-gradient(90deg, var(--paper) 0 8px, transparent 8px) left 4px top 5px / 16px 6px repeat-x,
+    linear-gradient(90deg, var(--paper) 0 8px, transparent 8px) left 4px bottom 5px / 16px 6px repeat-x,
+    linear-gradient(90deg, rgba(250, 248, 243, 0.35) 0 calc(100% - 8px), transparent calc(100% - 8px)) left 4px top 15px / 136px 10px repeat-x,
+    currentColor;
+}
 .section-num { font-size: 44px; font-weight: 700; line-height: 1; }
 .section-head h2 { font-weight: 700; font-size: 38px; line-height: 1.1; margin: 0; color: var(--ink); }
 
