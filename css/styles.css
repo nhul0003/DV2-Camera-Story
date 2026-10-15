@@ -69,11 +69,14 @@ h1 { font-weight: 700; font-size: clamp(48px, 7vw, 76px); line-height: 1.02; let
 .stat-text { font-size: 16px; line-height: 1.5; color: var(--ink-soft); margin: 8px 0 0; }
 
 /* Colour key sits in the third column beside the subtitle, so the intro has no empty column */
-.key { padding-top: 6px; }
+.key { padding-top: 6px; grid-column: 3; grid-row: 3 / span 2; }
+.intro-text { margin: var(--s3) 0 0; color: var(--ink-soft); }
 .key-title { font-size: 18px; font-weight: 700; margin-bottom: var(--s1); }
 .key-items { display: grid; gap: 4px; font-size: 15px; }
 .key-items span { display: inline-flex; align-items: center; gap: 8px; }
 .swatch { width: 16px; height: 16px; border-radius: 3px; display: inline-block; }
+/* One sequential scale for every amount shown by shading in a heatmap (light = less, dark = more) */
+.swatch-ramp { width: 40px; background: linear-gradient(90deg, #E3E7EE, #8797B2, #2C3A5A); }
 
 /* ---------- Sections ---------- */
 .section { padding: var(--s4) 0 0; }
@@ -113,6 +116,12 @@ h1 { font-weight: 700; font-size: clamp(48px, 7vw, 76px); line-height: 1.02; let
 .pill { border: 1px solid; border-radius: 999px; padding: 3px 12px; font-weight: 600; white-space: nowrap; }
 
 .vis { width: 100%; margin-top: var(--s2); }
+/* Year selector under the symbol map */
+.vega-bindings { margin-top: var(--s1); font-size: 15px; color: var(--ink-soft); }
+.vega-bind { display: flex; align-items: center; gap: 4px; flex-wrap: wrap; }
+.vega-bind-name { font-weight: 600; margin-right: 8px; }
+.vega-bind label { margin-right: 12px; cursor: pointer; }
+.vega-bind input[type="radio"] { accent-color: var(--ink); cursor: pointer; }
 
 /* Short analysis cards under a chart, one per third */
 .insights { margin: var(--s3) 0 0; }
@@ -170,7 +179,7 @@ footer p { margin: 0 0 4px; }
   .span-1, .span-2, .span-3 { grid-column: 1 / -1; }
   .text.grid p.span-2 { columns: 1; }
   .stat, .insight { margin-bottom: var(--s3); }
-  .key { margin-top: var(--s3); }
+  .key { margin-top: var(--s3); grid-column: 1 / -1; grid-row: auto; }
   .section-head h2 { font-size: 36px; }
   .section-num { font-size: 48px; }
 }

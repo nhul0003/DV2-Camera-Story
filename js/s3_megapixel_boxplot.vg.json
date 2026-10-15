@@ -6,7 +6,7 @@
   "spacing": 20,
   "vconcat": [
     {
-      "width": 640,
+      "width": 622,
       "height": 300,
       "transform": [{"filter": {"param": "brush"}}],
       "encoding": {
@@ -81,7 +81,7 @@
       ]
     },
     {
-      "width": 640,
+      "width": 622,
       "height": 60,
       "transform": [{"aggregate": [{"op": "median", "field": "megapixels", "as": "med"}], "groupby": ["year"]}],
       "params": [{"name": "brush", "select": {"type": "interval", "encodings": ["x"]}}],

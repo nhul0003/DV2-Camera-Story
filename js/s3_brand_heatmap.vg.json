@@ -5,7 +5,7 @@
   "spacing": 12,
   "vconcat": [
     {
-      "width": 984,
+      "width": 968,
       "height": 90,
       "layer": [
         {
@@ -98,7 +98,7 @@
       ]
     },
     {
-      "width": 984,
+      "width": 968,
       "height": 372,
       "transform": [
         {"joinaggregate": [{"op": "count", "as": "year_total"}], "groupby": ["year"]},
@@ -153,9 +153,16 @@
               "title": "New models that year",
               "scale": {
                 "domain": ["1–4", "5–9", "10–19", "20–39", "40 or more"],
-                "range": ["#D6EBED", "#A9D3D8", "#64ADB6", "#1B7F8C", "#0B4A52"]
+                "range": ["#E3E7EE", "#B8C2D3", "#8797B2", "#56688C", "#2C3A5A"]
               },
-              "legend": {"orient": "top", "direction": "horizontal", "offset": 12, "columns": 5}
+              "legend": {
+                "orient": "top",
+                "direction": "horizontal",
+                "offset": 12,
+                "columns": 5,
+                "columnPadding": 18,
+                "labelFontSize": 13
+              }
             },
             "opacity": {"condition": {"param": "brand_hover", "empty": true, "value": 1}, "value": 0.25},
             "tooltip": [

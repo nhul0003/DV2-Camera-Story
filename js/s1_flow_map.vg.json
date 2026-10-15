@@ -24,10 +24,15 @@
   ],
   "vconcat": [
     {
-      "width": 1072,
-      "height": 464,
-      "projection": {"type": "equalEarth", "rotate": [-150, 0, 0], "scale": 193, "translate": [536.0, 257.5]},
+      "width": 1030,
+      "height": 480,
+      "projection": {"type": "equalEarth", "rotate": [-150, 0, 0], "scale": 170, "translate": [515.0, 240.0]},
       "layer": [
+        {"data": {"sphere": true}, "mark": {"type": "geoshape", "fill": "#E3ECEF", "stroke": null}},
+        {
+          "data": {"graticule": {"step": [30, 30]}},
+          "mark": {"type": "geoshape", "filled": false, "stroke": "#FFFFFF", "strokeWidth": 0.8, "strokeOpacity": 0.9}
+        },
         {
           "data": {
             "url": "js/ne_110m_admin_0_countries.topojson",
@@ -45,7 +50,7 @@
               "groupby": ["country", "short_name", "latitude", "longitude"]
             }
           ],
-          "mark": {"type": "rule", "color": "#C8862A", "opacity": 0.55, "strokeCap": "round"},
+          "mark": {"type": "rule", "color": "#C8862A", "opacity": 0.5, "strokeCap": "round"},
           "encoding": {
             "longitude": {"field": "longitude", "type": "quantitative"},
             "latitude": {"field": "latitude", "type": "quantitative"},
@@ -107,22 +112,41 @@
                     "titleFontSize": 13,
                     "labelFontSize": 12,
                     "fillColor": "#FAF8F3",
-                    "padding": 8
+                    "padding": 8,
+                    "title": "Cameras made there (origin)"
                   }
                 },
-                "color": {
-                  "field": "origin",
-                  "type": "nominal",
-                  "scale": {"domain": ["Made overseas", "Made in Australia"], "range": ["#C8862A", "#C23B22"]},
-                  "legend": null
-                },
+                "color": {"value": "#C8862A"},
                 "tooltip": [
                   {"field": "country", "type": "nominal", "title": "Made in"},
                   {"field": "cameras", "type": "quantitative", "title": "Cameras"},
                   {"field": "share", "type": "quantitative", "title": "Share of cameras", "format": ".0%"},
                   {"field": "years", "type": "nominal", "title": "Years made"}
                 ]
-              }
+              },
+              "transform": [{"filter": "datum.country != 'Australia'"}]
+            },
+            {
+              "mark": {"type": "circle", "opacity": 0.9, "stroke": "#FAF8F3", "strokeWidth": 1.2},
+              "encoding": {
+                "longitude": {"field": "lon", "type": "quantitative"},
+                "latitude": {"field": "lat", "type": "quantitative"},
+                "size": {
+                  "field": "cameras",
+                  "type": "quantitative",
+                  "title": "Cameras made there",
+                  "scale": {"domain": [1, 65], "range": [25, 900]},
+                  "legend": null
+                },
+                "color": {"value": "#C23B22"},
+                "tooltip": [
+                  {"field": "country", "type": "nominal", "title": "Made in"},
+                  {"field": "cameras", "type": "quantitative", "title": "Cameras"},
+                  {"field": "share", "type": "quantitative", "title": "Share of cameras", "format": ".0%"},
+                  {"field": "years", "type": "nominal", "title": "Years made"}
+                ]
+              },
+              "transform": [{"filter": "datum.country == 'Australia'"}]
             },
             {
               "transform": [
@@ -172,12 +196,15 @@
               }
             },
             {
-              "transform": [{"filter": "datum.country == 'Australia'"}],
+              "transform": [
+                {"filter": "datum.country == 'Australia'"},
+                {"calculate": "datum.cameras + ' of them made in Australia'", "as": "label"}
+              ],
               "mark": {
                 "type": "text",
                 "align": "left",
-                "dx": 18,
-                "dy": 4,
+                "dx": 22,
+                "dy": 8,
                 "fontSize": 13,
                 "fontWeight": 700,
                 "color": "#C23B22"
@@ -190,12 +217,94 @@
             }
           ],
           "resolve": {"legend": {"size": "independent"}}
+        },
+        {
+          "data": {"values": [{"lon": 144.96, "lat": -37.81}]},
+          "mark": {
+            "type": "point",
+            "shape": "circle",
+            "filled": false,
+            "size": 900,
+            "stroke": "#1F1F1F",
+            "strokeWidth": 2.5
+          },
+          "encoding": {
+            "longitude": {"field": "lon", "type": "quantitative"},
+            "latitude": {"field": "lat", "type": "quantitative"}
+          }
+        },
+        {
+          "data": {"values": [{"lon": 144.96, "lat": -37.81, "t": "Destination: Museums Victoria, Melbourne"}]},
+          "mark": {
+            "type": "text",
+            "align": "left",
+            "dx": 22,
+            "dy": -10,
+            "fontSize": 13,
+            "fontWeight": 700,
+            "color": "#1F1F1F"
+          },
+          "encoding": {
+            "longitude": {"field": "lon", "type": "quantitative"},
+            "latitude": {"field": "lat", "type": "quantitative"},
+            "text": {"field": "t"}
+          }
+        },
+        {
+          "data": {
+            "values": [
+              {"k": "o", "y": 404, "t": "Origin: where the cameras were made"},
+              {"k": "a", "y": 423, "t": "Made in Australia"},
+              {"k": "d", "y": 442, "t": "Destination: Museums Victoria, Melbourne"},
+              {"k": "l", "y": 461, "t": "Line width: number of cameras"}
+            ]
+          },
+          "layer": [
+            {
+              "transform": [{"filter": "datum.k == 'o'"}],
+              "mark": {"type": "circle", "x": 407, "size": 110, "color": "#C8862A", "opacity": 0.9},
+              "encoding": {"y": {"field": "y", "type": "quantitative", "scale": null}}
+            },
+            {
+              "transform": [{"filter": "datum.k == 'a'"}],
+              "mark": {"type": "circle", "x": 407, "size": 110, "color": "#C23B22"},
+              "encoding": {"y": {"field": "y", "type": "quantitative", "scale": null}}
+            },
+            {
+              "transform": [{"filter": "datum.k == 'd'"}],
+              "mark": {
+                "type": "point",
+                "x": 407,
+                "size": 150,
+                "filled": false,
+                "stroke": "#1F1F1F",
+                "strokeWidth": 2.2
+              },
+              "encoding": {"y": {"field": "y", "type": "quantitative", "scale": null}}
+            },
+            {
+              "transform": [{"filter": "datum.k == 'l'"}],
+              "mark": {"type": "rule", "x": 400, "x2": 416, "color": "#C8862A", "strokeWidth": 4, "opacity": 0.6},
+              "encoding": {"y": {"field": "y", "type": "quantitative", "scale": null}}
+            },
+            {
+              "mark": {
+                "type": "text",
+                "x": 424,
+                "align": "left",
+                "baseline": "middle",
+                "fontSize": 13,
+                "color": "#3A3A3A"
+              },
+              "encoding": {"y": {"field": "y", "type": "quantitative", "scale": null}, "text": {"field": "t"}}
+            }
+          ]
         }
       ],
       "resolve": {"legend": {"size": "independent", "strokeWidth": "independent"}}
     },
     {
-      "width": 1027,
+      "width": 1030,
       "height": 90,
       "layer": [
         {
@@ -273,7 +382,13 @@
     "view": {"stroke": null},
     "font": "Source Sans 3",
     "axis": {"domain": false, "ticks": false, "labelColor": "#4A4A4A", "titleColor": "#4A4A4A", "labelFontSize": 13},
-    "legend": {"labelColor": "#4A4A4A", "titleColor": "#4A4A4A", "titleFontWeight": 600}
+    "legend": {
+      "labelColor": "#4A4A4A",
+      "titleColor": "#4A4A4A",
+      "titleFontWeight": 600,
+      "titleFontSize": 13,
+      "labelFontSize": 12
+    }
   },
   "padding": {"left": 0, "right": 0, "top": 5, "bottom": 5}
 }

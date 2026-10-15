@@ -1,7 +1,7 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
   "description": "Line chart: Australia's colour film exports 2000-2023, with the November 2004 closure of Kodak's Coburg plant marked.",
-  "width": 610,
+  "width": 600,
   "height": 340,
   "data": {"url": "data/s2_colour_film.csv"},
   "transform": [
@@ -67,6 +67,21 @@
             "gridColor": "#ECE8DF",
             "titleFontWeight": 600,
             "titleColor": "#6B6B6B"
+          }
+        },
+        "color": {
+          "datum": "Australia's colour film exports",
+          "type": "nominal",
+          "scale": {"range": ["#C23B22"]},
+          "legend": {
+            "orient": "top",
+            "direction": "horizontal",
+            "title": null,
+            "symbolType": "stroke",
+            "symbolStrokeWidth": 4,
+            "labelFontSize": 13,
+            "offset": 12,
+            "labelLimit": 400
           }
         }
       }

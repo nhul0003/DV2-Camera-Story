@@ -27,6 +27,7 @@
       <p class="kicker span-3">A data story about cameras · Australia · 1840–2025</p>
       <h1 class="span-3">From Film to Phone</h1>
       <p class="lead span-2">How the camera changed over 150 years, and what the switch from film to digital cost Australia.</p>
+      <p class="intro-text span-2">This story follows cameras through museum collections, trade records and a database of digital cameras. It shows what people used in the film era, how the film industry collapsed, how digital cameras boomed and faded, and how phones replaced them. Along the way, it asks what each change meant for Australia.</p>
 
       <div class="key span-1">
         <div class="key-title">How to read the colours</div>
@@ -36,6 +37,7 @@
           <span><i class="swatch" style="background: var(--phone);"></i>Mobile phones</span>
           <span><i class="swatch" style="background: var(--australia);"></i>Australia (always red)</span>
           <span><i class="swatch" style="background: var(--context);"></i>Everything else</span>
+          <span><i class="swatch swatch-ramp"></i>Heatmap shading: light = less, dark = more</span>
         </div>
       </div>
 
@@ -66,34 +68,34 @@
       <div class="row-b">
         <div class="text grid">
           <h3 class="span-1">For a century, cameras kept <span class="film">changing shape</span></h3>
-          <p class="span-2">Glass plates gave way to box cameras, then folding, roll-film and 35mm cameras. Each new type took over from the one before.</p>
+          <p class="span-2">Glass plates gave way to box cameras, then folding, roll-film and 35mm cameras. Each new type took over from the one before, and each made photography cheaper and easier. The darker a square, the bigger that type's share of all the cameras made in that decade.</p>
         </div>
         <div id="vis_s1_types" class="vis"></div>
         <div class="insights grid">
           <div class="insight film">
-            <div class="insight-label">Roll film · 1910s</div>
-            <div class="insight-number">181 cameras · 46% of the decade</div>
-            <p>The busiest square on the chart. Roll film could be loaded in daylight, so photography became a family hobby.</p>
+            <div class="insight-label">1 · Roll film · 1910s</div>
+            <div class="insight-number">46% of the decade's cameras</div>
+            <p>Roll film was the top type in every decade from the 1900s to the 1930s. It could be loaded in daylight, so photography became a family hobby.</p>
           </div>
           <div class="insight film">
-            <div class="insight-label">35mm · 1960s</div>
-            <div class="insight-number">75 cameras · 35% of the decade</div>
+            <div class="insight-label">2 · 35mm · 1960s</div>
+            <div class="insight-number">35% of the decade's cameras</div>
             <p>The most common camera of the 1960s. 35mm film became the standard for family cameras.</p>
           </div>
           <div class="insight film">
-            <div class="insight-label">Digital · 1990s</div>
-            <div class="insight-number">51 cameras · 65% of the decade</div>
-            <p>In its first decade, digital was already the most common camera type in the collection.</p>
+            <div class="insight-label">3 · Digital · 1990s</div>
+            <div class="insight-number">65% of the decade's cameras</div>
+            <p>The darkest square on the chart. In its first decade, digital was already two-thirds of the collection.</p>
           </div>
         </div>
-        <p class="how">Heatmap · Hover over a square for numbers; the outlined squares are explained above · 3,007 cameras with a known type and year · Source: Science Museum Group Collection. Counts show what the museum holds, not how many cameras were sold.</p>
+        <p class="how">Heatmap · Colour shows each type's share of all cameras made in that decade · Hover over a square for numbers; the numbered squares match the notes above · 2,982 cameras made in 1880–2009 (decades with at least 25 cameras) · Source: Science Museum Group Collection. Shares show what the museum holds, not how many cameras were sold.</p>
       </div>
 
       <!-- Chart 2: flow map + year histogram (layout B: one row of text, then a full-width chart) -->
       <div class="row-b">
         <div class="text grid">
           <h3 class="span-1">Where <span class="aus">Melbourne's</span> cameras came from</h3>
-          <p class="span-2">Most cameras in Museums Victoria were made overseas, first in the USA, Britain and Germany, later in Japan. Eighteen were made here, mostly by Kodak in Melbourne.</p>
+          <p class="span-2">Most cameras in Museums Victoria were made overseas, first in the USA, Britain and Germany, later in Japan. Eighteen were made here, mostly by Kodak in Melbourne. Every line ends at the museum in Melbourne, and the thicker the line, the more cameras came from that country.</p>
         </div>
         <div id="vis_s1_flow" class="vis"></div>
         <div class="insights grid">
@@ -113,7 +115,7 @@
             <p>Kodak built cameras in Melbourne for Australian families until its Coburg plant closed in 2004.</p>
           </div>
         </div>
-        <p class="how">Flow map with a linked bar chart · Drag across the bar chart to filter the map by year made · Equal Earth projection, centred on the Pacific so Australia sits near the middle · 163 cameras with a known country and year · Country and year are read from the museum record, or from the object title when the record is blank · Source: Museums Victoria Collections.</p>
+        <p class="how">Flow map with a linked bar chart · Each line runs from where cameras were made (origin) to Museums Victoria in Melbourne (destination); line width shows how many · Drag across the bar chart to filter the map by year made · Equal Earth projection, centred on the Pacific so Australia sits near the middle · 163 cameras with a known country and year · Country and year are read from the museum record, or from the object title when the record is blank · Source: Museums Victoria Collections.</p>
       </div>
 
     </section>
@@ -125,11 +127,11 @@
         <h2>The film industry collapses</h2>
       </div>
 
-      <!-- Chart 3: proportional symbol maps, small multiples (layout B) -->
+      <!-- Chart 3: proportional symbol map with a year selector (layout B) -->
       <div class="row-b">
         <div class="text grid">
           <h3 class="span-1">Film cameras <span class="film">almost vanished</span> in ten years</h3>
-          <p class="span-2">In 2000 the world exported US$3.6 billion of 35mm film cameras, over half from Hong Kong and China. By 2010 the trade had fallen by 96%.</p>
+          <p class="span-2">In 2000 the world exported US$3.6 billion of 35mm film cameras, over half from Hong Kong and China. By 2010 the trade had fallen by 96%. Choose a year under the map to watch the circles shrink inside their 2000 outlines. Australia, in red, followed the same path.</p>
         </div>
         <div id="vis_s2_exports" class="vis"></div>
         <div class="insights grid">
@@ -149,7 +151,7 @@
             <p>Australia's own film camera exports collapsed at the same pace, falling 98% in ten years.</p>
           </div>
         </div>
-        <p class="how">Proportional symbol maps in small multiples · Circle area shows exports in US$ (current prices) · Hover over a circle for details; the red ring marks Australia · Source: UN Comtrade via World Bank WITS, HS code 900653 (cameras for 35mm roll film).</p>
+        <p class="how">Proportional symbol map · Circle area shows each country's exports in US$ (current prices); dashed outlines show 2000 for comparison · Choose a year below the map and hover over a circle for details · Source: UN Comtrade via World Bank WITS, HS code 900653 (cameras for 35mm roll film).</p>
       </div>
 
       <!-- Chart 4: bump chart (layout A: text in column 1, chart in columns 2-3) -->
@@ -161,7 +163,7 @@
         </div>
         <div class="span-2">
           <div id="vis_s2_bump" class="vis"></div>
-          <p class="how">Bump chart · Hover over a line to highlight it · Rank by export value of colour film for 35mm cameras · Mexico stops reporting after 2010 · Source: UN Comtrade via World Bank WITS, HS code 370254.</p>
+          <p class="how">Bump chart · Every rank from #1 to #31 is evenly spaced · Hover over a line to highlight it · Rank by export value of colour film for 35mm cameras · Mexico stops reporting after 2010 · Source: UN Comtrade via World Bank WITS, HS code 370254.</p>
         </div>
       </div>
 

@@ -1,136 +1,296 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-  "description": "Proportional symbol maps in small multiples: exports of 35mm film cameras by country, 2000 to 2023.",
-  "data": {"url": "data/s2_film_cameras.csv"},
-  "transform": [
-    {"filter": "datum.Reporter != 'European Union' && datum.Reporter != 'World'"},
+  "description": "Proportional symbol map: exports of 35mm film cameras by country. Choose a year; the outlines show 2000 for comparison.",
+  "width": 1072,
+  "height": 530,
+  "autosize": {"type": "none"},
+  "projection": {"type": "equalEarth", "rotate": [-150, 0, 0], "scale": 170, "translate": [536.0, 290.0]},
+  "params": [
     {
-      "calculate": "datum.Reporter == 'Hong Kong, China' ? 'Hong Kong' : datum.Reporter == 'Other Asia, nes' ? 'Taiwan' : datum.Reporter == 'United States' ? 'United States of America' : datum.Reporter == 'Korea, Rep.' ? 'South Korea' : datum.Reporter == 'Russian Federation' ? 'Russia' : datum.Reporter == 'Slovak Republic' ? 'Slovakia' : datum.Reporter == 'Egypt, Arab Rep.' ? 'Egypt' : datum.Reporter",
-      "as": "country"
-    },
-    {"calculate": "datum['Trade Value 1000USD'] / 1000", "as": "exports"},
-    {"calculate": "datum['Quantity Unit'] == 'Item' ? datum.Quantity : null", "as": "cameras"},
-    {
-      "lookup": "country",
-      "from": {"data": {"url": "data/countryInfo.csv"}, "key": "name", "fields": ["latitude", "longitude"]}
-    },
-    {"filter": "isValid(datum.latitude)"},
-    {
-      "window": [{"op": "rank", "as": "rank"}],
-      "sort": [{"field": "exports", "order": "descending"}],
-      "groupby": ["Year"]
-    },
-    {"joinaggregate": [{"op": "sum", "field": "exports", "as": "world_total"}], "groupby": ["Year"]},
-    {"calculate": "datum.country == 'Australia' ? 'Australia' : 'Other countries'", "as": "group"},
-    {"calculate": "datum.country == 'United States of America' ? 'USA' : datum.country", "as": "short_name"},
-    {
-      "calculate": "'#1 ' + datum.short_name + ' · world total US$' + format(datum.world_total, ',.0f') + 'm'",
-      "as": "lead_label"
+      "name": "year_pick",
+      "value": 2010,
+      "bind": {"input": "radio", "options": [2000, 2005, 2010, 2015, 2019, 2023], "name": "Show year: "}
     }
   ],
-  "facet": {
-    "field": "Year",
-    "type": "ordinal",
-    "header": {"title": null, "labelExpr": "''", "labelPadding": 0, "labelFontSize": 1}
-  },
-  "columns": 3,
-  "spacing": {"row": 24, "column": 40},
-  "spec": {
-    "width": 330,
-    "height": 188,
-    "projection": {"type": "equalEarth", "rotate": [-150, 0, 0], "scale": 59.4, "translate": [165, 123.3]},
-    "layer": [
-      {
-        "data": {
-          "url": "js/ne_110m_admin_0_countries.topojson",
-          "format": {"type": "topojson", "feature": "ne_110m_admin_0_countries"}
-        },
-        "transform": [{"filter": "datum.properties.NAME != 'Antarctica'"}],
-        "mark": {"type": "geoshape", "fill": "#DAD5CA", "stroke": "#FAF8F3", "strokeWidth": 0.4}
+  "layer": [
+    {"data": {"sphere": true}, "mark": {"type": "geoshape", "fill": "#E3ECEF", "stroke": null}},
+    {
+      "data": {"graticule": {"step": [30, 30]}},
+      "mark": {"type": "geoshape", "filled": false, "stroke": "#FFFFFF", "strokeWidth": 0.8, "strokeOpacity": 0.9}
+    },
+    {
+      "data": {
+        "url": "js/ne_110m_admin_0_countries.topojson",
+        "format": {"type": "topojson", "feature": "ne_110m_admin_0_countries"}
       },
-      {
-        "mark": {"type": "circle", "opacity": 0.75, "stroke": "#FAF8F3", "strokeWidth": 0.8},
-        "encoding": {
-          "longitude": {"field": "longitude", "type": "quantitative"},
-          "latitude": {"field": "latitude", "type": "quantitative"},
-          "size": {
-            "field": "exports",
-            "type": "quantitative",
-            "title": "Exports (US$ million)",
-            "scale": {"domain": [0, 1000], "range": [0, 1400]},
-            "legend": {
-              "values": [10, 100, 500, 1000],
-              "orient": "bottom",
-              "direction": "horizontal",
-              "symbolFillColor": "#C8862A",
-              "symbolStrokeColor": "#FAF8F3"
-            }
-          },
-          "color": {
-            "field": "group",
-            "type": "nominal",
-            "scale": {"domain": ["Other countries", "Australia"], "range": ["#C8862A", "#C23B22"]},
-            "legend": null
-          },
-          "order": {"field": "exports", "sort": "descending"},
-          "tooltip": [
-            {"field": "Reporter", "type": "nominal", "title": "Country"},
-            {"field": "Year", "type": "ordinal", "title": "Year"},
-            {"field": "exports", "type": "quantitative", "title": "Exports (US$ m)", "format": ",.1f"},
-            {"field": "cameras", "type": "quantitative", "title": "Cameras exported", "format": ",.0f"},
-            {"field": "rank", "type": "quantitative", "title": "World rank"}
-          ]
-        }
-      },
-      {
-        "transform": [{"filter": "datum.rank == 1"}],
-        "mark": {
-          "type": "text",
-          "align": "left",
-          "baseline": "top",
-          "x": 0,
-          "y": 22,
-          "fontSize": 12,
-          "color": "#4A4A4A"
+      "transform": [{"filter": "datum.properties.NAME != 'Antarctica'"}],
+      "mark": {"type": "geoshape", "fill": "#DAD5CA", "stroke": "#FAF8F3", "strokeWidth": 0.6}
+    },
+    {
+      "data": {"url": "data/s2_film_cameras.csv"},
+      "transform": [
+        {"filter": "datum.Reporter != 'European Union' && datum.Reporter != 'World'"},
+        {
+          "calculate": "datum.Reporter == 'Hong Kong, China' ? 'Hong Kong' : datum.Reporter == 'Other Asia, nes' ? 'Taiwan' : datum.Reporter == 'United States' ? 'United States of America' : datum.Reporter == 'Korea, Rep.' ? 'South Korea' : datum.Reporter == 'Russian Federation' ? 'Russia' : datum.Reporter == 'Slovak Republic' ? 'Slovakia' : datum.Reporter == 'Egypt, Arab Rep.' ? 'Egypt' : datum.Reporter",
+          "as": "country"
         },
-        "encoding": {"text": {"field": "lead_label", "type": "nominal"}}
-      },
-      {
-        "transform": [{"filter": "datum.rank == 1"}],
-        "mark": {
-          "type": "text",
-          "align": "left",
-          "baseline": "top",
-          "x": 0,
-          "y": 0,
-          "fontSize": 18,
-          "fontWeight": 700,
-          "font": "Playfair Display",
-          "color": "#1F1F1F"
+        {"calculate": "datum['Trade Value 1000USD'] / 1000", "as": "exports"},
+        {"calculate": "datum['Quantity Unit'] == 'Item' ? datum.Quantity : null", "as": "cameras"},
+        {
+          "lookup": "country",
+          "from": {"data": {"url": "data/countryInfo.csv"}, "key": "name", "fields": ["latitude", "longitude"]}
         },
-        "encoding": {"text": {"field": "Year", "type": "ordinal"}}
-      },
-      {
-        "transform": [{"filter": "datum.country == 'Australia'"}],
-        "mark": {
-          "type": "point",
-          "shape": "circle",
-          "filled": false,
-          "color": "#C23B22",
-          "size": 30,
-          "strokeWidth": 1.5
+        {"filter": "isValid(datum.latitude)"},
+        {
+          "window": [{"op": "rank", "as": "rank"}],
+          "sort": [{"field": "exports", "order": "descending"}],
+          "groupby": ["Year"]
         },
-        "encoding": {
-          "longitude": {"field": "longitude", "type": "quantitative"},
-          "latitude": {"field": "latitude", "type": "quantitative"}
-        }
+        {"joinaggregate": [{"op": "sum", "field": "exports", "as": "world_total"}], "groupby": ["Year"]},
+        {"calculate": "datum.country == 'Australia' ? 'Australia' : 'Other countries'", "as": "group"},
+        {
+          "calculate": "datum.country == 'United States of America' ? 'USA' : datum.country",
+          "as": "short_name"
+        },
+        {
+          "calculate": "'#1 ' + datum.short_name + ' · world total US$' + format(datum.world_total, ',.0f') + 'm'",
+          "as": "lead_label"
+        },
+        {"filter": "datum.Year == 2000"}
+      ],
+      "mark": {"type": "circle", "filled": false, "stroke": "#8A8A8A", "strokeWidth": 1, "strokeDash": [3, 2]},
+      "encoding": {
+        "longitude": {"field": "longitude", "type": "quantitative"},
+        "latitude": {"field": "latitude", "type": "quantitative"},
+        "size": {
+          "field": "exports",
+          "type": "quantitative",
+          "title": "Exports (US$ million)",
+          "scale": {"domain": [0, 1100], "range": [6, 2600]},
+          "legend": null
+        },
+        "tooltip": [
+          {"field": "Reporter", "type": "nominal", "title": "Country"},
+          {"field": "Year", "type": "ordinal", "title": "Year"},
+          {"field": "exports", "type": "quantitative", "title": "Exports (US$ m)", "format": ",.1f"},
+          {"field": "cameras", "type": "quantitative", "title": "Cameras exported", "format": ",.0f"},
+          {"field": "rank", "type": "quantitative", "title": "World rank"}
+        ]
       }
-    ]
-  },
+    },
+    {
+      "data": {"url": "data/s2_film_cameras.csv"},
+      "transform": [
+        {"filter": "datum.Reporter != 'European Union' && datum.Reporter != 'World'"},
+        {
+          "calculate": "datum.Reporter == 'Hong Kong, China' ? 'Hong Kong' : datum.Reporter == 'Other Asia, nes' ? 'Taiwan' : datum.Reporter == 'United States' ? 'United States of America' : datum.Reporter == 'Korea, Rep.' ? 'South Korea' : datum.Reporter == 'Russian Federation' ? 'Russia' : datum.Reporter == 'Slovak Republic' ? 'Slovakia' : datum.Reporter == 'Egypt, Arab Rep.' ? 'Egypt' : datum.Reporter",
+          "as": "country"
+        },
+        {"calculate": "datum['Trade Value 1000USD'] / 1000", "as": "exports"},
+        {"calculate": "datum['Quantity Unit'] == 'Item' ? datum.Quantity : null", "as": "cameras"},
+        {
+          "lookup": "country",
+          "from": {"data": {"url": "data/countryInfo.csv"}, "key": "name", "fields": ["latitude", "longitude"]}
+        },
+        {"filter": "isValid(datum.latitude)"},
+        {
+          "window": [{"op": "rank", "as": "rank"}],
+          "sort": [{"field": "exports", "order": "descending"}],
+          "groupby": ["Year"]
+        },
+        {"joinaggregate": [{"op": "sum", "field": "exports", "as": "world_total"}], "groupby": ["Year"]},
+        {"calculate": "datum.country == 'Australia' ? 'Australia' : 'Other countries'", "as": "group"},
+        {
+          "calculate": "datum.country == 'United States of America' ? 'USA' : datum.country",
+          "as": "short_name"
+        },
+        {
+          "calculate": "'#1 ' + datum.short_name + ' · world total US$' + format(datum.world_total, ',.0f') + 'm'",
+          "as": "lead_label"
+        },
+        {"calculate": "datum.Year == 2000 ? datum.world_total : 0", "as": "t2000"},
+        {"joinaggregate": [{"op": "max", "field": "t2000", "as": "total_2000"}]},
+        {"filter": "datum.Year == year_pick"}
+      ],
+      "layer": [
+        {
+          "mark": {"type": "circle", "opacity": 0.75, "stroke": "#FAF8F3", "strokeWidth": 0.8},
+          "encoding": {
+            "longitude": {"field": "longitude", "type": "quantitative"},
+            "latitude": {"field": "latitude", "type": "quantitative"},
+            "size": {
+              "field": "exports",
+              "type": "quantitative",
+              "title": "Exports (US$ million)",
+              "scale": {"domain": [0, 1100], "range": [6, 2600]},
+              "legend": {
+                "values": [10, 100, 500, 1000],
+                "orient": "bottom-left",
+                "direction": "horizontal",
+                "symbolFillColor": "#C8862A",
+                "symbolStrokeColor": "#FAF8F3",
+                "symbolOpacity": 0.75,
+                "titleLimit": 300
+              }
+            },
+            "color": {
+              "field": "group",
+              "type": "nominal",
+              "scale": {"domain": ["Other countries", "Australia"], "range": ["#C8862A", "#C23B22"]},
+              "legend": null
+            },
+            "order": {"field": "exports", "sort": "descending"},
+            "tooltip": [
+              {"field": "Reporter", "type": "nominal", "title": "Country"},
+              {"field": "Year", "type": "ordinal", "title": "Year"},
+              {"field": "exports", "type": "quantitative", "title": "Exports (US$ m)", "format": ",.1f"},
+              {"field": "cameras", "type": "quantitative", "title": "Cameras exported", "format": ",.0f"},
+              {"field": "rank", "type": "quantitative", "title": "World rank"}
+            ]
+          }
+        },
+        {
+          "transform": [{"filter": "datum.country == 'Australia'"}],
+          "mark": {
+            "type": "point",
+            "shape": "circle",
+            "filled": false,
+            "color": "#C23B22",
+            "size": 90,
+            "strokeWidth": 2
+          },
+          "encoding": {
+            "longitude": {"field": "longitude", "type": "quantitative"},
+            "latitude": {"field": "latitude", "type": "quantitative"}
+          }
+        },
+        {
+          "transform": [
+            {"filter": "datum.rank <= 3"},
+            {"calculate": "datum.short_name + ' US$' + format(datum.exports, ',.0f') + 'm'", "as": "lab"}
+          ],
+          "mark": {
+            "type": "text",
+            "align": "left",
+            "dx": 8,
+            "dy": -4,
+            "fontSize": 13,
+            "fontWeight": 700,
+            "color": "#1F1F1F"
+          },
+          "encoding": {
+            "longitude": {"field": "longitude", "type": "quantitative"},
+            "latitude": {"field": "latitude", "type": "quantitative"},
+            "text": {"field": "lab"}
+          }
+        },
+        {
+          "transform": [
+            {"filter": "datum.country == 'Australia'"},
+            {
+              "calculate": "'Australia US$' + (datum.exports >= 1 ? format(datum.exports, '.1f') + 'm' : format(datum.exports * 1000, ',.0f') + 'k')",
+              "as": "lab"
+            }
+          ],
+          "mark": {
+            "type": "text",
+            "align": "left",
+            "dx": 12,
+            "dy": 4,
+            "fontSize": 13,
+            "fontWeight": 700,
+            "color": "#C23B22"
+          },
+          "encoding": {
+            "longitude": {"field": "longitude", "type": "quantitative"},
+            "latitude": {"field": "latitude", "type": "quantitative"},
+            "text": {"field": "lab"}
+          }
+        },
+        {
+          "transform": [
+            {"filter": "datum.rank == 1"},
+            {
+              "calculate": "datum.Year + ': world exports US$' + format(datum.world_total, ',.0f') + 'm'",
+              "as": "t1"
+            }
+          ],
+          "mark": {
+            "type": "text",
+            "x": 0,
+            "y": 12,
+            "align": "left",
+            "fontSize": 22,
+            "fontWeight": 700,
+            "font": "Playfair Display",
+            "color": "#1F1F1F"
+          },
+          "encoding": {"text": {"field": "t1"}}
+        },
+        {
+          "transform": [
+            {"filter": "datum.rank == 1"},
+            {
+              "calculate": "datum.Year == 2000 ? 'The last big year for film cameras' : 'Down ' + format(1 - datum.world_total / datum.total_2000, '.0%') + ' since 2000 (dashed outlines)'",
+              "as": "t2"
+            }
+          ],
+          "mark": {"type": "text", "x": 0, "y": 38, "align": "left", "fontSize": 14, "color": "#3A3A3A"},
+          "encoding": {"text": {"field": "t2"}}
+        }
+      ]
+    },
+    {
+      "data": {
+        "values": [
+          {"k": "f", "y": 422, "t": "Filled circle: exports in the chosen year"},
+          {"k": "g", "y": 444, "t": "Dashed outline: exports in 2000"},
+          {"k": "a", "y": 466, "t": "Australia"}
+        ]
+      },
+      "layer": [
+        {
+          "transform": [{"filter": "datum.k == 'f'"}],
+          "mark": {"type": "circle", "x": 707, "size": 130, "color": "#C8862A", "opacity": 0.75},
+          "encoding": {"y": {"field": "y", "type": "quantitative", "scale": null}}
+        },
+        {
+          "transform": [{"filter": "datum.k == 'g'"}],
+          "mark": {
+            "type": "circle",
+            "x": 707,
+            "size": 130,
+            "filled": false,
+            "stroke": "#8A8A8A",
+            "strokeDash": [3, 2]
+          },
+          "encoding": {"y": {"field": "y", "type": "quantitative", "scale": null}}
+        },
+        {
+          "transform": [{"filter": "datum.k == 'a'"}],
+          "mark": {"type": "circle", "x": 707, "size": 130, "color": "#C23B22", "opacity": 0.85},
+          "encoding": {"y": {"field": "y", "type": "quantitative", "scale": null}}
+        },
+        {
+          "mark": {
+            "type": "text",
+            "x": 722,
+            "align": "left",
+            "baseline": "middle",
+            "fontSize": 13,
+            "color": "#3A3A3A"
+          },
+          "encoding": {"y": {"field": "y", "type": "quantitative", "scale": null}, "text": {"field": "t"}}
+        }
+      ]
+    }
+  ],
+  "resolve": {"legend": {"size": "independent"}},
   "config": {
     "background": null,
     "view": {"stroke": null},
     "font": "Source Sans 3",
+    "axis": {"domain": false, "ticks": false, "labelColor": "#4A4A4A", "titleColor": "#4A4A4A", "labelFontSize": 13},
     "legend": {
       "labelColor": "#4A4A4A",
       "titleColor": "#4A4A4A",
@@ -139,5 +299,5 @@
       "labelFontSize": 12
     }
   },
-  "padding": {"left": 0, "right": 0, "top": 5, "bottom": 5}
+  "padding": {"left": 0, "right": 0, "top": 0, "bottom": 0}
 }

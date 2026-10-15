@@ -1,7 +1,7 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
   "description": "Gantt chart: years in which each brand with at least 40 digital camera models released new models, 1994-2025.",
-  "width": 974,
+  "width": 838,
   "height": 440,
   "data": {"url": "data/cameras.csv", "format": {"parse": {"year": "number"}}},
   "transform": [
@@ -118,7 +118,7 @@
           "type": "nominal",
           "title": null,
           "sort": {"field": "order", "op": "min", "order": "ascending"},
-          "axis": {"minExtent": 90, "labelLimit": 90, "labelPadding": 8, "labelFontSize": 13}
+          "axis": {"minExtent": 100, "labelLimit": 160, "labelPadding": 8, "labelFontSize": 13}
         }
       }
     },
@@ -140,7 +140,32 @@
           "field": "brand",
           "type": "nominal",
           "title": null,
-          "sort": {"field": "order", "op": "min", "order": "ascending"}
+          "sort": {"field": "order", "op": "min", "order": "ascending"},
+          "axis": {"minExtent": 100, "labelLimit": 160, "labelPadding": 8, "labelFontSize": 13}
+        }
+      }
+    },
+    {
+      "mark": {
+        "type": "text",
+        "align": "left",
+        "baseline": "middle",
+        "dx": 6,
+        "fontSize": 12,
+        "color": "#6B6B6B",
+        "stroke": "#FAF8F3",
+        "strokeWidth": 4,
+        "strokeJoin": "round"
+      },
+      "encoding": {
+        "x": {"field": "end", "type": "quantitative", "scale": {"domain": [1994, 2026], "nice": false}},
+        "text": {"field": "models_label"},
+        "y": {
+          "field": "brand",
+          "type": "nominal",
+          "title": null,
+          "sort": {"field": "order", "op": "min", "order": "ascending"},
+          "axis": {"minExtent": 100, "labelLimit": 160, "labelPadding": 8, "labelFontSize": 13}
         }
       }
     },
@@ -153,7 +178,8 @@
           "field": "brand",
           "type": "nominal",
           "title": null,
-          "sort": {"field": "order", "op": "min", "order": "ascending"}
+          "sort": {"field": "order", "op": "min", "order": "ascending"},
+          "axis": {"minExtent": 100, "labelLimit": 160, "labelPadding": 8, "labelFontSize": 13}
         }
       }
     }

@@ -2,7 +2,7 @@
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
   "description": "Bump chart: world rank of the top 10 colour film exporters of 2000, from 2000 to 2023. Australia highlighted.",
   "width": 540,
-  "height": 380,
+  "height": 420,
   "data": {"url": "data/s2_colour_film.csv"},
   "transform": [
     {"filter": "datum.Reporter != 'European Union' && datum.Reporter != 'World'"},
@@ -25,9 +25,9 @@
       "groupby": ["country"]
     },
     {"filter": "datum.start_rank <= 10"},
-    {"calculate": "min(datum.rank, 21)", "as": "rank_plot"},
     {"calculate": "datum.country == 'Australia' ? 'Australia' : 'Other countries'", "as": "group"},
-    {"calculate": "'#' + datum.rank", "as": "rank_label"}
+    {"calculate": "'#' + datum.rank", "as": "rank_label"},
+    {"calculate": "datum.rank", "as": "rank_plot"}
   ],
   "encoding": {
     "x": {
@@ -40,10 +40,10 @@
       "field": "rank_plot",
       "type": "quantitative",
       "title": "World rank",
-      "scale": {"domain": [1, 21], "reverse": true, "nice": false},
+      "scale": {"domain": [1, 31], "reverse": true, "nice": false},
       "axis": {
-        "values": [1, 5, 10, 15, 20, 21],
-        "labelExpr": "datum.value == 21 ? 'below 20' : '#' + datum.value",
+        "values": [1, 5, 10, 15, 20, 25, 30],
+        "labelExpr": "'#' + datum.value",
         "grid": true,
         "gridColor": "#ECE8DF",
         "domain": false,
@@ -56,7 +56,15 @@
       "field": "group",
       "type": "nominal",
       "scale": {"domain": ["Other countries", "Australia"], "range": ["#A9A49A", "#C23B22"]},
-      "legend": null
+      "legend": {
+        "orient": "top",
+        "direction": "horizontal",
+        "title": null,
+        "symbolType": "stroke",
+        "symbolStrokeWidth": 4,
+        "labelFontSize": 13,
+        "offset": 12
+      }
     },
     "opacity": {"condition": {"param": "hover", "empty": true, "value": 1}, "value": 0.2}
   },
@@ -96,8 +104,21 @@
       "encoding": {"text": {"field": "country"}}
     },
     {
-      "transform": [{"filter": "datum.country == 'Australia'"}],
+      "transform": [{"filter": "datum.country == 'Australia' && datum.Year != 2000"}],
       "mark": {"type": "text", "align": "center", "baseline": "bottom", "dy": -9, "fontSize": 12, "fontWeight": 700},
+      "encoding": {"text": {"field": "rank_label"}}
+    },
+    {
+      "transform": [{"filter": "datum.country == 'Australia' && datum.Year == 2000"}],
+      "mark": {
+        "type": "text",
+        "align": "right",
+        "baseline": "middle",
+        "dy": 0,
+        "fontSize": 12,
+        "fontWeight": 700,
+        "dx": -10
+      },
       "encoding": {"text": {"field": "rank_label"}}
     }
   ],
