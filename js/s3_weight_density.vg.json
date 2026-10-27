@@ -1,6 +1,10 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
   "description": "Density plot: weight of new digital camera models in three eras. Cameras got lighter during the boom, then heavier after phones took over everyday photos.",
+  "title": {
+    "text": "Weight of new camera models, by era",
+    "subtitle": "Grams, including battery · 3,711 models with a listed weight"
+  },
   "width": 663,
   "height": 300,
   "data": {"url": "data/cameras.csv", "format": {"parse": {"year": "number", "weight_g": "number"}}},
@@ -132,6 +136,18 @@
       "titleFontSize": 13,
       "labelFontSize": 13,
       "labelLimit": 300
+    },
+    "title": {
+      "anchor": "start",
+      "font": "'Source Sans 3', Helvetica, Arial, sans-serif",
+      "fontSize": 19,
+      "fontWeight": 700,
+      "color": "#1F1F1F",
+      "subtitleFont": "'Source Sans 3', Helvetica, Arial, sans-serif",
+      "subtitleFontSize": 14,
+      "subtitleColor": "#6B6B6B",
+      "subtitlePadding": 4,
+      "offset": 14
     }
   },
   "padding": {"left": 0, "right": 8, "top": 5, "bottom": 5},

@@ -1,6 +1,10 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
   "description": "Two aligned charts: Australia's mobile and landline phone subscriptions per 100 people (top) and new digital camera models released worldwide each year (bottom), 1994-2024.",
+  "title": {
+    "text": "Mobile phones rose as camera models fell",
+    "subtitle": "Top: Australia, subscriptions per 100 people · bottom: new camera models worldwide · 1994 to 2024"
+  },
   "spacing": 18,
   "vconcat": [
     {
@@ -347,6 +351,18 @@
       "labelFontSize": 13,
       "labelLimit": 320,
       "titleLimit": 320
+    },
+    "title": {
+      "anchor": "start",
+      "font": "'Source Sans 3', Helvetica, Arial, sans-serif",
+      "fontSize": 19,
+      "fontWeight": 700,
+      "color": "#1F1F1F",
+      "subtitleFont": "'Source Sans 3', Helvetica, Arial, sans-serif",
+      "subtitleFontSize": 14,
+      "subtitleColor": "#6B6B6B",
+      "subtitlePadding": 4,
+      "offset": 14
     }
   },
   "padding": {"left": 0, "right": 8, "top": 5, "bottom": 5}

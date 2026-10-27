@@ -1,6 +1,10 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
   "description": "Heatmap with a linked bar chart: new digital camera models released each year by the 15 brands with the most models, 1994-2025.",
+  "title": {
+    "text": "New digital camera models released each year",
+    "subtitle": "Top: all brands · below: the 15 brands with the most models · 1994 to 2025"
+  },
   "data": {"url": "data/cameras.csv", "format": {"parse": {"year": "number"}}},
   "spacing": 12,
   "vconcat": [
@@ -209,6 +213,18 @@
       "labelFontSize": 12,
       "symbolType": "square",
       "symbolSize": 180
+    },
+    "title": {
+      "anchor": "start",
+      "font": "'Source Sans 3', Helvetica, Arial, sans-serif",
+      "fontSize": 19,
+      "fontWeight": 700,
+      "color": "#1F1F1F",
+      "subtitleFont": "'Source Sans 3', Helvetica, Arial, sans-serif",
+      "subtitleFontSize": 14,
+      "subtitleColor": "#6B6B6B",
+      "subtitlePadding": 4,
+      "offset": 14
     }
   },
   "padding": {"left": 0, "right": 8, "top": 5, "bottom": 5}

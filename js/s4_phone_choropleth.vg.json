@@ -149,7 +149,7 @@
         {"calculate": "toNumber(datum['Proportion of individuals who own a mobile telephone'])", "as": "own"},
         {"filter": "datum.Entity == 'World' && datum.Year == year_pick"},
         {
-          "calculate": "datum.Year + ': ' + format(datum.own, '.0f') + '% of people worldwide own a mobile phone'",
+          "calculate": "'Share of people who own a mobile phone, ' + datum.Year + ': ' + format(datum.own, '.0f') + '% worldwide'",
           "as": "t1"
         }
       ],
@@ -160,18 +160,18 @@
             "x": 0,
             "y": 12,
             "align": "left",
-            "fontSize": 22,
+            "fontSize": 19,
             "fontWeight": 700,
-            "font": "'Playfair Display', Georgia, serif",
+            "font": "'Source Sans 3', Helvetica, Arial, sans-serif",
             "color": "#1F1F1F"
           },
           "encoding": {"text": {"field": "t1"}}
         },
         {
-          "mark": {"type": "text", "x": 0, "y": 38, "align": "left", "fontSize": 14, "color": "#3A3A3A"},
+          "mark": {"type": "text", "x": 0, "y": 36, "align": "left", "fontSize": 14, "color": "#6B6B6B"},
           "encoding": {
             "text": {
-              "value": "Darker countries have a larger share of people with a phone; light beige means no data"
+              "value": "Owners of a mobile phone with an active SIM card · darker = larger share · light beige = no data"
             }
           }
         }

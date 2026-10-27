@@ -1,6 +1,10 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
   "description": "Gantt chart: years in which each brand with at least 40 digital camera models released new models, 1994-2025.",
+  "title": {
+    "text": "Years each brand released new camera models",
+    "subtitle": "Brands with at least 40 models · 1994 to 2025"
+  },
   "width": 500,
   "height": 400,
   "data": {"url": "data/cameras.csv", "format": {"parse": {"year": "number"}}},
@@ -189,7 +193,19 @@
     "view": {"stroke": null},
     "font": "'Source Sans 3', Helvetica, Arial, sans-serif",
     "axis": {"domain": false, "ticks": false, "labelColor": "#4A4A4A", "labelFontSize": 13},
-    "legend": {"labelColor": "#4A4A4A"}
+    "legend": {"labelColor": "#4A4A4A"},
+    "title": {
+      "anchor": "start",
+      "font": "'Source Sans 3', Helvetica, Arial, sans-serif",
+      "fontSize": 19,
+      "fontWeight": 700,
+      "color": "#1F1F1F",
+      "subtitleFont": "'Source Sans 3', Helvetica, Arial, sans-serif",
+      "subtitleFontSize": 14,
+      "subtitleColor": "#6B6B6B",
+      "subtitlePadding": 4,
+      "offset": 14
+    }
   },
   "padding": {"left": 0, "right": 8, "top": 5, "bottom": 5}
 }

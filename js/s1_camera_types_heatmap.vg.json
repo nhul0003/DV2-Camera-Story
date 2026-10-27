@@ -1,6 +1,10 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
   "description": "Heatmap: share of each decade's cameras in the Science Museum Group collection, by camera type (rows) and decade made (columns), 1880s-2000s.",
+  "title": {
+    "text": "Camera types in the Science Museum Group collection",
+    "subtitle": "Share of each decade's cameras · 1880s to 2000s"
+  },
   "width": "container",
   "height": 390,
   "autosize": {"type": "fit-x", "contains": "padding"},
@@ -175,6 +179,18 @@
       "titleColor": "#4A4A4A",
       "titleFontSize": 13,
       "titleFontWeight": 600
+    },
+    "title": {
+      "anchor": "start",
+      "font": "'Source Sans 3', Helvetica, Arial, sans-serif",
+      "fontSize": 19,
+      "fontWeight": 700,
+      "color": "#1F1F1F",
+      "subtitleFont": "'Source Sans 3', Helvetica, Arial, sans-serif",
+      "subtitleFontSize": 14,
+      "subtitleColor": "#6B6B6B",
+      "subtitlePadding": 4,
+      "offset": 14
     }
   }
 }

@@ -1,6 +1,10 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
   "description": "100% stacked bar chart: share of new digital camera models with a CCD or a CMOS image sensor, 1994-2025.",
+  "title": {
+    "text": "Image sensor type in new camera models",
+    "subtitle": "Share of each year's new models · 1994 to 2025"
+  },
   "width": 633,
   "height": 250,
   "data": {"url": "data/cameras.csv", "format": {"parse": {"year": "number"}}},
@@ -124,6 +128,18 @@
       "titleFontSize": 13,
       "labelFontSize": 13,
       "labelLimit": 300
+    },
+    "title": {
+      "anchor": "start",
+      "font": "'Source Sans 3', Helvetica, Arial, sans-serif",
+      "fontSize": 19,
+      "fontWeight": 700,
+      "color": "#1F1F1F",
+      "subtitleFont": "'Source Sans 3', Helvetica, Arial, sans-serif",
+      "subtitleFontSize": 14,
+      "subtitleColor": "#6B6B6B",
+      "subtitlePadding": 4,
+      "offset": 14
     }
   },
   "padding": {"left": 0, "right": 8, "top": 5, "bottom": 5}

@@ -1,6 +1,10 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
   "description": "Flow map: where the cameras in Museums Victoria (Melbourne) were made, with a year-made histogram that filters the map.",
+  "title": {
+    "text": "Where the cameras in Museums Victoria were made",
+    "subtitle": "Cameras by country made, with a line to Melbourne · bar chart: cameras by year made, 1860–2015"
+  },
   "data": {"url": "data/museums_victoria_cameras.csv"},
   "transform": [
     {"filter": "test(/^[A-Za-z ]*Camera - /, datum.object_name) && !test(/^Camera Case/, datum.object_name)"},
@@ -388,6 +392,18 @@
       "titleFontWeight": 600,
       "titleFontSize": 13,
       "labelFontSize": 12
+    },
+    "title": {
+      "anchor": "start",
+      "font": "'Source Sans 3', Helvetica, Arial, sans-serif",
+      "fontSize": 19,
+      "fontWeight": 700,
+      "color": "#1F1F1F",
+      "subtitleFont": "'Source Sans 3', Helvetica, Arial, sans-serif",
+      "subtitleFontSize": 14,
+      "subtitleColor": "#6B6B6B",
+      "subtitlePadding": 4,
+      "offset": 14
     }
   },
   "padding": {"left": 0, "right": 0, "top": 5, "bottom": 5}

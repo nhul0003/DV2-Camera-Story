@@ -1,6 +1,7 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
   "description": "Waffle charts: out of every 100 people, how many own a mobile phone in 2024, in Australia, the world, and the least developed countries.",
+  "title": {"text": "Who owns a mobile phone, out of every 100 people", "subtitle": "2024"},
   "data": {"url": "data/share-population-mobile-phone.csv"},
   "transform": [
     {"calculate": "toNumber(datum['Proportion of individuals who own a mobile telephone'])", "as": "own"},
@@ -103,6 +104,18 @@
       "labelFontSize": 13,
       "labelLimit": 320,
       "titleLimit": 320
+    },
+    "title": {
+      "anchor": "start",
+      "font": "'Source Sans 3', Helvetica, Arial, sans-serif",
+      "fontSize": 19,
+      "fontWeight": 700,
+      "color": "#1F1F1F",
+      "subtitleFont": "'Source Sans 3', Helvetica, Arial, sans-serif",
+      "subtitleFontSize": 14,
+      "subtitleColor": "#6B6B6B",
+      "subtitlePadding": 4,
+      "offset": 14
     }
   },
   "padding": {"left": 0, "right": 8, "top": 5, "bottom": 30}

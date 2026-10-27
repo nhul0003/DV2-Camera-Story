@@ -203,7 +203,7 @@
           "transform": [
             {"filter": "datum.rank == 1"},
             {
-              "calculate": "datum.Year + ': world exports US$' + format(datum.world_total, ',.0f') + 'm'",
+              "calculate": "'Exports of 35mm film cameras, ' + datum.Year + ': US$' + format(datum.world_total, ',.0f') + 'm worldwide'",
               "as": "t1"
             }
           ],
@@ -212,9 +212,9 @@
             "x": 0,
             "y": 12,
             "align": "left",
-            "fontSize": 22,
+            "fontSize": 19,
             "fontWeight": 700,
-            "font": "'Playfair Display', Georgia, serif",
+            "font": "'Source Sans 3', Helvetica, Arial, sans-serif",
             "color": "#1F1F1F"
           },
           "encoding": {"text": {"field": "t1"}}
@@ -223,11 +223,11 @@
           "transform": [
             {"filter": "datum.rank == 1"},
             {
-              "calculate": "datum.Year == 2000 ? 'The last big year for film cameras' : 'Down ' + format(1 - datum.world_total / datum.total_2000, '.0%') + ' since 2000 (dashed outlines)'",
+              "calculate": "datum.Year == 2000 ? 'US$ million, current prices · 2000 was the last big year for film cameras' : 'US$ million, current prices · down ' + format(1 - datum.world_total / datum.total_2000, '.0%') + ' since 2000 (dashed outlines)'",
               "as": "t2"
             }
           ],
-          "mark": {"type": "text", "x": 0, "y": 38, "align": "left", "fontSize": 14, "color": "#3A3A3A"},
+          "mark": {"type": "text", "x": 0, "y": 36, "align": "left", "fontSize": 14, "color": "#6B6B6B"},
           "encoding": {"text": {"field": "t2"}}
         }
       ]

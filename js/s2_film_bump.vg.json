@@ -1,6 +1,10 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
   "description": "Bump chart: world rank of the top 10 colour film exporters of 2000, from 2000 to 2023. Australia highlighted.",
+  "title": {
+    "text": "World rank in colour film exports",
+    "subtitle": "Top 10 exporters of 2000, ranked by export value · 2000 to 2023"
+  },
   "width": 609,
   "height": 420,
   "data": {"url": "data/s2_colour_film.csv"},
@@ -126,6 +130,18 @@
     "background": null,
     "view": {"stroke": null},
     "font": "'Source Sans 3', Helvetica, Arial, sans-serif",
-    "axis": {"labelColor": "#4A4A4A", "labelFontSize": 13}
+    "axis": {"labelColor": "#4A4A4A", "labelFontSize": 13},
+    "title": {
+      "anchor": "start",
+      "font": "'Source Sans 3', Helvetica, Arial, sans-serif",
+      "fontSize": 19,
+      "fontWeight": 700,
+      "color": "#1F1F1F",
+      "subtitleFont": "'Source Sans 3', Helvetica, Arial, sans-serif",
+      "subtitleFontSize": 14,
+      "subtitleColor": "#6B6B6B",
+      "subtitlePadding": 4,
+      "offset": 14
+    }
   }
 }

@@ -1,6 +1,10 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
   "description": "Box plots with overview and detail: megapixels of new digital camera models by year, 1996-2025. Drag across the small chart to zoom the box plots.",
+  "title": {
+    "text": "Megapixels of new camera models",
+    "subtitle": "One box per year · small chart: median megapixels · 1996 to 2025"
+  },
   "data": {"url": "data/cameras.csv", "format": {"parse": {"year": "number", "megapixels": "number"}}},
   "transform": [{"filter": "datum.year >= 1996"}],
   "spacing": 20,
@@ -160,7 +164,19 @@
     "background": null,
     "view": {"stroke": null},
     "font": "'Source Sans 3', Helvetica, Arial, sans-serif",
-    "axis": {"domain": false, "ticks": false, "labelColor": "#4A4A4A", "labelFontSize": 13}
+    "axis": {"domain": false, "ticks": false, "labelColor": "#4A4A4A", "labelFontSize": 13},
+    "title": {
+      "anchor": "start",
+      "font": "'Source Sans 3', Helvetica, Arial, sans-serif",
+      "fontSize": 19,
+      "fontWeight": 700,
+      "color": "#1F1F1F",
+      "subtitleFont": "'Source Sans 3', Helvetica, Arial, sans-serif",
+      "subtitleFontSize": 14,
+      "subtitleColor": "#6B6B6B",
+      "subtitlePadding": 4,
+      "offset": 14
+    }
   },
   "padding": {"left": 0, "right": 8, "top": 5, "bottom": 5}
 }
