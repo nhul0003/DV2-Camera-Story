@@ -119,6 +119,79 @@
         ],
         "opacity": {"condition": {"param": "era_pick", "empty": true, "value": 1}, "value": 0.12}
       }
+    },
+    {
+      "data": {"values": [{"w": 185, "t1": "71% of boom-era models", "t2": "weighed 100–200 g"}]},
+      "layer": [
+        {
+          "mark": {
+            "type": "text",
+            "align": "left",
+            "baseline": "top",
+            "y": 8,
+            "dx": 6,
+            "fontSize": 13,
+            "fontWeight": 700,
+            "color": "#1B7F8C",
+            "stroke": "#FAF8F3",
+            "strokeWidth": 5,
+            "strokeJoin": "round"
+          },
+          "encoding": {
+            "x": {"field": "w", "type": "quantitative", "scale": {"domain": [0, 1200], "nice": false}},
+            "text": {"field": "t1"}
+          }
+        },
+        {
+          "mark": {
+            "type": "text",
+            "align": "left",
+            "baseline": "top",
+            "y": 25,
+            "dx": 6,
+            "fontSize": 13,
+            "color": "#1B7F8C",
+            "stroke": "#FAF8F3",
+            "strokeWidth": 5,
+            "strokeJoin": "round"
+          },
+          "encoding": {
+            "x": {"field": "w", "type": "quantitative", "scale": {"domain": [0, 1200], "nice": false}},
+            "text": {"field": "t2"}
+          }
+        },
+        {
+          "mark": {
+            "type": "text",
+            "align": "left",
+            "baseline": "top",
+            "y": 8,
+            "dx": 6,
+            "fontSize": 13,
+            "fontWeight": 700,
+            "color": "#1B7F8C"
+          },
+          "encoding": {
+            "x": {"field": "w", "type": "quantitative", "scale": {"domain": [0, 1200], "nice": false}},
+            "text": {"field": "t1"}
+          }
+        },
+        {
+          "mark": {
+            "type": "text",
+            "align": "left",
+            "baseline": "top",
+            "y": 25,
+            "dx": 6,
+            "fontSize": 13,
+            "color": "#1B7F8C"
+          },
+          "encoding": {
+            "x": {"field": "w", "type": "quantitative", "scale": {"domain": [0, 1200], "nice": false}},
+            "text": {"field": "t2"}
+          }
+        }
+      ]
     }
   ],
   "config": {

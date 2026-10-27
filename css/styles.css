@@ -63,7 +63,7 @@ h1, h2, h3, .lead, .section-num, .stat-number, .key-title, .insight-label {
   text-transform: uppercase; color: var(--film); margin: 0 0 var(--s1);
 }
 h1 { font-weight: 700; font-size: clamp(48px, 7vw, 76px); line-height: 1.02; letter-spacing: -0.01em; margin: 0 0 var(--s3); }
-.lead { font-size: 24px; font-style: italic; line-height: 1.45; color: var(--ink-soft); margin: 0; }
+.lead { max-width: 23em; font-size: 24px; font-style: italic; line-height: 1.45; color: var(--ink-soft); margin: 0; }
 
 .stats { margin-top: var(--s3); }
 .stat { border-top: 4px solid; padding-top: 14px; }
@@ -72,7 +72,7 @@ h1 { font-weight: 700; font-size: clamp(48px, 7vw, 76px); line-height: 1.02; let
 
 /* Colour key sits in the third column beside the subtitle, so the intro has no empty column */
 .key { padding-top: 6px; grid-column: 3; grid-row: 3 / span 2; }
-.intro-text { margin: var(--s3) 0 0; color: var(--ink-soft); }
+.intro-text { max-width: 24em; margin: var(--s3) 0 0; color: var(--ink-soft); }
 .key-title { font-size: 18px; font-weight: 700; margin-bottom: var(--s1); }
 .key-items { display: grid; gap: 4px; font-size: 15px; }
 .key-items span { display: inline-flex; align-items: center; gap: 8px; }
@@ -129,7 +129,7 @@ h1 { font-weight: 700; font-size: clamp(48px, 7vw, 76px); line-height: 1.02; let
 .insight strong { font-weight: 700; color: var(--ink); }
 .insight strong.aus { color: var(--australia); }
 
-.how { font-size: 14px; line-height: 1.5; color: var(--muted); margin: var(--s1) 0 0; }
+.how { max-width: 27em; font-size: 14px; line-height: 1.5; color: var(--muted); margin: var(--s1) 0 0; }
 
 .vis { width: 100%; }
 /* Year selector under the maps */
@@ -166,7 +166,7 @@ h1 { font-weight: 700; font-size: clamp(48px, 7vw, 76px); line-height: 1.02; let
 .interlude { margin: var(--s2) 0 var(--s3); text-align: left; }
 .interlude h3 { font-size: 34px; font-weight: 700; line-height: 1.15; margin: 0; color: var(--ink); }
 .interlude h3::after { content: ""; display: block; width: 64px; height: 3px; border-radius: 2px; background: var(--sec); margin: var(--s2) 0 var(--s3); }
-.interlude p { max-width: 32em; font-size: 19px; line-height: 1.6; color: var(--ink-soft); margin: 0; }
+.interlude p { max-width: 21em; font-size: 19px; line-height: 1.6; color: var(--ink-soft); margin: 0; }
 .interlude strong { font-weight: 700; color: var(--ink); }
 .interlude strong.aus { color: var(--australia); }
 .conclusion { --sec: var(--australia); border-top: 1px solid var(--ink); padding-top: var(--s4); margin-top: var(--s2); max-width: none; }
@@ -218,7 +218,7 @@ h1 { font-weight: 700; font-size: clamp(48px, 7vw, 76px); line-height: 1.02; let
 /* ---------- Footer: sources in two thirds, about in one third ---------- */
 footer { border-top: 1px solid var(--rule); margin-top: var(--s4); padding: var(--s3) 0 var(--s4); font-size: 14px; line-height: 1.6; color: #4A4A4A; }
 footer strong { color: var(--ink); display: block; margin-bottom: 4px; }
-footer p { margin: 0 0 4px; }
+footer p { max-width: 29em; margin: 0 0 4px; }
 
 /* ---------- Tooltip cards (built in js/tooltips.js) ----------
    Vega's own tooltip box is made transparent; the card inside has a top rule
