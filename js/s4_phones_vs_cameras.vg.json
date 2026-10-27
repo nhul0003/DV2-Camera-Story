@@ -1,0 +1,353 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "description": "Two aligned charts: Australia's mobile and landline phone subscriptions per 100 people (top) and new digital camera models released worldwide each year (bottom), 1994-2024.",
+  "spacing": 18,
+  "vconcat": [
+    {
+      "name": "phones",
+      "width": 1002,
+      "height": 230,
+      "data": {
+        "url": "data/ict-adoption-per-100-people.csv",
+        "format": {
+          "parse": {"Year": "number", "Mobile phone subscriptions": "number", "Landline phone subscriptions": "number"}
+        }
+      },
+      "transform": [
+        {"filter": "datum.Entity == 'Australia' && datum.Year >= 1994 && datum.Year <= 2024"},
+        {"fold": ["Mobile phone subscriptions", "Landline phone subscriptions"], "as": ["series", "per100"]},
+        {"filter": "isValid(datum.per100)"}
+      ],
+      "layer": [
+        {
+          "data": {"values": [{"y": 100}]},
+          "mark": {"type": "rule", "color": "#8A8A8A", "strokeDash": [4, 3]},
+          "encoding": {"y": {"field": "y", "type": "quantitative", "scale": {"domain": [0, 120]}}}
+        },
+        {
+          "data": {"values": [{"Year": 2024, "y": 100, "t": "100 per 100 people: one for every Australian"}]},
+          "mark": {
+            "type": "text",
+            "align": "right",
+            "dy": 13,
+            "fontSize": 12,
+            "color": "#6B6B6B",
+            "fontStyle": "italic"
+          },
+          "encoding": {
+            "x": {
+              "field": "Year",
+              "type": "ordinal",
+              "title": null,
+              "scale": {
+                "type": "band",
+                "domain": [1994, 1995, 1996, 1997, 1998, 1999, 2000, 2001, 2002, 2003, 2004, 2005, 2006, 2007, 2008, 2009, 2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024],
+                "paddingInner": 0.15,
+                "paddingOuter": 0.1
+              },
+              "axis": null
+            },
+            "y": {"field": "y", "type": "quantitative", "scale": {"domain": [0, 120]}},
+            "text": {"field": "t"}
+          }
+        },
+        {
+          "mark": {"type": "line", "strokeWidth": 3, "interpolate": "monotone"},
+          "encoding": {
+            "x": {
+              "field": "Year",
+              "type": "ordinal",
+              "title": null,
+              "scale": {
+                "type": "band",
+                "domain": [1994, 1995, 1996, 1997, 1998, 1999, 2000, 2001, 2002, 2003, 2004, 2005, 2006, 2007, 2008, 2009, 2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024],
+                "paddingInner": 0.15,
+                "paddingOuter": 0.1
+              },
+              "axis": {"labelAngle": 0, "labelExpr": "datum.value % 5 == 0 ? datum.label : ''", "labelPadding": 6}
+            },
+            "y": {
+              "field": "per100",
+              "type": "quantitative",
+              "title": "Per 100 people",
+              "scale": {"domain": [0, 120]},
+              "axis": {"values": [0, 25, 50, 75, 100], "grid": true, "gridColor": "#ECE8DF"}
+            },
+            "color": {
+              "field": "series",
+              "type": "nominal",
+              "title": null,
+              "scale": {
+                "domain": ["Mobile phone subscriptions", "Landline phone subscriptions"],
+                "range": ["#6A4C93", "#A9A49A"]
+              },
+              "legend": {
+                "orient": "top",
+                "direction": "horizontal",
+                "symbolType": "stroke",
+                "symbolStrokeWidth": 4,
+                "offset": 8
+              }
+            }
+          }
+        },
+        {
+          "mark": {"type": "point", "filled": true, "size": 60, "opacity": 0},
+          "params": [
+            {
+              "name": "pick_year",
+              "select": {
+                "type": "point",
+                "fields": ["Year"],
+                "on": "pointerover",
+                "nearest": true,
+                "clear": "pointerout"
+              }
+            }
+          ],
+          "encoding": {
+            "x": {
+              "field": "Year",
+              "type": "ordinal",
+              "title": null,
+              "scale": {
+                "type": "band",
+                "domain": [1994, 1995, 1996, 1997, 1998, 1999, 2000, 2001, 2002, 2003, 2004, 2005, 2006, 2007, 2008, 2009, 2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024],
+                "paddingInner": 0.15,
+                "paddingOuter": 0.1
+              }
+            },
+            "y": {"field": "per100", "type": "quantitative", "scale": {"domain": [0, 120]}},
+            "tooltip": [
+              {"field": "Year", "type": "ordinal", "title": "Year"},
+              {"field": "series", "title": "Australia"},
+              {"field": "per100", "type": "quantitative", "title": "Per 100 people", "format": ".0f"}
+            ]
+          }
+        },
+        {
+          "transform": [{"filter": {"param": "pick_year", "empty": false}}],
+          "mark": {"type": "point", "filled": true, "size": 70},
+          "encoding": {
+            "x": {
+              "field": "Year",
+              "type": "ordinal",
+              "title": null,
+              "scale": {
+                "type": "band",
+                "domain": [1994, 1995, 1996, 1997, 1998, 1999, 2000, 2001, 2002, 2003, 2004, 2005, 2006, 2007, 2008, 2009, 2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024],
+                "paddingInner": 0.15,
+                "paddingOuter": 0.1
+              }
+            },
+            "y": {"field": "per100", "type": "quantitative", "scale": {"domain": [0, 120]}},
+            "color": {
+              "field": "series",
+              "type": "nominal",
+              "scale": {
+                "domain": ["Mobile phone subscriptions", "Landline phone subscriptions"],
+                "range": ["#6A4C93", "#A9A49A"]
+              }
+            },
+            "tooltip": [
+              {"field": "Year", "type": "ordinal", "title": "Year"},
+              {"field": "series", "title": "Australia"},
+              {"field": "per100", "type": "quantitative", "title": "Per 100 people", "format": ".0f"}
+            ]
+          }
+        },
+        {
+          "data": {"values": [{"Year": 2007, "y": 101.5}]},
+          "mark": {
+            "type": "point",
+            "filled": true,
+            "size": 70,
+            "color": "#6A4C93",
+            "stroke": "#FAF8F3",
+            "strokeWidth": 1.5
+          },
+          "encoding": {
+            "x": {
+              "field": "Year",
+              "type": "ordinal",
+              "title": null,
+              "scale": {
+                "type": "band",
+                "domain": [1994, 1995, 1996, 1997, 1998, 1999, 2000, 2001, 2002, 2003, 2004, 2005, 2006, 2007, 2008, 2009, 2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024],
+                "paddingInner": 0.15,
+                "paddingOuter": 0.1
+              }
+            },
+            "y": {"field": "y", "type": "quantitative", "scale": {"domain": [0, 120]}}
+          }
+        },
+        {
+          "data": {"values": [{"Year": 2007, "y": 101.5, "t": "2007: more mobile subscriptions than people"}]},
+          "mark": {
+            "type": "text",
+            "align": "right",
+            "dx": -8,
+            "dy": -14,
+            "fontSize": 13,
+            "fontWeight": 700,
+            "color": "#6A4C93"
+          },
+          "encoding": {
+            "x": {
+              "field": "Year",
+              "type": "ordinal",
+              "title": null,
+              "scale": {
+                "type": "band",
+                "domain": [1994, 1995, 1996, 1997, 1998, 1999, 2000, 2001, 2002, 2003, 2004, 2005, 2006, 2007, 2008, 2009, 2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024],
+                "paddingInner": 0.15,
+                "paddingOuter": 0.1
+              }
+            },
+            "y": {"field": "y", "type": "quantitative", "scale": {"domain": [0, 120]}},
+            "text": {"field": "t"}
+          }
+        },
+        {
+          "transform": [{"filter": "datum.Year == 2024"}, {"calculate": "format(datum.per100, '.0f')", "as": "lab"}],
+          "mark": {"type": "text", "align": "left", "dx": 8, "fontSize": 13, "fontWeight": 700},
+          "encoding": {
+            "x": {
+              "field": "Year",
+              "type": "ordinal",
+              "title": null,
+              "scale": {
+                "type": "band",
+                "domain": [1994, 1995, 1996, 1997, 1998, 1999, 2000, 2001, 2002, 2003, 2004, 2005, 2006, 2007, 2008, 2009, 2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024],
+                "paddingInner": 0.15,
+                "paddingOuter": 0.1
+              }
+            },
+            "y": {"field": "per100", "type": "quantitative", "scale": {"domain": [0, 120]}},
+            "text": {"field": "lab"},
+            "color": {
+              "field": "series",
+              "type": "nominal",
+              "scale": {
+                "domain": ["Mobile phone subscriptions", "Landline phone subscriptions"],
+                "range": ["#6A4C93", "#A9A49A"]
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "width": 1002,
+      "height": 130,
+      "data": {"url": "data/cameras.csv", "format": {"parse": {"year": "number"}}},
+      "transform": [
+        {"filter": "datum.year <= 2024"},
+        {"aggregate": [{"op": "count", "as": "models"}], "groupby": ["year"]},
+        {"calculate": "datum.year", "as": "Year"}
+      ],
+      "layer": [
+        {
+          "mark": {"type": "bar", "color": "#A9D3D8", "cornerRadiusTopLeft": 2, "cornerRadiusTopRight": 2},
+          "encoding": {
+            "x": {
+              "field": "Year",
+              "type": "ordinal",
+              "title": null,
+              "scale": {
+                "type": "band",
+                "domain": [1994, 1995, 1996, 1997, 1998, 1999, 2000, 2001, 2002, 2003, 2004, 2005, 2006, 2007, 2008, 2009, 2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024],
+                "paddingInner": 0.15,
+                "paddingOuter": 0.1
+              },
+              "axis": {"labelAngle": 0, "labelExpr": "datum.value % 5 == 0 ? datum.label : ''", "labelPadding": 6}
+            },
+            "y": {
+              "field": "models",
+              "type": "quantitative",
+              "title": "Camera models",
+              "scale": {"domain": [0, 400]},
+              "axis": {"values": [0, 200, 400], "grid": true, "gridColor": "#ECE8DF"}
+            },
+            "tooltip": [
+              {"field": "Year", "type": "ordinal", "title": "Year"},
+              {"field": "models", "type": "quantitative", "title": "New camera models"}
+            ]
+          }
+        },
+        {
+          "transform": [{"filter": {"param": "pick_year", "empty": false}}],
+          "mark": {"type": "bar", "color": "#1B7F8C", "cornerRadiusTopLeft": 2, "cornerRadiusTopRight": 2},
+          "encoding": {
+            "x": {
+              "field": "Year",
+              "type": "ordinal",
+              "title": null,
+              "scale": {
+                "type": "band",
+                "domain": [1994, 1995, 1996, 1997, 1998, 1999, 2000, 2001, 2002, 2003, 2004, 2005, 2006, 2007, 2008, 2009, 2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024],
+                "paddingInner": 0.15,
+                "paddingOuter": 0.1
+              }
+            },
+            "y": {"field": "models", "type": "quantitative", "scale": {"domain": [0, 400]}},
+            "tooltip": [
+              {"field": "Year", "type": "ordinal", "title": "Year"},
+              {"field": "models", "type": "quantitative", "title": "New camera models"}
+            ]
+          }
+        },
+        {
+          "transform": [{"filter": "datum.Year == 2010"}],
+          "mark": {
+            "type": "text",
+            "align": "left",
+            "dx": 14,
+            "dy": 2,
+            "fontSize": 13,
+            "fontWeight": 700,
+            "color": "#1B7F8C"
+          },
+          "encoding": {
+            "x": {
+              "field": "Year",
+              "type": "ordinal",
+              "title": null,
+              "scale": {
+                "type": "band",
+                "domain": [1994, 1995, 1996, 1997, 1998, 1999, 2000, 2001, 2002, 2003, 2004, 2005, 2006, 2007, 2008, 2009, 2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024],
+                "paddingInner": 0.15,
+                "paddingOuter": 0.1
+              }
+            },
+            "y": {"field": "models", "type": "quantitative", "scale": {"domain": [0, 400]}},
+            "text": {"value": "2010: 340 new camera models, the peak"}
+          }
+        }
+      ]
+    }
+  ],
+  "config": {
+    "background": null,
+    "view": {"stroke": null},
+    "font": "'Source Sans 3', Helvetica, Arial, sans-serif",
+    "axis": {
+      "domain": false,
+      "ticks": false,
+      "labelColor": "#4A4A4A",
+      "titleColor": "#6B6B6B",
+      "titleFontWeight": 600,
+      "labelFontSize": 13
+    },
+    "legend": {
+      "labelColor": "#4A4A4A",
+      "titleColor": "#4A4A4A",
+      "titleFontWeight": 600,
+      "titleFontSize": 13,
+      "labelFontSize": 13,
+      "labelLimit": 320,
+      "titleLimit": 320
+    }
+  },
+  "padding": {"left": 0, "right": 8, "top": 5, "bottom": 5}
+}

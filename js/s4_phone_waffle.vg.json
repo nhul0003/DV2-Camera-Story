@@ -1,0 +1,109 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "description": "Waffle charts: out of every 100 people, how many own a mobile phone in 2024, in Australia, the world, and the least developed countries.",
+  "data": {"url": "data/share-population-mobile-phone.csv"},
+  "transform": [
+    {"calculate": "toNumber(datum['Proportion of individuals who own a mobile telephone'])", "as": "own"},
+    {
+      "filter": "datum.Year == 2024 && (datum.Entity == 'Australia' || datum.Entity == 'World' || datum.Entity == 'Least Developed Countries (LDCs)')"
+    },
+    {
+      "calculate": "datum.Entity == 'Australia' ? 'Australia' : datum.Entity == 'World' ? 'World' : 'Least developed countries'",
+      "as": "place"
+    },
+    {"calculate": "round(datum.own)", "as": "people"},
+    {"calculate": "sequence(0, 100)", "as": "cell"},
+    {"flatten": ["cell"]},
+    {"calculate": "datum.cell % 10", "as": "col"},
+    {"calculate": "floor(datum.cell / 10)", "as": "row"},
+    {"calculate": "datum.cell < datum.people ? 'Owns a mobile phone' : 'Does not'", "as": "status"},
+    {"calculate": "datum.people + ' in 100'", "as": "headline"}
+  ],
+  "facet": {
+    "column": {
+      "field": "place",
+      "type": "nominal",
+      "sort": ["Australia", "World", "Least developed countries"],
+      "header": {
+        "title": null,
+        "labelFontSize": 15,
+        "labelFontWeight": 700,
+        "labelColor": "#1F1F1F",
+        "labelFont": "'Source Sans 3', Helvetica, Arial, sans-serif",
+        "labelPadding": 6,
+        "labelAnchor": "start"
+      }
+    }
+  },
+  "spacing": 42,
+  "spec": {
+    "width": 180,
+    "height": 200,
+    "layer": [
+      {
+        "mark": {"type": "rect", "cornerRadius": 2, "stroke": "#FAF8F3", "strokeWidth": 2},
+        "encoding": {
+          "x": {"field": "col", "type": "ordinal", "axis": null},
+          "y": {"field": "row", "type": "ordinal", "axis": null, "scale": {"reverse": false}},
+          "color": {
+            "field": "status",
+            "type": "nominal",
+            "title": null,
+            "scale": {"domain": ["Owns a mobile phone", "Does not"], "range": ["#6A4C93", "#E4E0D7"]},
+            "legend": {
+              "orient": "top",
+              "direction": "horizontal",
+              "symbolType": "square",
+              "symbolSize": 180,
+              "offset": 10
+            }
+          },
+          "tooltip": [
+            {"field": "place", "title": "Where"},
+            {"field": "own", "type": "quantitative", "title": "Own a mobile phone (%)", "format": ".1f"}
+          ]
+        }
+      },
+      {
+        "transform": [{"filter": "datum.cell == 0"}],
+        "mark": {
+          "type": "text",
+          "x": 0,
+          "y": 218,
+          "align": "left",
+          "baseline": "top",
+          "fontSize": 20,
+          "fontWeight": 700,
+          "font": "'Playfair Display', Georgia, serif"
+        },
+        "encoding": {
+          "text": {"field": "headline"},
+          "color": {"condition": {"test": "datum.place == 'Australia'", "value": "#C23B22"}, "value": "#1F1F1F"}
+        }
+      }
+    ]
+  },
+  "config": {
+    "background": null,
+    "view": {"stroke": null},
+    "font": "'Source Sans 3', Helvetica, Arial, sans-serif",
+    "axis": {
+      "domain": false,
+      "ticks": false,
+      "labelColor": "#4A4A4A",
+      "titleColor": "#6B6B6B",
+      "titleFontWeight": 600,
+      "labelFontSize": 13
+    },
+    "legend": {
+      "labelColor": "#4A4A4A",
+      "titleColor": "#4A4A4A",
+      "titleFontWeight": 600,
+      "titleFontSize": 13,
+      "labelFontSize": 13,
+      "labelLimit": 320,
+      "titleLimit": 320
+    }
+  },
+  "padding": {"left": 0, "right": 8, "top": 5, "bottom": 30}
+}

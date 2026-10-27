@@ -1,0 +1,130 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "description": "100% stacked bar chart: share of new digital camera models with a CCD or a CMOS image sensor, 1994-2025.",
+  "width": 633,
+  "height": 280,
+  "data": {"url": "data/cameras.csv", "format": {"parse": {"year": "number"}}},
+  "transform": [
+    {
+      "calculate": "datum.sensor_type == 'CCD' ? 'CCD' : datum.sensor_type == 'CMOS' ? 'CMOS' : 'Other or unknown'",
+      "as": "sensor"
+    },
+    {"aggregate": [{"op": "count", "as": "models"}], "groupby": ["year", "sensor"]},
+    {"joinaggregate": [{"op": "sum", "field": "models", "as": "year_total"}], "groupby": ["year"]},
+    {"calculate": "datum.models / datum.year_total", "as": "share"},
+    {"calculate": "datum.sensor == 'CMOS' ? 0 : datum.sensor == 'CCD' ? 1 : 2", "as": "stack_order"}
+  ],
+  "layer": [
+    {
+      "mark": {"type": "bar"},
+      "encoding": {
+        "x": {
+          "field": "year",
+          "type": "ordinal",
+          "title": null,
+          "scale": {
+            "domain": [1994, 1995, 1996, 1997, 1998, 1999, 2000, 2001, 2002, 2003, 2004, 2005, 2006, 2007, 2008, 2009, 2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024, 2025],
+            "paddingInner": 0.12
+          },
+          "axis": {"labelAngle": 0, "labelExpr": "datum.value % 5 == 0 ? datum.label : ''", "labelPadding": 6}
+        },
+        "y": {
+          "field": "share",
+          "type": "quantitative",
+          "stack": "zero",
+          "title": "Share of new models",
+          "scale": {"domain": [0, 1]},
+          "axis": {"format": "%", "values": [0, 0.25, 0.5, 0.75, 1], "grid": false}
+        },
+        "color": {
+          "field": "sensor",
+          "type": "nominal",
+          "title": null,
+          "scale": {"domain": ["CMOS", "CCD", "Other or unknown"], "range": ["#1B7F8C", "#BFDCDF", "#E4E0D7"]},
+          "legend": {
+            "orient": "top",
+            "direction": "horizontal",
+            "symbolType": "square",
+            "symbolSize": 180,
+            "offset": 26
+          }
+        },
+        "order": {"field": "stack_order"},
+        "tooltip": [
+          {"field": "year", "type": "ordinal", "title": "Year"},
+          {"field": "sensor", "title": "Sensor"},
+          {"field": "models", "type": "quantitative", "title": "Models"},
+          {"field": "share", "type": "quantitative", "title": "Share of the year", "format": ".0%"}
+        ]
+      }
+    },
+    {
+      "data": {"values": [{"y": 0.5}]},
+      "mark": {"type": "rule", "color": "#FFFFFF", "strokeDash": [4, 3], "strokeWidth": 1.5},
+      "encoding": {"y": {"field": "y", "type": "quantitative", "scale": {"domain": [0, 1]}}}
+    },
+    {
+      "data": {"values": [{"year": 2012, "t": "2012: CMOS passes half of new models (58%)"}]},
+      "mark": {
+        "type": "text",
+        "y": -12,
+        "align": "right",
+        "dx": 8,
+        "fontSize": 13,
+        "fontWeight": 700,
+        "color": "#1F1F1F"
+      },
+      "encoding": {
+        "x": {
+          "field": "year",
+          "type": "ordinal",
+          "title": null,
+          "scale": {
+            "domain": [1994, 1995, 1996, 1997, 1998, 1999, 2000, 2001, 2002, 2003, 2004, 2005, 2006, 2007, 2008, 2009, 2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024, 2025],
+            "paddingInner": 0.12
+          },
+          "axis": null
+        },
+        "text": {"field": "t"}
+      }
+    },
+    {
+      "data": {"values": [{"year": 2012}]},
+      "mark": {"type": "rule", "y": -4, "y2": 0, "color": "#1F1F1F", "strokeWidth": 1.5},
+      "encoding": {
+        "x": {
+          "field": "year",
+          "type": "ordinal",
+          "title": null,
+          "scale": {
+            "domain": [1994, 1995, 1996, 1997, 1998, 1999, 2000, 2001, 2002, 2003, 2004, 2005, 2006, 2007, 2008, 2009, 2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024, 2025],
+            "paddingInner": 0.12
+          },
+          "axis": null
+        }
+      }
+    }
+  ],
+  "config": {
+    "background": null,
+    "view": {"stroke": null},
+    "font": "'Source Sans 3', Helvetica, Arial, sans-serif",
+    "axis": {
+      "domain": false,
+      "ticks": false,
+      "labelColor": "#4A4A4A",
+      "titleColor": "#6B6B6B",
+      "titleFontWeight": 600,
+      "labelFontSize": 13
+    },
+    "legend": {
+      "labelColor": "#4A4A4A",
+      "titleColor": "#4A4A4A",
+      "titleFontWeight": 600,
+      "titleFontSize": 13,
+      "labelFontSize": 13,
+      "labelLimit": 300
+    }
+  },
+  "padding": {"left": 0, "right": 8, "top": 5, "bottom": 5}
+}

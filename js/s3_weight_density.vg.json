@@ -1,0 +1,139 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "description": "Density plot: weight of new digital camera models in three eras. Cameras got lighter during the boom, then heavier after phones took over everyday photos.",
+  "width": 663,
+  "height": 300,
+  "data": {"url": "data/cameras.csv", "format": {"parse": {"year": "number", "weight_g": "number"}}},
+  "transform": [
+    {"filter": "isValid(datum.weight_g) && datum.weight_g > 0"},
+    {
+      "calculate": "datum.year <= 2004 ? '1994–2004: early digital' : datum.year <= 2012 ? '2005–2012: the boom' : '2013–2025: the phone era'",
+      "as": "era"
+    }
+  ],
+  "layer": [
+    {
+      "transform": [
+        {
+          "density": "weight_g",
+          "groupby": ["era"],
+          "extent": [0, 1200],
+          "bandwidth": 30,
+          "steps": 240,
+          "as": ["weight", "density"]
+        }
+      ],
+      "mark": {"type": "area", "opacity": 0.28, "interpolate": "monotone"},
+      "encoding": {
+        "x": {
+          "field": "weight",
+          "type": "quantitative",
+          "scale": {"domain": [0, 1200], "nice": false},
+          "title": "Weight with battery (grams)",
+          "axis": {"values": [0, 200, 400, 600, 800, 1000, 1200], "grid": false, "labelPadding": 6}
+        },
+        "y": {
+          "field": "density",
+          "type": "quantitative",
+          "title": "Share of models",
+          "stack": null,
+          "axis": {"labels": false, "grid": false}
+        },
+        "color": {
+          "field": "era",
+          "type": "nominal",
+          "title": "Era (median weight)",
+          "scale": {
+            "domain": ["1994–2004: early digital", "2005–2012: the boom", "2013–2025: the phone era"],
+            "range": ["#9CCDD2", "#1B7F8C", "#0B3F46"]
+          },
+          "legend": null
+        }
+      }
+    },
+    {
+      "transform": [
+        {
+          "density": "weight_g",
+          "groupby": ["era"],
+          "extent": [0, 1200],
+          "bandwidth": 30,
+          "steps": 240,
+          "as": ["weight", "density"]
+        }
+      ],
+      "mark": {"type": "line", "strokeWidth": 2.5, "interpolate": "monotone"},
+      "encoding": {
+        "x": {"field": "weight", "type": "quantitative", "scale": {"domain": [0, 1200], "nice": false}},
+        "y": {"field": "density", "type": "quantitative"},
+        "color": {
+          "field": "era",
+          "type": "nominal",
+          "scale": {
+            "domain": ["1994–2004: early digital", "2005–2012: the boom", "2013–2025: the phone era"],
+            "range": ["#9CCDD2", "#1B7F8C", "#0B3F46"]
+          },
+          "legend": {
+            "orient": "top-right",
+            "direction": "vertical",
+            "symbolType": "stroke",
+            "symbolStrokeWidth": 4,
+            "title": "Era (median weight)",
+            "labelLimit": 320,
+            "labelExpr": "datum.label + (indexof(datum.label, '1994') == 0 ? ' · 230 g' : indexof(datum.label, '2005') == 0 ? ' · 150 g' : ' · 370 g')",
+            "titleLimit": 300
+          }
+        }
+      }
+    },
+    {
+      "transform": [
+        {
+          "aggregate": [{"op": "median", "field": "weight_g", "as": "med"}, {"op": "count", "as": "n"}],
+          "groupby": ["era"]
+        }
+      ],
+      "mark": {"type": "rule", "strokeDash": [4, 3], "strokeWidth": 1.5},
+      "encoding": {
+        "x": {"field": "med", "type": "quantitative", "scale": {"domain": [0, 1200], "nice": false}},
+        "color": {
+          "field": "era",
+          "type": "nominal",
+          "scale": {
+            "domain": ["1994–2004: early digital", "2005–2012: the boom", "2013–2025: the phone era"],
+            "range": ["#9CCDD2", "#1B7F8C", "#0B3F46"]
+          },
+          "legend": null
+        },
+        "tooltip": [
+          {"field": "era", "title": "Era"},
+          {"field": "med", "type": "quantitative", "title": "Median weight (g)"},
+          {"field": "n", "type": "quantitative", "title": "Models with a weight", "format": ","}
+        ]
+      }
+    }
+  ],
+  "config": {
+    "background": null,
+    "view": {"stroke": null},
+    "font": "'Source Sans 3', Helvetica, Arial, sans-serif",
+    "axis": {
+      "domain": false,
+      "ticks": false,
+      "labelColor": "#4A4A4A",
+      "titleColor": "#6B6B6B",
+      "titleFontWeight": 600,
+      "labelFontSize": 13
+    },
+    "legend": {
+      "labelColor": "#4A4A4A",
+      "titleColor": "#4A4A4A",
+      "titleFontWeight": 600,
+      "titleFontSize": 13,
+      "labelFontSize": 13,
+      "labelLimit": 300
+    }
+  },
+  "padding": {"left": 0, "right": 8, "top": 5, "bottom": 5},
+  "resolve": {"legend": {"color": "independent"}}
+}
