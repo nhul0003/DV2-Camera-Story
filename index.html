@@ -321,20 +321,21 @@
   </div>
 
   <script src="js/rail.js"></script>
+  <script src="js/tooltips.js"></script>
   <script>
-    vegaEmbed('#vis_s1_types', 'js/s1_camera_types_heatmap.vg.json', { actions: false, renderer: 'svg' }).catch(console.error);
-    vegaEmbed('#vis_s1_flow', 'js/s1_flow_map.vg.json', { actions: false, renderer: 'svg' }).catch(console.error);
-    vegaEmbed('#vis_s2_exports', 'js/s2_film_camera_exports_map.vg.json', { actions: false, renderer: 'svg' }).catch(console.error);
-    vegaEmbed('#vis_s2_bump', 'js/s2_film_bump.vg.json', { actions: false, renderer: 'svg' }).catch(console.error);
-    vegaEmbed('#vis_s2_aus', 'js/s2_australia_film_line.vg.json', { actions: false, renderer: 'svg' }).catch(console.error);
-    vegaEmbed('#vis_s3_brands', 'js/s3_brand_heatmap.vg.json', { actions: false, renderer: 'svg' }).catch(console.error);
-    vegaEmbed('#vis_s3_mp', 'js/s3_megapixel_boxplot.vg.json', { actions: false, renderer: 'svg' }).catch(console.error);
-    vegaEmbed('#vis_s3_gantt', 'js/s3_brand_gantt.vg.json', { actions: false, renderer: 'svg' }).catch(console.error);
-    vegaEmbed('#vis_s3_weight', 'js/s3_weight_density.vg.json', { actions: false, renderer: 'svg' }).catch(console.error);
-    vegaEmbed('#vis_s3_sensor', 'js/s3_sensor_stacked.vg.json', { actions: false, renderer: 'svg' }).catch(console.error);
-    vegaEmbed('#vis_s4_phones', 'js/s4_phones_vs_cameras.vg.json', { actions: false, renderer: 'svg' }).catch(console.error);
-    vegaEmbed('#vis_s4_map', 'js/s4_phone_choropleth.vg.json', { actions: false, renderer: 'svg' }).catch(console.error);
-    vegaEmbed('#vis_s4_waffle', 'js/s4_phone_waffle.vg.json', { actions: false, renderer: 'svg' }).catch(console.error);
+    vegaEmbed('#vis_s1_types', 'js/s1_camera_types_heatmap.vg.json', { actions: false, renderer: 'svg', tooltip: Tip.options('#vis_s1_types') }).catch(console.error);
+    vegaEmbed('#vis_s1_flow', 'js/s1_flow_map.vg.json', { actions: false, renderer: 'svg', tooltip: Tip.options('#vis_s1_flow') }).catch(console.error);
+    vegaEmbed('#vis_s2_exports', 'js/s2_film_camera_exports_map.vg.json', { actions: false, renderer: 'svg', tooltip: Tip.options('#vis_s2_exports') }).catch(console.error);
+    vegaEmbed('#vis_s2_bump', 'js/s2_film_bump.vg.json', { actions: false, renderer: 'svg', tooltip: Tip.options('#vis_s2_bump') }).catch(console.error);
+    vegaEmbed('#vis_s2_aus', 'js/s2_australia_film_line.vg.json', { actions: false, renderer: 'svg', tooltip: Tip.options('#vis_s2_aus') }).catch(console.error);
+    vegaEmbed('#vis_s3_brands', 'js/s3_brand_heatmap.vg.json', { actions: false, renderer: 'svg', tooltip: Tip.options('#vis_s3_brands') }).catch(console.error);
+    vegaEmbed('#vis_s3_mp', 'js/s3_megapixel_boxplot.vg.json', { actions: false, renderer: 'svg', tooltip: Tip.options('#vis_s3_mp') }).catch(console.error);
+    vegaEmbed('#vis_s3_gantt', 'js/s3_brand_gantt.vg.json', { actions: false, renderer: 'svg', tooltip: Tip.options('#vis_s3_gantt') }).catch(console.error);
+    vegaEmbed('#vis_s3_weight', 'js/s3_weight_density.vg.json', { actions: false, renderer: 'svg', tooltip: Tip.options('#vis_s3_weight') }).catch(console.error);
+    vegaEmbed('#vis_s3_sensor', 'js/s3_sensor_stacked.vg.json', { actions: false, renderer: 'svg', tooltip: Tip.options('#vis_s3_sensor') }).catch(console.error);
+    vegaEmbed('#vis_s4_phones', 'js/s4_phones_vs_cameras.vg.json', { actions: false, renderer: 'svg', tooltip: Tip.options('#vis_s4_phones') }).catch(console.error);
+    vegaEmbed('#vis_s4_map', 'js/s4_phone_choropleth.vg.json', { actions: false, renderer: 'svg', tooltip: Tip.options('#vis_s4_map') }).catch(console.error);
+    vegaEmbed('#vis_s4_waffle', 'js/s4_phone_waffle.vg.json', { actions: false, renderer: 'svg', tooltip: Tip.options('#vis_s4_waffle') }).catch(console.error);
   </script>
 </body>
 
