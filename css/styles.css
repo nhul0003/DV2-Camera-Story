@@ -105,7 +105,8 @@ h1 { font-weight: 700; font-size: clamp(48px, 7vw, 76px); line-height: 1.02; let
 /* ---------- Chart rows (reference layout: chart and text side by side) ----------
    Each row: chart in two thirds, analysis in one third, on the same 3-column grid.
    Sections alternate sides (.flip), so the page zig-zags instead of stacking all text on one side. */
-.row { align-items: center; margin-bottom: var(--s4); }
+/* Text starts level with the top of its chart, like the reference layout, instead of floating in the middle */
+.row { align-items: start; margin-bottom: var(--s4); }
 .flip .row .insight { order: -1; }
 .fig { margin: 0; min-width: 0; }
 
