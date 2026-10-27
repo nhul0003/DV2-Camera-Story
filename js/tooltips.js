@@ -142,8 +142,15 @@ var Tip = (function () {
   function sub(t) { return '<p class="tt-sub">' + t + "</p>"; }
   function note(t) { return '<p class="tt-note">' + t + "</p>"; }
   function series(obj, keys) { return keys.map(function (k) { return obj && obj[k] !== undefined ? obj[k] : NaN; }); }
+  // Labels under the mini bars: the hovered bar, plus the first and last bar
+  // only when they are far enough from it not to overlap (labels are about 32px wide).
   function edgeLabels(keys, hi, fmtKey) {
-    return keys.map(function (k, i) { return i === 0 || i === keys.length - 1 || i === hi ? fmtKey(k) : ""; });
+    var gap = Math.ceil(34 / (220 / keys.length));
+    return keys.map(function (k, i) {
+      if (i === hi) return fmtKey(k);
+      if ((i === 0 || i === keys.length - 1) && Math.abs(i - hi) >= gap) return fmtKey(k);
+      return "";
+    });
   }
 
   // ---------- one card per chart ----------

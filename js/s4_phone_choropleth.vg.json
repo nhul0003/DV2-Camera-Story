@@ -76,10 +76,25 @@
           {"field": "own", "type": "quantitative", "title": "Own a mobile phone (%)", "format": ".1f"},
           {"field": "rank", "type": "quantitative", "title": "Rank (of countries with data)"}
         ],
-        "stroke": {"condition": {"test": "datum.Code == 'AUS'", "value": "#C23B22"}, "value": "#FAF8F3"},
-        "strokeWidth": {"condition": {"test": "datum.Code == 'AUS'", "value": 2.2}, "value": 0.6},
+        "stroke": {
+          "condition": [
+            {"param": "hover_c", "empty": false, "value": "#1F1F1F"},
+            {"test": "datum.Code == 'AUS'", "value": "#C23B22"}
+          ],
+          "value": "#FAF8F3"
+        },
+        "strokeWidth": {
+          "condition": [{"param": "hover_c", "empty": false, "value": 2}, {"test": "datum.Code == 'AUS'", "value": 2.2}],
+          "value": 0.6
+        },
         "order": {"condition": {"test": "datum.Code == 'AUS'", "value": 1}, "value": 0}
-      }
+      },
+      "params": [
+        {
+          "name": "hover_c",
+          "select": {"type": "point", "fields": ["Code"], "on": "pointerover", "clear": "pointerout"}
+        }
+      ]
     },
     {
       "data": {"url": "data/share-population-mobile-phone.csv"},
