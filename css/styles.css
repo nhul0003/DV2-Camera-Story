@@ -28,6 +28,8 @@
 }
 
 * { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+.section, #top, #sources { scroll-margin-top: 16px; }
 
 body {
   margin: 0;
@@ -107,10 +109,8 @@ h1 { font-weight: 700; font-size: clamp(48px, 7vw, 76px); line-height: 1.02; let
 .flip .row .insight { order: -1; }
 .fig { margin: 0; min-width: 0; }
 
-/* Full-width charts (the three maps): headline + first paragraph left, second paragraph beside it, chart below */
+/* Full-width charts (the three maps): centred intro above, chart below */
 .row-wide { margin-bottom: var(--s4); }
-.insight-wide { align-items: end; margin-bottom: var(--s2); }
-.insight-wide .span-2 p { max-width: 30em; }
 
 /* Analysis text: headline states the finding, key words and numbers in bold */
 .insight { font-size: 17px; line-height: 1.6; color: var(--ink-soft); }
@@ -125,8 +125,8 @@ h1 { font-weight: 700; font-size: clamp(48px, 7vw, 76px); line-height: 1.02; let
 }
 .insight p { margin: 0 0 var(--s1); }
 .insight p:last-child { margin-bottom: 0; }
-.insight strong, .conclusion strong { font-weight: 700; color: var(--ink); }
-.insight strong.aus, .conclusion strong.aus { color: var(--australia); }
+.insight strong { font-weight: 700; color: var(--ink); }
+.insight strong.aus { color: var(--australia); }
 
 .how { font-size: 14px; line-height: 1.5; color: var(--muted); margin: var(--s1) 0 0; }
 
@@ -138,19 +138,69 @@ h1 { font-weight: 700; font-size: clamp(48px, 7vw, 76px); line-height: 1.02; let
 .vega-bind label { margin-right: 12px; cursor: pointer; }
 .vega-bind input[type="radio"] { accent-color: var(--ink); cursor: pointer; }
 
-/* Section links under the intro */
-.chapters { display: flex; flex-wrap: wrap; gap: var(--s1) var(--s4); padding: var(--s2) 0 0; border-top: 1px solid var(--rule); margin-top: var(--s3); font-size: 15px; }
-.chapters a { text-decoration: none; color: var(--ink-soft); }
-.chapters a b { font-family: var(--serif); margin-right: 4px; }
+/* Section links under the intro: outlined buttons, so they read as clickable */
+.chapters { display: flex; flex-wrap: wrap; align-items: center; gap: var(--s1); padding: var(--s2) 0 0; border-top: 1px solid var(--rule); margin-top: var(--s3); font-size: 15px; }
+.chapters-label { font-weight: 600; color: var(--muted); margin-right: var(--s1); }
+.chapters a {
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 6px 14px; border: 1.5px solid var(--rule); border-radius: 999px;
+  text-decoration: none; color: var(--ink); background: #FFFFFF;
+  transition: border-color 0.15s, background 0.15s;
+}
+.chapters a b { font-family: var(--serif); }
+.chapters a i { font-style: normal; color: var(--muted); }
 .chapters a.film b { color: var(--film); }
 .chapters a.digital b { color: var(--digital); }
 .chapters a.phone b { color: var(--phone); }
-.chapters a:hover { color: var(--ink); text-decoration: underline; }
+.chapters a:hover { border-color: currentColor; background: var(--paper); }
+.chapters a.film:hover { border-color: var(--film); }
+.chapters a.digital:hover { border-color: var(--digital); }
+.chapters a.phone:hover { border-color: var(--phone); }
 
-/* Conclusion: headline left, text across the other two thirds */
-.conclusion { border-top: 1px solid var(--ink); padding-top: var(--s3); margin-top: var(--s2); align-items: start; }
-.conclusion h3 { font-size: 30px; line-height: 1.15; margin: 0; }
-.conclusion p { max-width: 32em; font-size: 19px; line-height: 1.6; margin: 0 0 var(--s1); color: var(--ink-soft); }
+/* Intro above each full-width map, and the conclusion:
+   headline, a short rule in the section colour, then one paragraph.
+   Left-aligned on the page's left edge, so it adds no new sight line (layout notes),
+   and the paragraph is capped at about 10 words per line (typography notes). */
+.interlude { margin: var(--s2) 0 var(--s3); text-align: left; }
+.interlude h3 { font-size: 34px; font-weight: 700; line-height: 1.15; margin: 0; color: var(--ink); }
+.interlude h3::after { content: ""; display: block; width: 64px; height: 3px; border-radius: 2px; background: var(--sec); margin: var(--s2) 0 var(--s3); }
+.interlude p { max-width: 32em; font-size: 19px; line-height: 1.6; color: var(--ink-soft); margin: 0; }
+.interlude strong { font-weight: 700; color: var(--ink); }
+.interlude strong.aus { color: var(--australia); }
+.conclusion { --sec: var(--australia); border-top: 1px solid var(--ink); padding-top: var(--s4); margin-top: var(--s2); max-width: none; }
+.conclusion h3 { max-width: 20em; }
+.conclusion h3 { font-size: 38px; }
+
+/* ---------- Section rail: fixed on the left edge ----------
+   Wide screens show the section names; narrower screens show only the ticks,
+   and the names appear when you point at the rail. Hidden on small screens. */
+.rail {
+  position: fixed; left: 18px; top: 50%; transform: translateY(-50%); z-index: 10;
+  display: flex; flex-direction: column; gap: 14px; padding: 4px 0 4px 14px;
+  font-size: 13px; line-height: 1.25;
+}
+.rail-title { font-size: 11px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); margin-bottom: 2px; }
+.rail-track { position: absolute; left: 0; top: 26px; bottom: 4px; width: 3px; border-radius: 2px; background: var(--rule); }
+.rail-fill { display: block; width: 100%; height: 0; border-radius: 2px; background: var(--ink); }
+.rail a { position: relative; display: flex; align-items: center; color: var(--muted); text-decoration: none; }
+.rail .tick { position: absolute; left: -17px; width: 9px; height: 9px; border-radius: 50%; background: var(--paper); border: 2px solid var(--muted); }
+.rail a.film .tick { border-color: var(--film); }
+.rail a.digital .tick { border-color: var(--digital); }
+.rail a.phone .tick { border-color: var(--phone); }
+.rail a:hover, .rail a.active { color: var(--ink); font-weight: 700; }
+.rail a.active .tick { background: var(--ink); border-color: var(--ink); }
+.rail a.film.active .tick { background: var(--film); border-color: var(--film); }
+.rail a.digital.active .tick { background: var(--digital); border-color: var(--digital); }
+.rail a.phone.active .tick { background: var(--phone); border-color: var(--phone); }
+.rail .lbl { max-width: 140px; }
+
+/* Between 1100 and 1460px wide there is only room for the ticks: names show on hover */
+@media (max-width: 1460px) {
+  .rail .lbl, .rail-title { opacity: 0; pointer-events: none; transition: opacity 0.15s; }
+  .rail:hover .lbl, .rail:hover .rail-title { opacity: 1; pointer-events: auto; }
+  .rail:hover { background: rgba(250, 248, 243, 0.96); padding-right: 12px; border-radius: 8px; }
+}
+@media (max-width: 1100px) { .rail { display: none; } }
 
 /* Section colour used by the headline rules */
 .sec-film { --sec: var(--film); }

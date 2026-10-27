@@ -20,10 +20,22 @@
 </head>
 
 <body>
+  <!-- Section rail: fixed on the left, shows where you are and jumps to a section when clicked -->
+  <nav class="rail" aria-label="Jump to a section">
+    <span class="rail-title">Sections</span>
+    <span class="rail-track" aria-hidden="true"><span class="rail-fill"></span></span>
+    <a href="#top" data-target="top"><span class="tick"></span><span class="lbl">Introduction</span></a>
+    <a href="#film-era" data-target="film-era" class="film"><span class="tick"></span><span class="lbl">01 The film era</span></a>
+    <a href="#film-collapse" data-target="film-collapse" class="film"><span class="tick"></span><span class="lbl">02 Film collapses</span></a>
+    <a href="#digital-boom" data-target="digital-boom" class="digital"><span class="tick"></span><span class="lbl">03 The digital boom</span></a>
+    <a href="#phone-era" data-target="phone-era" class="phone"><span class="tick"></span><span class="lbl">04 The phone takes over</span></a>
+    <a href="#sources" data-target="sources"><span class="tick"></span><span class="lbl">Sources</span></a>
+  </nav>
+
   <div class="page">
 
     <!-- ================= INTRO ================= -->
-    <header class="intro grid">
+    <header class="intro grid" id="top">
       <p class="kicker span-3">A data story about cameras · Australia · 1840–2025</p>
       <h1 class="span-3">From Film to Phone</h1>
       <p class="lead span-2">How the camera changed over 150 years, and what the switch from film to digital cost Australia.</p>
@@ -58,10 +70,11 @@
     </header>
 
     <nav class="chapters" aria-label="Sections">
-      <a href="#film-era" class="film"><b>01</b> The film era</a>
-      <a href="#film-collapse" class="film"><b>02</b> Film collapses</a>
-      <a href="#digital-boom" class="digital"><b>03</b> The digital boom</a>
-      <a href="#phone-era" class="phone"><b>04</b> The phone takes over</a>
+      <span class="chapters-label">Jump to a section:</span>
+      <a href="#film-era" class="film"><b>01</b> The film era <i aria-hidden="true">↓</i></a>
+      <a href="#film-collapse" class="film"><b>02</b> Film collapses <i aria-hidden="true">↓</i></a>
+      <a href="#digital-boom" class="digital"><b>03</b> The digital boom <i aria-hidden="true">↓</i></a>
+      <a href="#phone-era" class="phone"><b>04</b> The phone takes over <i aria-hidden="true">↓</i></a>
     </nav>
 
     <!-- ================= SECTION 1: THE FILM ERA (charts left, text right) ================= -->
@@ -87,14 +100,9 @@
 
       <!-- Chart 2: flow map + year bar chart (full width, text above) -->
       <div class="row-wide">
-        <div class="insight-wide grid">
-          <div class="insight span-1">
-            <h3>Where <span class="aus">Melbourne's</span> cameras came from</h3>
-            <p>Most cameras in Museums Victoria were <strong>made overseas</strong>. Every line ends at the museum in Melbourne, and the thicker the line, the more cameras came from that country.</p>
-          </div>
-          <div class="insight span-2">
-            <p>The <strong>USA</strong> is the biggest source, with <strong>65 of 163</strong> cameras (40%), 38 of them by Kodak. <strong>Japanese</strong> cameras only appear after 1950: drag across 1950–1990 on the bar chart to see them. <strong class="aus">18</strong> were made in Australia, <strong>11 by Kodak Australasia</strong> in Melbourne.</p>
-          </div>
+        <div class="interlude">
+          <h3>Where <span class="aus">Melbourne's</span> cameras came from</h3>
+          <p>Most cameras in Museums Victoria were <strong>made overseas</strong>. Every line ends at the museum in Melbourne, and the thicker the line, the more cameras came from that country. The <strong>USA</strong> is the biggest source, with <strong>65 of 163</strong> cameras (40%), 38 of them by Kodak. <strong>Japanese</strong> cameras only appear after 1950: drag across 1950–1990 on the bar chart to see them. <strong class="aus">18</strong> were made in Australia, <strong>11 by Kodak Australasia</strong> in Melbourne.</p>
         </div>
         <figure class="fig">
           <div id="vis_s1_flow" class="vis"></div>
@@ -112,14 +120,9 @@
 
       <!-- Chart 3: proportional symbol map (full width, text above) -->
       <div class="row-wide">
-        <div class="insight-wide grid">
-          <div class="insight span-1">
-            <h3>Film cameras <span class="film">almost vanished</span> in ten years</h3>
-            <p>In 2000 the world exported <strong>US$3.6 billion</strong> of 35mm film cameras, <strong>55%</strong> of it from Hong Kong and China.</p>
-          </div>
-          <div class="insight span-2">
-            <p>By 2010 the trade had fallen <strong>96%</strong>, to US$158 million, as digital cameras took over. Australia, in red, followed the same path: its exports fell <strong>98%</strong>, from <strong class="aus">US$5.2m</strong> to <strong class="aus">US$0.1m</strong>. Choose a year under the map to watch the circles shrink inside their 2000 outlines.</p>
-          </div>
+        <div class="interlude">
+          <h3>Film cameras <span class="film">almost vanished</span> in ten years</h3>
+          <p>In 2000 the world exported <strong>US$3.6 billion</strong> of 35mm film cameras, <strong>55%</strong> of it from Hong Kong and China. By 2010 the trade had fallen <strong>96%</strong>, to US$158 million, as digital cameras took over. Australia, in red, followed the same path: its exports fell <strong>98%</strong>, from <strong class="aus">US$5.2m</strong> to <strong class="aus">US$0.1m</strong>. Choose a year under the map to watch the circles shrink inside their 2000 outlines.</p>
         </div>
         <figure class="fig">
           <div id="vis_s2_exports" class="vis"></div>
@@ -251,14 +254,9 @@
 
       <!-- Chart 12: choropleth map (full width, text above) -->
       <div class="row-wide">
-        <div class="insight-wide grid">
-          <div class="insight span-1">
-            <h3>Almost everyone <span class="phone">carries a phone</span></h3>
-            <p>The map shades each country by the <strong>share of people</strong> who own a mobile phone, so countries of every size can be compared fairly. Worldwide it is <strong>82%</strong>.</p>
-          </div>
-          <div class="insight span-2">
-            <p><strong class="aus">Australia</strong> is at <strong class="aus">97.5%</strong>, 28th of 185 countries, and has stayed between 94% and 98% since 2019. The lightest countries are in Central and East Africa: <strong>Burundi</strong> is lowest at <strong>28%</strong>, and in the least developed countries as a group it is 63%.</p>
-          </div>
+        <div class="interlude">
+          <h3>Almost everyone <span class="phone">carries a phone</span></h3>
+          <p>The map shades each country by the <strong>share of people</strong> who own a mobile phone, so countries of every size can be compared fairly. Worldwide it is <strong>82%</strong>. <strong class="aus">Australia</strong> is at <strong class="aus">97.5%</strong>, 28th of 185 countries, and has stayed between 94% and 98% since 2019. The lightest countries are in Central and East Africa: <strong>Burundi</strong> is lowest at <strong>28%</strong>.</p>
         </div>
         <figure class="fig">
           <div id="vis_s4_map" class="vis"></div>
@@ -280,17 +278,14 @@
       </div>
 
       <!-- Conclusion -->
-      <div class="conclusion grid">
-        <h3 class="span-1">What it meant for <span class="aus">Australia</span></h3>
-        <div class="span-2">
-          <p>For a century, Australians bought cameras made overseas and <strong>film made in Melbourne</strong>. When digital arrived, Kodak's Coburg plant closed and the country's film exports fell <strong>93% in five years</strong>.</p>
-          <p>Digital cameras <strong>boomed and faded</strong> within a decade. Today the camera most Australians use is <strong>the phone in their pocket</strong>.</p>
-        </div>
+      <div class="interlude conclusion">
+        <h3>What it meant for <span class="aus">Australia</span></h3>
+        <p>For a century, Australians bought cameras made overseas and <strong>film made in Melbourne</strong>. When digital arrived, Kodak's Coburg plant closed and the country's film exports fell <strong>93% in five years</strong>. Digital cameras <strong>boomed and faded</strong> within a decade. Today the camera most Australians use is <strong>the phone in their pocket</strong>.</p>
       </div>
     </section>
 
     <!-- ================= FOOTER ================= -->
-    <footer class="grid">
+    <footer class="grid" id="sources">
       <div class="span-2">
         <strong>Data sources</strong>
         <p><a href="https://collection.sciencemuseumgroup.org.uk/" target="_blank">Science Museum Group Collection</a> (CC0 / CC BY 4.0), © The Board of Trustees of the Science Museum</p>
@@ -312,6 +307,7 @@
 
   </div>
 
+  <script src="js/rail.js"></script>
   <script>
     vegaEmbed('#vis_s1_types', 'js/s1_camera_types_heatmap.vg.json', { actions: false, renderer: 'svg' }).catch(console.error);
     vegaEmbed('#vis_s1_flow', 'js/s1_flow_map.vg.json', { actions: false, renderer: 'svg' }).catch(console.error);
