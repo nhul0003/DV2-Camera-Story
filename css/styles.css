@@ -55,7 +55,7 @@ h1, h2, h3, .lead, .section-num, .stat-number, .key-title, .insight-label {
 }
 
 /* ---------- Intro ---------- */
-.intro { padding: var(--s5) 0 var(--s3); row-gap: 0; align-items: start; }
+.intro { padding: var(--s4) 0 0; row-gap: 0; align-items: start; }
 .kicker {
   font-family: var(--body); font-size: 14px; font-weight: 600; letter-spacing: 0.14em;
   text-transform: uppercase; color: var(--film); margin: 0 0 var(--s1);
@@ -63,7 +63,7 @@ h1, h2, h3, .lead, .section-num, .stat-number, .key-title, .insight-label {
 h1 { font-weight: 700; font-size: clamp(48px, 7vw, 76px); line-height: 1.02; letter-spacing: -0.01em; margin: 0 0 var(--s3); }
 .lead { font-size: 24px; font-style: italic; line-height: 1.45; color: var(--ink-soft); margin: 0; }
 
-.stats { margin-top: var(--s4); }
+.stats { margin-top: var(--s3); }
 .stat { border-top: 4px solid; padding-top: 14px; }
 .stat-number { font-size: 34px; font-weight: 700; line-height: 1.15; }
 .stat-text { font-size: 16px; line-height: 1.5; color: var(--ink-soft); margin: 8px 0 0; }
@@ -79,8 +79,8 @@ h1 { font-weight: 700; font-size: clamp(48px, 7vw, 76px); line-height: 1.02; let
 .swatch-ramp { width: 40px; background: linear-gradient(90deg, #E3E7EE, #8797B2, #2C3A5A); }
 
 /* ---------- Sections ---------- */
-.section { padding: var(--s4) 0 0; }
-.section-head { display: flex; align-items: baseline; gap: var(--s2); position: relative; padding-bottom: calc(var(--s3) + 40px); margin-bottom: var(--s4); }
+.section { padding: var(--s3) 0 0; }
+.section-head { display: flex; align-items: baseline; gap: var(--s2); position: relative; padding-bottom: calc(var(--s2) + 40px); margin-bottom: var(--s3); }
 /* Film-strip divider under each section title: a strip in the section colour, with
    sprocket holes along both edges and a row of frames in the middle */
 .section-head::after {
@@ -100,33 +100,62 @@ h1 { font-weight: 700; font-size: clamp(48px, 7vw, 76px); line-height: 1.02; let
 .section-num { font-size: 44px; font-weight: 700; line-height: 1; }
 .section-head h2 { font-weight: 700; font-size: 38px; line-height: 1.1; margin: 0; color: var(--ink); }
 
-.text h3 { font-size: 26px; font-weight: 700; line-height: 1.2; margin: 0 0 var(--s2); }
-.text p { margin: 0 0 var(--s2); }
-/* Row B text: heading in column 1, paragraph across columns 2-3 in two newspaper-style columns */
-.text.grid h3 { margin: 0; }
-.text.grid p.span-2 { columns: 2; column-gap: var(--gap); }
+/* ---------- Chart rows (reference layout: chart and text side by side) ----------
+   Each row: chart in two thirds, analysis in one third, on the same 3-column grid.
+   Sections alternate sides (.flip), so the page zig-zags instead of stacking all text on one side. */
+.row { align-items: center; margin-bottom: var(--s4); }
+.flip .row .insight { order: -1; }
+.fig { margin: 0; min-width: 0; }
 
-/* Row A: text in the first third, chart in the other two thirds */
-.row-a { align-items: start; margin-bottom: var(--s5); }
-/* Row B: one row of text across the three columns, then a full-width chart */
-.row-b { margin-bottom: var(--s5); }
+/* Full-width charts (the three maps): headline + first paragraph left, second paragraph beside it, chart below */
+.row-wide { margin-bottom: var(--s4); }
+.insight-wide { align-items: end; margin-bottom: var(--s2); }
+.insight-wide .span-2 p { max-width: 30em; }
 
-.how { font-size: 15px; line-height: 1.5; color: var(--muted); margin: var(--s1) 0 0; }
+/* Analysis text: headline states the finding, key words and numbers in bold */
+.insight { font-size: 17px; line-height: 1.6; color: var(--ink-soft); }
+.insight h3 {
+  position: relative; padding-top: 14px; margin: 0 0 var(--s1);
+  font-size: 26px; font-weight: 700; line-height: 1.2; color: var(--ink);
+}
+/* short rule in the section colour above each headline */
+.insight h3::before {
+  content: ""; position: absolute; top: 0; left: 0;
+  width: 40px; height: 3px; border-radius: 2px; background: var(--sec);
+}
+.insight p { margin: 0 0 var(--s1); }
+.insight p:last-child { margin-bottom: 0; }
+.insight strong, .conclusion strong { font-weight: 700; color: var(--ink); }
+.insight strong.aus, .conclusion strong.aus { color: var(--australia); }
 
-.vis { width: 100%; margin-top: var(--s2); }
-/* Year selector under the symbol map */
+.how { font-size: 14px; line-height: 1.5; color: var(--muted); margin: var(--s1) 0 0; }
+
+.vis { width: 100%; }
+/* Year selector under the maps */
 .vega-bindings { margin-top: var(--s1); font-size: 15px; color: var(--ink-soft); }
 .vega-bind { display: flex; align-items: center; gap: 4px; flex-wrap: wrap; }
 .vega-bind-name { font-weight: 600; margin-right: 8px; }
 .vega-bind label { margin-right: 12px; cursor: pointer; }
 .vega-bind input[type="radio"] { accent-color: var(--ink); cursor: pointer; }
 
-/* Short analysis cards under a chart, one per third */
-.insights { margin: var(--s3) 0 0; }
-.insight { border-top: 3px solid; padding-top: 12px; }
-.insight-label { font-size: 22px; font-weight: 700; line-height: 1.2; }
-.insight-number { font-weight: 700; font-size: 16px; margin: 6px 0; color: var(--ink); }
-.insight p { font-size: 16px; line-height: 1.5; margin: 0; color: var(--ink-soft); }
+/* Section links under the intro */
+.chapters { display: flex; flex-wrap: wrap; gap: var(--s1) var(--s4); padding: var(--s2) 0 0; border-top: 1px solid var(--rule); margin-top: var(--s3); font-size: 15px; }
+.chapters a { text-decoration: none; color: var(--ink-soft); }
+.chapters a b { font-family: var(--serif); margin-right: 4px; }
+.chapters a.film b { color: var(--film); }
+.chapters a.digital b { color: var(--digital); }
+.chapters a.phone b { color: var(--phone); }
+.chapters a:hover { color: var(--ink); text-decoration: underline; }
+
+/* Conclusion: headline left, text across the other two thirds */
+.conclusion { border-top: 1px solid var(--ink); padding-top: var(--s3); margin-top: var(--s2); align-items: start; }
+.conclusion h3 { font-size: 30px; line-height: 1.15; margin: 0; }
+.conclusion p { max-width: 32em; font-size: 19px; line-height: 1.6; margin: 0 0 var(--s1); color: var(--ink-soft); }
+
+/* Section colour used by the headline rules */
+.sec-film { --sec: var(--film); }
+.sec-digital { --sec: var(--digital); }
+.sec-phone { --sec: var(--phone); }
 
 /* Section colours */
 .film { color: var(--film); border-color: var(--film); }
@@ -174,8 +203,9 @@ footer p { margin: 0 0 4px; }
 @media (max-width: 860px) {
   .grid { grid-template-columns: 1fr; }
   .span-1, .span-2, .span-3 { grid-column: 1 / -1; }
-  .text.grid p.span-2 { columns: 1; }
-  .stat, .insight { margin-bottom: var(--s3); }
+  .flip .row .insight { order: 0; }
+  .row .insight { margin-top: var(--s2); }
+  .stat { margin-bottom: var(--s3); }
   .key { margin-top: var(--s3); grid-column: 1 / -1; grid-row: auto; }
   .section-head h2 { font-size: 36px; }
   .section-num { font-size: 48px; }

@@ -5,7 +5,7 @@
   "spacing": 12,
   "vconcat": [
     {
-      "width": 978,
+      "width": 600,
       "height": 90,
       "layer": [
         {
@@ -71,7 +71,7 @@
           }
         },
         {
-          "data": {"values": [{"year": 2010, "y": 360, "text": "2010: 340 new models, the peak"}]},
+          "data": {"values": [{"year": 2010, "y": 360, "text": "2010: 340 models, the peak"}]},
           "mark": {
             "type": "text",
             "align": "left",
@@ -98,8 +98,8 @@
       ]
     },
     {
-      "width": 978,
-      "height": 372,
+      "width": 600,
+      "height": 360,
       "transform": [
         {"joinaggregate": [{"op": "count", "as": "year_total"}], "groupby": ["year"]},
         {"joinaggregate": [{"op": "count", "as": "brand_total"}], "groupby": ["brand"]},

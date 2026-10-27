@@ -5,7 +5,7 @@
   "vconcat": [
     {
       "name": "phones",
-      "width": 1002,
+      "width": 620,
       "height": 230,
       "data": {
         "url": "data/ict-adoption-per-100-people.csv",
@@ -25,7 +25,7 @@
           "encoding": {"y": {"field": "y", "type": "quantitative", "scale": {"domain": [0, 120]}}}
         },
         {
-          "data": {"values": [{"Year": 2024, "y": 100, "t": "100 per 100 people: one for every Australian"}]},
+          "data": {"values": [{"Year": 2024, "y": 100, "t": "100 per 100: one for every Australian"}]},
           "mark": {
             "type": "text",
             "align": "right",
@@ -182,7 +182,7 @@
           }
         },
         {
-          "data": {"values": [{"Year": 2007, "y": 101.5, "t": "2007: more mobile subscriptions than people"}]},
+          "data": {"values": [{"Year": 2007, "y": 101.5, "t": "2007: more subscriptions than people"}]},
           "mark": {
             "type": "text",
             "align": "right",
@@ -238,7 +238,7 @@
       ]
     },
     {
-      "width": 1002,
+      "width": 620,
       "height": 130,
       "data": {"url": "data/cameras.csv", "format": {"parse": {"year": "number"}}},
       "transform": [
@@ -321,7 +321,7 @@
               }
             },
             "y": {"field": "models", "type": "quantitative", "scale": {"domain": [0, 400]}},
-            "text": {"value": "2010: 340 new camera models, the peak"}
+            "text": {"value": "2010: 340 models, the peak"}
           }
         }
       ]

@@ -57,308 +57,234 @@
       </div>
     </header>
 
-    <!-- ================= SECTION 1: THE FILM ERA ================= -->
-    <section class="section" id="film-era">
+    <nav class="chapters" aria-label="Sections">
+      <a href="#film-era" class="film"><b>01</b> The film era</a>
+      <a href="#film-collapse" class="film"><b>02</b> Film collapses</a>
+      <a href="#digital-boom" class="digital"><b>03</b> The digital boom</a>
+      <a href="#phone-era" class="phone"><b>04</b> The phone takes over</a>
+    </nav>
+
+    <!-- ================= SECTION 1: THE FILM ERA (charts left, text right) ================= -->
+    <section class="section sec-film" id="film-era">
       <div class="section-head film">
         <span class="section-num">01</span>
         <h2>The film era</h2>
       </div>
 
-      <!-- Chart 1: heatmap (layout B: one row of text, then a full-width chart) -->
-      <div class="row-b">
-        <div class="text grid">
-          <h3 class="span-1">For a century, cameras kept <span class="film">changing shape</span></h3>
-          <p class="span-2">Glass plates gave way to box cameras, then folding, roll-film and 35mm cameras. Each new type took over from the one before, and each made photography cheaper and easier. The darker a square, the bigger that type's share of all the cameras made in that decade.</p>
+      <!-- Chart 1: heatmap -->
+      <div class="row grid">
+        <figure class="fig span-2">
+          <div id="vis_s1_types" class="vis"></div>
+          <p class="how">Heatmap · Hover over a square for numbers · 2,982 cameras made in 1880–2009 (decades with at least 25 cameras) · Source: Science Museum Group Collection. Shares show what the museum holds, not how many cameras were sold.</p>
+        </figure>
+        <div class="insight span-1">
+          <h3>For a century, cameras kept <span class="film">changing shape</span></h3>
+          <p>Glass plates gave way to box, folding, roll-film and 35mm cameras. Each new type took over from the one before. The darker a square, the bigger that type's <strong>share of the decade's cameras</strong>.</p>
+          <p><strong>1 · Roll film</strong> was the top type in every decade from the 1900s to the 1930s, peaking at <strong>46%</strong> in the 1910s. <strong>2 · 35mm</strong> led the 1960s with <strong>35%</strong>.</p>
+          <p><strong>3 · Digital</strong> was already <strong>65%</strong> of the 1990s, the darkest square on the chart.</p>
         </div>
-        <div id="vis_s1_types" class="vis"></div>
-        <div class="insights grid">
-          <div class="insight film">
-            <div class="insight-label">1 · Roll film · 1910s</div>
-            <div class="insight-number">46% of the decade's cameras</div>
-            <p>Roll film was the top type in every decade from the 1900s to the 1930s. It could be loaded in daylight, so photography became a family hobby.</p>
-          </div>
-          <div class="insight film">
-            <div class="insight-label">2 · 35mm · 1960s</div>
-            <div class="insight-number">35% of the decade's cameras</div>
-            <p>The most common camera of the 1960s. 35mm film became the standard for family cameras.</p>
-          </div>
-          <div class="insight film">
-            <div class="insight-label">3 · Digital · 1990s</div>
-            <div class="insight-number">65% of the decade's cameras</div>
-            <p>The darkest square on the chart. In its first decade, digital was already two-thirds of the collection.</p>
-          </div>
-        </div>
-        <p class="how">Heatmap · Colour shows each type's share of all cameras made in that decade · Hover over a square for numbers; the numbered squares match the notes above · 2,982 cameras made in 1880–2009 (decades with at least 25 cameras) · Source: Science Museum Group Collection. Shares show what the museum holds, not how many cameras were sold.</p>
       </div>
 
-      <!-- Chart 2: flow map + year histogram (layout B: one row of text, then a full-width chart) -->
-      <div class="row-b">
-        <div class="text grid">
-          <h3 class="span-1">Where <span class="aus">Melbourne's</span> cameras came from</h3>
-          <p class="span-2">Most cameras in Museums Victoria were made overseas, first in the USA, Britain and Germany, later in Japan. Eighteen were made here, mostly by Kodak in Melbourne. Every line ends at the museum in Melbourne, and the thicker the line, the more cameras came from that country.</p>
-        </div>
-        <div id="vis_s1_flow" class="vis"></div>
-        <div class="insights grid">
-          <div class="insight film">
-            <div class="insight-label">USA · 40%</div>
-            <div class="insight-number">65 of 163 cameras</div>
-            <p>The biggest source. 38 of them were made by Kodak, whose head office was in Rochester, New York.</p>
+      <!-- Chart 2: flow map + year bar chart (full width, text above) -->
+      <div class="row-wide">
+        <div class="insight-wide grid">
+          <div class="insight span-1">
+            <h3>Where <span class="aus">Melbourne's</span> cameras came from</h3>
+            <p>Most cameras in Museums Victoria were <strong>made overseas</strong>. Every line ends at the museum in Melbourne, and the thicker the line, the more cameras came from that country.</p>
           </div>
-          <div class="insight film">
-            <div class="insight-label">Japan · after 1950</div>
-            <div class="insight-number">16 cameras, all from 1950 on</div>
-            <p>Japanese cameras only appear after the Second World War. Select 1950–1990 on the bar chart to see them.</p>
-          </div>
-          <div class="insight" style="border-color: var(--australia);">
-            <div class="insight-label aus">Made in Australia · 18</div>
-            <div class="insight-number">11 by Kodak Australasia</div>
-            <p>Kodak built cameras in Melbourne for Australian families until its Coburg plant closed in 2004.</p>
+          <div class="insight span-2">
+            <p>The <strong>USA</strong> is the biggest source, with <strong>65 of 163</strong> cameras (40%), 38 of them by Kodak. <strong>Japanese</strong> cameras only appear after 1950: drag across 1950–1990 on the bar chart to see them. <strong class="aus">18</strong> were made in Australia, <strong>11 by Kodak Australasia</strong> in Melbourne.</p>
           </div>
         </div>
-        <p class="how">Flow map with a linked bar chart · Each line runs from where cameras were made (origin) to Museums Victoria in Melbourne (destination); line width shows how many · Drag across the bar chart to filter the map by year made · Equal Earth projection, centred on the Pacific so Australia sits near the middle · 163 cameras with a known country and year · Country and year are read from the museum record, or from the object title when the record is blank · Source: Museums Victoria Collections.</p>
+        <figure class="fig">
+          <div id="vis_s1_flow" class="vis"></div>
+          <p class="how">Flow map with a linked bar chart · Lines run from where cameras were made (origin) to Museums Victoria in Melbourne (destination); line width shows how many · Drag across the bar chart to filter the map by year made · 163 cameras with a known country and year, read from the museum record or the object title · Source: Museums Victoria Collections.</p>
+        </figure>
       </div>
-
     </section>
 
-    <!-- ================= SECTION 2: THE FILM INDUSTRY COLLAPSES ================= -->
-    <section class="section" id="film-collapse">
+    <!-- ================= SECTION 2: THE FILM INDUSTRY COLLAPSES (text left, charts right) ================= -->
+    <section class="section sec-film flip" id="film-collapse">
       <div class="section-head film">
         <span class="section-num">02</span>
         <h2>The film industry collapses</h2>
       </div>
 
-      <!-- Chart 3: proportional symbol map with a year selector (layout B) -->
-      <div class="row-b">
-        <div class="text grid">
-          <h3 class="span-1">Film cameras <span class="film">almost vanished</span> in ten years</h3>
-          <p class="span-2">In 2000 the world exported US$3.6 billion of 35mm film cameras, over half from Hong Kong and China. By 2010 the trade had fallen by 96%. Choose a year under the map to watch the circles shrink inside their 2000 outlines. Australia, in red, followed the same path.</p>
-        </div>
-        <div id="vis_s2_exports" class="vis"></div>
-        <div class="insights grid">
-          <div class="insight film">
-            <div class="insight-label">2000 · US$3.6 billion</div>
-            <div class="insight-number">55% from Hong Kong and China</div>
-            <p>The last big year for film cameras. Hong Kong alone exported over US$1 billion worth.</p>
+      <!-- Chart 3: proportional symbol map (full width, text above) -->
+      <div class="row-wide">
+        <div class="insight-wide grid">
+          <div class="insight span-1">
+            <h3>Film cameras <span class="film">almost vanished</span> in ten years</h3>
+            <p>In 2000 the world exported <strong>US$3.6 billion</strong> of 35mm film cameras, <strong>55%</strong> of it from Hong Kong and China.</p>
           </div>
-          <div class="insight film">
-            <div class="insight-label">2010 · down 96%</div>
-            <div class="insight-number">US$158 million worldwide</div>
-            <p>Digital cameras took over within a decade. By 2015 exports were just US$58 million.</p>
-          </div>
-          <div class="insight" style="border-color: var(--australia);">
-            <div class="insight-label aus">Australia · down 98%</div>
-            <div class="insight-number">US$5.2m (2000) → US$0.1m (2010)</div>
-            <p>Australia's own film camera exports collapsed at the same pace, falling 98% in ten years.</p>
+          <div class="insight span-2">
+            <p>By 2010 the trade had fallen <strong>96%</strong>, to US$158 million, as digital cameras took over. Australia, in red, followed the same path: its exports fell <strong>98%</strong>, from <strong class="aus">US$5.2m</strong> to <strong class="aus">US$0.1m</strong>. Choose a year under the map to watch the circles shrink inside their 2000 outlines.</p>
           </div>
         </div>
-        <p class="how">Proportional symbol map · Circle area shows each country's exports in US$ (current prices); dashed outlines show 2000 for comparison · Choose a year below the map and hover over a circle for details · Source: UN Comtrade via World Bank WITS, HS code 900653 (cameras for 35mm roll film).</p>
+        <figure class="fig">
+          <div id="vis_s2_exports" class="vis"></div>
+          <p class="how">Proportional symbol map · Circle area shows each country's exports in US$ (current prices); dashed outlines show 2000 · Choose a year below the map and hover over a circle for details · Source: UN Comtrade via World Bank WITS, HS code 900653 (cameras for 35mm roll film).</p>
+        </figure>
       </div>
 
-      <!-- Chart 4: bump chart (layout A: text in column 1, chart in columns 2-3) -->
-      <div class="row-a grid">
-        <div class="text span-1">
-          <h3><span class="aus">Australia</span> was a top-10 film maker</h3>
-          <p>In 2000, Australia ranked 9th in the world for colour film exports, ahead of Singapore.</p>
-          <p>By 2005 it had dropped to 17th, and by 2015 to 31st, out of the top 20 altogether.</p>
-        </div>
-        <div class="span-2">
+      <!-- Chart 4: bump chart -->
+      <div class="row grid">
+        <figure class="fig span-2">
           <div id="vis_s2_bump" class="vis"></div>
           <p class="how">Bump chart · Every rank from #1 to #31 is evenly spaced · Hover over a line to highlight it · Rank by export value of colour film for 35mm cameras · Mexico stops reporting after 2010 · Source: UN Comtrade via World Bank WITS, HS code 370254.</p>
+        </figure>
+        <div class="insight span-1">
+          <h3><span class="aus">Australia</span> was a top-10 film maker</h3>
+          <p>In 2000, Australia ranked <strong class="aus">9th</strong> in the world for colour film exports, ahead of Singapore.</p>
+          <p>By 2005 it had dropped to <strong>17th</strong>, and by 2015 to <strong>31st</strong>, out of the top 20 altogether.</p>
         </div>
       </div>
 
-      <!-- Chart 5: line chart with annotation (layout A: text in column 1, chart in columns 2-3) -->
-      <div class="row-a grid">
-        <div class="text span-1">
-          <h3>Then the <span class="aus">factory closed</span></h3>
-          <p>In November 2004, Kodak shut its Coburg plant in Melbourne, which made film, photo paper and chemicals. Kodak blamed the switch to digital photography.</p>
-          <p>Australia's colour film exports fell 93% in five years, from US$74 million in 2000 to US$4.9 million in 2005.</p>
-        </div>
-        <div class="span-2">
+      <!-- Chart 5: line chart -->
+      <div class="row grid">
+        <figure class="fig span-2">
           <div id="vis_s2_aus" class="vis"></div>
-          <p class="how">Line chart · Hover over a point for the exact value · Australia's exports of colour film for 35mm cameras, US$ (current prices) · Sources: UN Comtrade via World Bank WITS, HS code 370254; Photo Review (2004) for the plant closure.</p>
+          <p class="how">Line chart · Dots show the years with data; hover over one for the exact value · Australia's exports of colour film for 35mm cameras, US$ (current prices) · Sources: UN Comtrade via World Bank WITS, HS code 370254; Photo Review (2004).</p>
+        </figure>
+        <div class="insight span-1">
+          <h3>Then the <span class="aus">factory closed</span></h3>
+          <p>In <strong>November 2004</strong>, Kodak shut its Coburg plant in Melbourne, which made film, photo paper and chemicals. Kodak blamed the switch to digital photography.</p>
+          <p>Australia's colour film exports fell <strong>93% in five years</strong>, from US$74 million in 2000 to US$4.9 million in 2005.</p>
         </div>
       </div>
     </section>
 
-    <!-- ================= SECTION 3: THE DIGITAL BOOM ================= -->
-    <section class="section" id="digital-boom">
+    <!-- ================= SECTION 3: THE DIGITAL BOOM (charts left, text right) ================= -->
+    <section class="section sec-digital" id="digital-boom">
       <div class="section-head digital">
         <span class="section-num">03</span>
         <h2>The digital boom</h2>
       </div>
 
-      <!-- Chart 6: brand x year heatmap with a linked bar chart (layout B) -->
-      <div class="row-b">
-        <div class="text grid">
-          <h3 class="span-1">A flood of <span class="digital">new cameras</span>, then a drought</h3>
-          <p class="span-2">Digital cameras needed no film, and every photo could be checked straight away. Camera makers raced to release new models every year, and two-thirds of all models came out between 2004 and 2012. After 2010, the flood slowed to a trickle.</p>
-        </div>
-        <div id="vis_s3_brands" class="vis"></div>
-        <div class="insights grid">
-          <div class="insight digital">
-            <div class="insight-label">2010 · the peak</div>
-            <div class="insight-number">340 new models in one year</div>
-            <p>Almost one new camera every day. 2,575 of the 3,860 models came out in 2004–2012.</p>
-          </div>
-          <div class="insight digital">
-            <div class="insight-label">Fujifilm · 62 models</div>
-            <div class="insight-number">The busiest square, in 2010</div>
-            <p>A new Fujifilm model about every six days. Samsung released 48 that same year.</p>
-          </div>
-          <div class="insight digital">
-            <div class="insight-label">2015 · down 79%</div>
-            <div class="insight-number">Only 70 new models</div>
-            <p>Kodak and Casio released their last models in 2014, Samsung in 2015. Seven of these 15 brands have none after 2015.</p>
-          </div>
-        </div>
-        <p class="how">Heatmap with a linked bar chart · Hover over a brand's row to show its models in the bar chart above · The 15 brands with the most models (85% of all models) · Source: CameraDatabase (leavestylecode, GitHub), 3,860 digital camera models, 1994–2025.</p>
-      </div>
-      
-      <!-- Chart 7: box plots with overview + detail (layout A: text in column 1, chart in columns 2-3) -->
-      <div class="row-a grid">
-        <div class="text span-1">
-          <h3>The <span class="digital">megapixel race</span></h3>
-          <p>Every year, new cameras packed more pixels onto their sensors. The typical new model had 2 megapixels in 2000, 12 in 2010 and 24 by 2019.</p>
-          <p>Then the race stalled. Since 2017, most new cameras have had about 20 to 26 megapixels.</p>
-        </div>
-        <div class="span-2">
-          <div id="vis_s3_mp" class="vis"></div>
-          <p class="how">Box plots with overview and detail · Drag across the small chart to zoom into those years; double-click to reset · Each box shows the middle half of that year's models, and the pale line is the median · Source: CameraDatabase.</p>
-        </div>
-      </div>
-      
-      <!-- Chart 8: Gantt chart of brand lifespans (layout B: one row of text, then a full-width chart) -->
-      <div class="row-b">
-        <div class="text grid">
-          <h3 class="span-1">Big names <span class="digital">left the market</span></h3>
-          <p class="span-2">Twenty-two brands released at least 40 digital camera models. Thirteen of them have stopped, and every one of those had released its last model by 2015, within eight years of the first iPhone. Most brands had their busiest year around 2010, just before the fall.</p>
-        </div>
-        <div id="vis_s3_gantt" class="vis"></div>
-        <div class="insights grid">
-          <div class="insight digital">
-            <div class="insight-label">13 of 22 · gone by 2015</div>
-            <div class="insight-number">No brand quit after 2015</div>
-            <p>Household names such as HP, Kodak, Casio and Samsung released their last models between 2010 and 2015.</p>
-          </div>
-          <div class="insight digital">
-            <div class="insight-label">Kodak · 1994–2014</div>
-            <div class="insight-number">207 models in 21 years</div>
-            <p>The oldest brand in the database. Its busiest year was 2009, only five years before its last model.</p>
-          </div>
-          <div class="insight digital">
-            <div class="insight-label">9 still going</div>
-            <div class="insight-number">8 of them from Japan</div>
-            <p>The survivors are mostly camera and lens makers, such as Canon, Nikon and Fujifilm, plus Sony and Panasonic.</p>
-          </div>
-        </div>
-        <p class="how">Gantt chart · Each bar runs from a brand's first to last new model; the black dot marks its busiest year · Hover over a bar for details · Brands with at least 40 models (94% of all models) · Source: CameraDatabase.</p>
-      </div>
-      <!-- Chart 9: density plot of camera weight by era (layout A) -->
-      <div class="row-a grid">
-        <div class="text span-1">
-          <h3>Small cameras <span class="digital">disappeared first</span></h3>
-          <p>During the boom, new cameras got lighter. The typical model of 2005–2012 weighed 150 g, small enough for a pocket.</p>
-          <p>After 2012 that peak of small cameras flattened out. The typical new model now weighs 370 g, two and a half times as much, because the cameras still being made are bigger ones.</p>
-        </div>
-        <div class="span-2">
-          <div id="vis_s3_weight" class="vis"></div>
-          <p class="how">Density plot · Each curve shows how the models of one era spread across weights; the dashed lines mark each era's median · Hover over a dashed line for details · 3,711 models with a listed weight · Source: CameraDatabase.</p>
+      <!-- Chart 6: brand x year heatmap with a linked bar chart -->
+      <div class="row grid">
+        <figure class="fig span-2">
+          <div id="vis_s3_brands" class="vis"></div>
+          <p class="how">Heatmap with a linked bar chart · Hover over a brand's row to show its models in the bar chart above · The 15 brands with the most models (85% of all models) · Source: CameraDatabase (leavestylecode, GitHub), 3,860 models, 1994–2025.</p>
+        </figure>
+        <div class="insight span-1">
+          <h3>A flood of <span class="digital">new cameras</span>, then a drought</h3>
+          <p>Digital cameras needed no film, and makers raced to release new models. <strong>2,575 of the 3,860</strong> models came out in 2004–2012.</p>
+          <p>The peak was <strong>2010</strong>, with <strong>340</strong> new models, almost one a day. <strong>Fujifilm</strong> alone released <strong>62</strong> that year (outlined).</p>
+          <p>By 2015 there were only <strong>70</strong>, down 79%.</p>
         </div>
       </div>
 
-      <!-- Chart 10: 100% stacked bar chart of sensor type (layout A) -->
-      <div class="row-a grid">
-        <div class="text span-1">
-          <h3>A new kind of <span class="digital">image sensor</span></h3>
-          <p>Early digital cameras used CCD sensors. CMOS sensors use less power and became cheaper to make, and from 2011 they took over quickly.</p>
-          <p>CMOS passed half of all new models in 2012. Since 2017, every new model in the database uses one.</p>
+      <!-- Chart 7: box plots with overview + detail -->
+      <div class="row grid">
+        <figure class="fig span-2">
+          <div id="vis_s3_mp" class="vis"></div>
+          <p class="how">Box plots with overview and detail · Drag across the small chart to zoom into those years; double-click to reset · Source: CameraDatabase.</p>
+        </figure>
+        <div class="insight span-1">
+          <h3>The <span class="digital">megapixel race</span></h3>
+          <p>Every year, new cameras packed more pixels onto their sensors. The typical new model had <strong>2 megapixels</strong> in 2000, <strong>12</strong> in 2010 and <strong>24</strong> by 2019.</p>
+          <p>Then the race <strong>stalled</strong>. Since 2017, most new cameras have had about 20 to 26 megapixels.</p>
         </div>
-        <div class="span-2">
+      </div>
+
+      <!-- Chart 8: Gantt chart of brand lifespans -->
+      <div class="row grid">
+        <figure class="fig span-2">
+          <div id="vis_s3_gantt" class="vis"></div>
+          <p class="how">Gantt chart · Each bar runs from a brand's first to last new model; the black dot marks its busiest year · Hover over a bar for details · Brands with at least 40 models (94% of all models) · Source: CameraDatabase.</p>
+        </figure>
+        <div class="insight span-1">
+          <h3>Big names <span class="digital">left the market</span></h3>
+          <p>Of the 22 brands with at least 40 models, <strong>13 have stopped</strong>, and every one released its last model by <strong>2015</strong>.</p>
+          <p><strong>Kodak</strong>, the oldest brand here, made 207 models from 1994 to 2014. Its busiest year was 2009.</p>
+          <p>The <strong>9 still going</strong> are mostly camera and lens makers, and 8 of them are Japanese.</p>
+        </div>
+      </div>
+
+      <!-- Chart 9: density plot of camera weight by era -->
+      <div class="row grid">
+        <figure class="fig span-2">
+          <div id="vis_s3_weight" class="vis"></div>
+          <p class="how">Density plot · Each curve shows how one era's models spread across weights; dashed lines mark each era's median · Hover over a dashed line for details · 3,711 models with a listed weight · Source: CameraDatabase.</p>
+        </figure>
+        <div class="insight span-1">
+          <h3>Small cameras <span class="digital">disappeared first</span></h3>
+          <p>During the boom, cameras got lighter. The typical 2005–2012 model weighed <strong>150 g</strong>, small enough for a pocket.</p>
+          <p>After 2012 that peak of small cameras flattened out. The typical new model now weighs <strong>370 g</strong>, about two and a half times as much.</p>
+        </div>
+      </div>
+
+      <!-- Chart 10: 100% stacked bar chart of sensor type -->
+      <div class="row grid">
+        <figure class="fig span-2">
           <div id="vis_s3_sensor" class="vis"></div>
           <p class="how">100% stacked bar chart · Each bar is one year's new models, split by sensor type · Hover over a bar for numbers · Source: CameraDatabase.</p>
+        </figure>
+        <div class="insight span-1">
+          <h3>A new kind of <span class="digital">image sensor</span></h3>
+          <p>Early digital cameras used <strong>CCD</strong> sensors. <strong>CMOS</strong> sensors use less power and became cheaper to make, and from 2011 they took over quickly.</p>
+          <p>CMOS passed half of all new models in <strong>2012</strong>. Since 2017, <strong>every</strong> new model in the database uses one.</p>
         </div>
       </div>
     </section>
-    <!-- ================= SECTION 4: THE PHONE TAKES OVER ================= -->
-    <section class="section" id="phone-era">
+
+    <!-- ================= SECTION 4: THE PHONE TAKES OVER (text left, charts right) ================= -->
+    <section class="section sec-phone flip" id="phone-era">
       <div class="section-head phone">
         <span class="section-num">04</span>
         <h2>The phone takes over</h2>
       </div>
 
-      <!-- Chart 11: phone subscriptions vs camera models, two aligned charts (layout B) -->
-      <div class="row-b">
-        <div class="text grid">
-          <h3 class="span-1"><span class="phone">Phones</span> arrived as cameras peaked</h3>
-          <p class="span-2">Australians signed up for mobile phones fast. By 2007 there were more mobile subscriptions than people, the same year the first iPhone was released. Camera makers kept growing for three more years, then new models fell away while landlines halved.</p>
+      <!-- Chart 11: phone subscriptions vs camera models -->
+      <div class="row grid">
+        <figure class="fig span-2">
+          <div id="vis_s4_phones" class="vis"></div>
+          <p class="how">Line chart and bar chart on the same years · Hover over the top chart to highlight that year in both · Top: Australia's subscriptions per 100 people (ITU via Our World in Data) · Bottom: new digital camera models worldwide (CameraDatabase).</p>
+        </figure>
+        <div class="insight span-1">
+          <h3><span class="phone">Phones</span> arrived as cameras peaked</h3>
+          <p>Australians signed up for mobiles fast: <strong>45</strong> subscriptions per 100 people in 2000, <strong>101</strong> by 2007, more than one each.</p>
+          <p>Camera makers kept growing for three more years, to the <strong>2010</strong> peak. Then new models fell away, and landlines dropped from <strong>53 to 22</strong> per 100.</p>
         </div>
-        <div id="vis_s4_phones" class="vis"></div>
-        <div class="insights grid">
-          <div class="insight phone">
-            <div class="insight-label">2007 · 101 per 100</div>
-            <div class="insight-number">More mobiles than Australians</div>
-            <p>Up from 45 per 100 in 2000. By 2024 there were 113 mobile subscriptions for every 100 people.</p>
-          </div>
-          <div class="insight digital">
-            <div class="insight-label">2010 · 340 models</div>
-            <div class="insight-number">The camera peak came later</div>
-            <p>Three years after phones passed one per person, camera makers released the most new models. By 2015 it was 70.</p>
-          </div>
-          <div class="insight" style="border-color: var(--context);">
-            <div class="insight-label">Landlines · 53 → 22</div>
-            <div class="insight-number">Per 100 people, 2002 to 2024</div>
-            <p>The home phone faded too. Phones that can call, browse and take photos replaced several older devices.</p>
-          </div>
-        </div>
-        <p class="how">Line chart and bar chart on the same years · Hover over the top chart to highlight that year in both · Top: Australia's subscriptions per 100 people (ITU via Our World in Data) · Bottom: new digital camera models worldwide (CameraDatabase).</p>
       </div>
 
-      <!-- Chart 12: choropleth map with a year selector (layout B) -->
-      <div class="row-b">
-        <div class="text grid">
-          <h3 class="span-1">Almost everyone <span class="phone">carries a phone</span></h3>
-          <p class="span-2">The map shows the share of people who own a mobile phone, not the number of phones, so countries of every size can be compared fairly. Most of the world is now dark. The lightest countries are in Central and East Africa, where fewer than half of people own one.</p>
-        </div>
-        <div id="vis_s4_map" class="vis"></div>
-        <div class="insights grid">
-          <div class="insight" style="border-color: var(--australia);">
-            <div class="insight-label aus">Australia · 97.5%</div>
-            <div class="insight-number">28th of 185 countries with data, 2024</div>
-            <p>Phone ownership in Australia has stayed between 94% and 98% every year since 2019.</p>
+      <!-- Chart 12: choropleth map (full width, text above) -->
+      <div class="row-wide">
+        <div class="insight-wide grid">
+          <div class="insight span-1">
+            <h3>Almost everyone <span class="phone">carries a phone</span></h3>
+            <p>The map shades each country by the <strong>share of people</strong> who own a mobile phone, so countries of every size can be compared fairly. Worldwide it is <strong>82%</strong>.</p>
           </div>
-          <div class="insight phone">
-            <div class="insight-label">World · 82%</div>
-            <div class="insight-number">Four in five people, 2024</div>
-            <p>In Bahrain, Saudi Arabia and the United Arab Emirates, the figure is 100%.</p>
-          </div>
-          <div class="insight phone">
-            <div class="insight-label">Burundi · 28%</div>
-            <div class="insight-number">The lowest in 2024</div>
-            <p>In the least developed countries as a group, 63% of people own a mobile phone.</p>
+          <div class="insight span-2">
+            <p><strong class="aus">Australia</strong> is at <strong class="aus">97.5%</strong>, 28th of 185 countries, and has stayed between 94% and 98% since 2019. The lightest countries are in Central and East Africa: <strong>Burundi</strong> is lowest at <strong>28%</strong>, and in the least developed countries as a group it is 63%.</p>
           </div>
         </div>
-        <p class="how">Choropleth map · Shade shows the share of people who own a mobile phone with an active SIM card · Choose a year below the map and hover over a country for details · Countries with no data are light beige · Source: International Telecommunication Union (ITU) via Our World in Data.</p>
+        <figure class="fig">
+          <div id="vis_s4_map" class="vis"></div>
+          <p class="how">Choropleth map · Shade shows the share of people who own a mobile phone with an active SIM card · Choose a year below the map and hover over a country for details · Light beige means no data · Source: International Telecommunication Union (ITU) via Our World in Data.</p>
+        </figure>
       </div>
 
-      <!-- Chart 13: waffle charts (layout A: text in column 1, chart in columns 2-3) -->
-      <div class="row-a grid">
-        <div class="text span-1">
-          <h3>A camera in <span class="aus">almost every Australian pocket</span></h3>
-          <p>Out of every 100 Australians, 98 own a mobile phone. Worldwide it is 82, and in the least developed countries 63.</p>
-          <p>Almost every phone is also a camera, so most Australians now carry one everywhere they go.</p>
-        </div>
-        <div class="span-2">
+      <!-- Chart 13: waffle charts -->
+      <div class="row grid">
+        <figure class="fig span-2">
           <div id="vis_s4_waffle" class="vis"></div>
           <p class="how">Waffle charts · Each square is one person out of 100 · Hover over a square for the exact share · 2024 · Source: ITU via Our World in Data.</p>
+        </figure>
+        <div class="insight span-1">
+          <h3>A camera in <span class="aus">almost every Australian pocket</span></h3>
+          <p>Out of every 100 Australians, <strong class="aus">98</strong> own a mobile phone. Worldwide it is <strong>82</strong>, and in the least developed countries <strong>63</strong>.</p>
+          <p>Almost every phone is also a camera, so most Australians now carry one <strong>everywhere they go</strong>.</p>
         </div>
       </div>
 
-      <!-- Conclusion (layout B text row) -->
-      <div class="row-b conclusion">
-        <div class="text grid">
-          <h3 class="span-1">What it meant for <span class="aus">Australia</span></h3>
-          <p class="span-2">For a century, Australians bought cameras made overseas and film made in Melbourne. When digital arrived, Kodak's Coburg plant closed and the country's film exports fell 93% in five years. Digital cameras boomed and then faded within a decade. Today the camera most Australians use is the phone in their pocket.</p>
+      <!-- Conclusion -->
+      <div class="conclusion grid">
+        <h3 class="span-1">What it meant for <span class="aus">Australia</span></h3>
+        <div class="span-2">
+          <p>For a century, Australians bought cameras made overseas and <strong>film made in Melbourne</strong>. When digital arrived, Kodak's Coburg plant closed and the country's film exports fell <strong>93% in five years</strong>.</p>
+          <p>Digital cameras <strong>boomed and faded</strong> within a decade. Today the camera most Australians use is <strong>the phone in their pocket</strong>.</p>
         </div>
       </div>
     </section>

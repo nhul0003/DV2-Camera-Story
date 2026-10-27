@@ -1,7 +1,7 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
   "description": "Gantt chart: years in which each brand with at least 40 digital camera models released new models, 1994-2025.",
-  "width": 885,
+  "width": 500,
   "height": 440,
   "data": {"url": "data/cameras.csv", "format": {"parse": {"year": "number"}}},
   "transform": [
@@ -40,7 +40,7 @@
       "encoding": {"x": {"field": "year", "type": "quantitative", "scale": {"domain": [1994, 2026], "nice": false}}}
     },
     {
-      "data": {"values": [{"year": 2007, "label": "2007: the first iPhone"}]},
+      "data": {"values": [{"year": 2007, "label": "2007: first iPhone"}]},
       "mark": {
         "type": "text",
         "y": -10,
@@ -57,7 +57,7 @@
       }
     },
     {
-      "data": {"values": [{"year": 2010, "label": "2010: most new models"}]},
+      "data": {"values": [{"year": 2010, "label": "2010: peak"}]},
       "mark": {
         "type": "text",
         "y": -10,
