@@ -110,7 +110,17 @@ h1 { font-weight: 700; font-size: clamp(48px, 7vw, 76px); line-height: 1.02; let
 .flip .row .insight { order: -1; }
 .fig { margin: 0; min-width: 0; }
 
-/* Full-width charts (the three maps): centred intro above, chart below */
+/* Full-width charts (the three maps): intro above, chart below.
+   The intro uses all three columns: headline across the top, the story in two short
+   paragraphs (columns 1 and 2), and one key number in column 3. */
+.interlude-wide { margin-bottom: var(--s3); }
+.interlude-wide .grid { align-items: start; }
+.interlude-wide p { max-width: none; font-size: 18px; }
+.keynum { border-left: 3px solid var(--sec); padding-left: var(--s2); }
+.keynum.aus { border-color: var(--australia); }
+.keynum b { display: block; font-family: var(--serif); font-size: 48px; line-height: 1; color: var(--sec); }
+.keynum.aus b { color: var(--australia); }
+.keynum span { display: block; margin-top: var(--s1); font-size: 16px; line-height: 1.45; color: var(--ink-soft); max-width: 16em; }
 .row-wide { margin-bottom: var(--s4); }
 
 /* Analysis text: headline states the finding, key words and numbers in bold */
@@ -286,6 +296,7 @@ footer .span-2 strong { column-span: all; }
   .key { margin-top: var(--s3); grid-column: 1 / -1; grid-row: auto; }
   footer .span-2 { columns: 1; }
   .timeline { margin-top: var(--s3); }
+  .interlude-wide p, .keynum { margin-bottom: var(--s2); }
   .section-head h2 { font-size: 36px; }
   .section-num { font-size: 48px; }
 }
