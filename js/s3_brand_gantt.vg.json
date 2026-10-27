@@ -123,8 +123,10 @@
           "title": null,
           "sort": {"field": "order", "op": "min", "order": "ascending"},
           "axis": {"minExtent": 100, "labelLimit": 160, "labelPadding": 8, "labelFontSize": 13}
-        }
-      }
+        },
+        "opacity": {"condition": {"param": "status_pick", "empty": true, "value": 1}, "value": 0.15}
+      },
+      "params": [{"name": "status_pick", "select": {"type": "point", "fields": ["status"]}, "bind": "legend"}]
     },
     {
       "mark": {"type": "circle", "size": 40, "color": "#1F1F1F", "stroke": "#FAF8F3", "strokeWidth": 1.5},
@@ -146,7 +148,8 @@
           "title": null,
           "sort": {"field": "order", "op": "min", "order": "ascending"},
           "axis": {"minExtent": 100, "labelLimit": 160, "labelPadding": 8, "labelFontSize": 13}
-        }
+        },
+        "opacity": {"condition": {"param": "status_pick", "empty": true, "value": 1}, "value": 0.15}
       }
     },
     {
@@ -170,7 +173,8 @@
           "title": null,
           "sort": {"field": "order", "op": "min", "order": "ascending"},
           "axis": {"minExtent": 100, "labelLimit": 160, "labelPadding": 8, "labelFontSize": 13}
-        }
+        },
+        "opacity": {"condition": {"param": "status_pick", "empty": true, "value": 1}, "value": 0.15}
       }
     },
     {
@@ -184,7 +188,8 @@
           "title": null,
           "sort": {"field": "order", "op": "min", "order": "ascending"},
           "axis": {"minExtent": 100, "labelLimit": 160, "labelPadding": 8, "labelFontSize": 13}
-        }
+        },
+        "opacity": {"condition": {"param": "status_pick", "empty": true, "value": 1}, "value": 0.15}
       }
     }
   ],

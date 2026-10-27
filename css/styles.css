@@ -138,6 +138,7 @@ h1 { font-weight: 700; font-size: clamp(48px, 7vw, 76px); line-height: 1.02; let
 .vega-bind-name { font-weight: 600; margin-right: 8px; }
 .vega-bind label { margin-right: 12px; cursor: pointer; }
 .vega-bind input[type="radio"] { accent-color: var(--ink); cursor: pointer; }
+.vega-bind select { font: inherit; color: var(--ink); padding: 4px 8px; border: 1.5px solid var(--rule); border-radius: 6px; background: #FFFFFF; cursor: pointer; }
 
 /* Section links under the intro: outlined buttons, so they read as clickable */
 .chapters { display: flex; flex-wrap: wrap; align-items: center; gap: var(--s1); padding: var(--s2) 0 0; border-top: 1px solid var(--rule); margin-top: var(--s3); font-size: 15px; }

@@ -52,7 +52,8 @@
             "range": ["#9CCDD2", "#1B7F8C", "#0B3F46"]
           },
           "legend": null
-        }
+        },
+        "opacity": {"condition": {"param": "era_pick", "empty": true, "value": 0.28}, "value": 0.03}
       }
     },
     {
@@ -87,8 +88,10 @@
             "labelExpr": "datum.label + (indexof(datum.label, '1994') == 0 ? ' · 230 g' : indexof(datum.label, '2005') == 0 ? ' · 150 g' : ' · 370 g')",
             "titleLimit": 300
           }
-        }
-      }
+        },
+        "opacity": {"condition": {"param": "era_pick", "empty": true, "value": 1}, "value": 0.12}
+      },
+      "params": [{"name": "era_pick", "select": {"type": "point", "fields": ["era"]}, "bind": "legend"}]
     },
     {
       "transform": [
@@ -113,7 +116,8 @@
           {"field": "era", "title": "Era"},
           {"field": "med", "type": "quantitative", "title": "Median weight (g)"},
           {"field": "n", "type": "quantitative", "title": "Models with a weight", "format": ","}
-        ]
+        ],
+        "opacity": {"condition": {"param": "era_pick", "empty": true, "value": 1}, "value": 0.12}
       }
     }
   ],

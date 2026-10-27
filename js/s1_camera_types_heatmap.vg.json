@@ -89,8 +89,10 @@
           {"field": "decade_label", "type": "nominal", "title": "Decade made"},
           {"field": "cameras", "type": "quantitative", "title": "Cameras"},
           {"field": "share", "type": "quantitative", "title": "Share of decade", "format": ".0%"}
-        ]
-      }
+        ],
+        "opacity": {"condition": {"param": "band_pick", "empty": true, "value": 1}, "value": 0.15}
+      },
+      "params": [{"name": "band_pick", "select": {"type": "point", "fields": ["band"]}, "bind": "legend"}]
     },
     {
       "mark": {"type": "rect", "fill": "transparent", "stroke": "#1F1F1F", "strokeWidth": 2, "cornerRadius": 3},

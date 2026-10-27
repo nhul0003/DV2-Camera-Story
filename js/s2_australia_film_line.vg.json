@@ -16,7 +16,7 @@
   "layer": [
     {
       "data": {"values": [{"year": 2004.87}]},
-      "mark": {"type": "rule", "color": "#1F1F1F", "strokeDash": [4, 4], "strokeWidth": 1.5},
+      "mark": {"type": "rule", "color": "#1F1F1F", "strokeDash": [4, 4], "strokeWidth": 1.5, "clip": true},
       "encoding": {"x": {"field": "year", "type": "quantitative", "scale": {"domain": [2000, 2023], "nice": false}}}
     },
     {
@@ -30,19 +30,28 @@
       "mark": {"type": "text", "align": "left", "fontSize": 14, "fontWeight": 600, "color": "#1F1F1F"},
       "encoding": {
         "x": {"field": "year", "type": "quantitative", "scale": {"domain": [2000, 2023], "nice": false}},
-        "y": {"field": "y", "type": "quantitative", "scale": {"domain": [0, 80]}},
+        "y": {
+          "field": "y",
+          "type": "quantitative",
+          "scale": {"domainMin": 0, "domainMax": {"expr": "y_max"}, "nice": false}
+        },
         "text": {"field": "text"}
-      }
+      },
+      "transform": [{"filter": "y_max == 80"}]
     },
     {
-      "mark": {"type": "area", "color": "#C23B22", "opacity": 0.08, "interpolate": "monotone"},
+      "mark": {"type": "area", "color": "#C23B22", "opacity": 0.08, "interpolate": "monotone", "clip": true},
       "encoding": {
         "x": {"field": "Year", "type": "quantitative", "scale": {"domain": [2000, 2023], "nice": false}},
-        "y": {"field": "exports", "type": "quantitative", "scale": {"domain": [0, 80]}}
+        "y": {
+          "field": "exports",
+          "type": "quantitative",
+          "scale": {"domainMin": 0, "domainMax": {"expr": "y_max"}, "nice": false}
+        }
       }
     },
     {
-      "mark": {"type": "line", "color": "#C23B22", "strokeWidth": 3.5, "interpolate": "monotone"},
+      "mark": {"type": "line", "color": "#C23B22", "strokeWidth": 3.5, "interpolate": "monotone", "clip": true},
       "encoding": {
         "x": {
           "field": "Year",
@@ -61,13 +70,13 @@
           "field": "exports",
           "type": "quantitative",
           "title": "Exports (US$ million)",
-          "scale": {"domain": [0, 80]},
+          "scale": {"domainMin": 0, "domainMax": {"expr": "y_max"}, "nice": false},
           "axis": {
-            "values": [0, 20, 40, 60, 80],
             "grid": true,
             "gridColor": "#ECE8DF",
             "titleFontWeight": 600,
-            "titleColor": "#6B6B6B"
+            "titleColor": "#6B6B6B",
+            "tickCount": 4
           }
         },
         "color": {
@@ -94,11 +103,16 @@
         "size": 80,
         "stroke": "#FAF8F3",
         "strokeWidth": 1.5,
-        "opacity": 1
+        "opacity": 1,
+        "clip": true
       },
       "encoding": {
         "x": {"field": "Year", "type": "quantitative", "scale": {"domain": [2000, 2023], "nice": false}},
-        "y": {"field": "exports", "type": "quantitative", "scale": {"domain": [0, 80]}},
+        "y": {
+          "field": "exports",
+          "type": "quantitative",
+          "scale": {"domainMin": 0, "domainMax": {"expr": "y_max"}, "nice": false}
+        },
         "tooltip": [
           {"field": "Year", "type": "ordinal", "title": "Year"},
           {"field": "value_label", "type": "nominal", "title": "Colour film exports"}
@@ -106,7 +120,7 @@
       }
     },
     {
-      "transform": [{"filter": "datum.Year == 2000 || datum.Year == 2005"}],
+      "transform": [{"filter": "datum.Year == 2000 || datum.Year == 2005"}, {"filter": "datum.exports <= y_max"}],
       "mark": {
         "type": "text",
         "align": "left",
@@ -118,16 +132,24 @@
       },
       "encoding": {
         "x": {"field": "Year", "type": "quantitative", "scale": {"domain": [2000, 2023], "nice": false}},
-        "y": {"field": "exports", "type": "quantitative", "scale": {"domain": [0, 80]}},
+        "y": {
+          "field": "exports",
+          "type": "quantitative",
+          "scale": {"domainMin": 0, "domainMax": {"expr": "y_max"}, "nice": false}
+        },
         "text": {"field": "value_label"}
       }
     },
     {
-      "transform": [{"filter": "datum.Year > 2005"}],
+      "transform": [{"filter": "datum.Year > 2005"}, {"filter": "datum.exports <= y_max"}],
       "mark": {"type": "text", "align": "center", "dy": -14, "fontSize": 12, "fontWeight": 600, "color": "#C23B22"},
       "encoding": {
         "x": {"field": "Year", "type": "quantitative", "scale": {"domain": [2000, 2023], "nice": false}},
-        "y": {"field": "exports", "type": "quantitative", "scale": {"domain": [0, 80]}},
+        "y": {
+          "field": "exports",
+          "type": "quantitative",
+          "scale": {"domainMin": 0, "domainMax": {"expr": "y_max"}, "nice": false}
+        },
         "text": {"field": "value_label"}
       }
     }
@@ -149,5 +171,17 @@
       "subtitlePadding": 4,
       "offset": 14
     }
-  }
+  },
+  "params": [
+    {
+      "name": "y_max",
+      "value": 80,
+      "bind": {
+        "input": "radio",
+        "options": [80, 5, 0.3],
+        "labels": ["Whole range (up to US$80m)", "Zoom to US$5m", "Zoom to US$0.3m"],
+        "name": "Y-axis: "
+      }
+    }
+  ]
 }

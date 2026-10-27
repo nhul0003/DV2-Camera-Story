@@ -1,17 +1,18 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-  "description": "Waffle charts: out of every 100 people, how many own a mobile phone in 2024, in Australia, the world, and the least developed countries.",
+  "description": "Waffle charts: out of every 100 people, how many own a mobile phone in 2024, in Australia, the world, and a place the reader chooses.",
   "title": {"text": "Who owns a mobile phone, out of every 100 people", "subtitle": "2024"},
   "data": {"url": "data/share-population-mobile-phone.csv"},
   "transform": [
     {"calculate": "toNumber(datum['Proportion of individuals who own a mobile telephone'])", "as": "own"},
     {
-      "filter": "datum.Year == 2024 && (datum.Entity == 'Australia' || datum.Entity == 'World' || datum.Entity == 'Least Developed Countries (LDCs)')"
+      "filter": "datum.Year == 2024 && (datum.Entity == 'Australia' || datum.Entity == 'World' || datum.Entity == compare)"
     },
     {
-      "calculate": "datum.Entity == 'Australia' ? 'Australia' : datum.Entity == 'World' ? 'World' : 'Least developed countries'",
+      "calculate": "datum.Entity == 'Least Developed Countries (LDCs)' ? 'Least developed countries' : datum.Entity",
       "as": "place"
     },
+    {"calculate": "datum.Entity == 'Australia' ? 0 : datum.Entity == 'World' ? 1 : 2", "as": "ord"},
     {"calculate": "round(datum.own)", "as": "people"},
     {"calculate": "sequence(0, 100)", "as": "cell"},
     {"flatten": ["cell"]},
@@ -24,7 +25,7 @@
     "column": {
       "field": "place",
       "type": "nominal",
-      "sort": ["Australia", "World", "Least developed countries"],
+      "sort": {"field": "ord", "op": "min"},
       "header": {
         "title": null,
         "labelFontSize": 15,
@@ -118,5 +119,49 @@
       "offset": 14
     }
   },
-  "padding": {"left": 0, "right": 8, "top": 5, "bottom": 30}
+  "padding": {"left": 0, "right": 8, "top": 5, "bottom": 30},
+  "params": [
+    {
+      "name": "compare",
+      "value": "Least Developed Countries (LDCs)",
+      "bind": {
+        "input": "select",
+        "options": [
+          "Least Developed Countries (LDCs)",
+          "Burundi",
+          "Papua New Guinea",
+          "Indonesia",
+          "India",
+          "Philippines",
+          "Fiji",
+          "Brazil",
+          "China",
+          "Japan",
+          "New Zealand",
+          "United Kingdom",
+          "United States",
+          "Malaysia",
+          "Singapore"
+        ],
+        "labels": [
+          "Least developed countries",
+          "Burundi",
+          "Papua New Guinea",
+          "Indonesia",
+          "India",
+          "Philippines",
+          "Fiji",
+          "Brazil",
+          "China",
+          "Japan",
+          "New Zealand",
+          "United Kingdom",
+          "United States",
+          "Malaysia",
+          "Singapore"
+        ],
+        "name": "Compare with: "
+      }
+    }
+  ]
 }

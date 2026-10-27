@@ -59,8 +59,10 @@
           {"field": "sensor", "title": "Sensor"},
           {"field": "models", "type": "quantitative", "title": "Models"},
           {"field": "share", "type": "quantitative", "title": "Share of the year", "format": ".0%"}
-        ]
-      }
+        ],
+        "opacity": {"condition": {"param": "sensor_pick", "empty": true, "value": 1}, "value": 0.2}
+      },
+      "params": [{"name": "sensor_pick", "select": {"type": "point", "fields": ["sensor"]}, "bind": "legend"}]
     },
     {
       "data": {"values": [{"y": 0.5}]},
