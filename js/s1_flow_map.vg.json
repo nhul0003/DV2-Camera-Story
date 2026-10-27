@@ -257,28 +257,28 @@
         {
           "data": {
             "values": [
-              {"k": "o", "y": 404, "t": "Origin: where the cameras were made"},
-              {"k": "a", "y": 423, "t": "Made in Australia"},
-              {"k": "d", "y": 442, "t": "Destination: Museums Victoria, Melbourne"},
-              {"k": "l", "y": 461, "t": "Line width: number of cameras"}
+              {"k": "o", "y": 408, "t": "Origin: where the cameras were made"},
+              {"k": "a", "y": 427, "t": "Made in Australia"},
+              {"k": "d", "y": 446, "t": "Destination: Museums Victoria, Melbourne"},
+              {"k": "l", "y": 465, "t": "Line width: number of cameras"}
             ]
           },
           "layer": [
             {
               "transform": [{"filter": "datum.k == 'o'"}],
-              "mark": {"type": "circle", "x": 407, "size": 110, "color": "#C8862A", "opacity": 0.9},
+              "mark": {"type": "circle", "x": 735, "size": 110, "color": "#C8862A", "opacity": 0.9},
               "encoding": {"y": {"field": "y", "type": "quantitative", "scale": null}}
             },
             {
               "transform": [{"filter": "datum.k == 'a'"}],
-              "mark": {"type": "circle", "x": 407, "size": 110, "color": "#C23B22"},
+              "mark": {"type": "circle", "x": 735, "size": 110, "color": "#C23B22"},
               "encoding": {"y": {"field": "y", "type": "quantitative", "scale": null}}
             },
             {
               "transform": [{"filter": "datum.k == 'd'"}],
               "mark": {
                 "type": "point",
-                "x": 407,
+                "x": 735,
                 "size": 150,
                 "filled": false,
                 "stroke": "#1F1F1F",
@@ -288,13 +288,13 @@
             },
             {
               "transform": [{"filter": "datum.k == 'l'"}],
-              "mark": {"type": "rule", "x": 400, "x2": 416, "color": "#C8862A", "strokeWidth": 4, "opacity": 0.6},
+              "mark": {"type": "rule", "x": 728, "x2": 744, "color": "#C8862A", "strokeWidth": 4, "opacity": 0.6},
               "encoding": {"y": {"field": "y", "type": "quantitative", "scale": null}}
             },
             {
               "mark": {
                 "type": "text",
-                "x": 424,
+                "x": 752,
                 "align": "left",
                 "baseline": "middle",
                 "fontSize": 13,
