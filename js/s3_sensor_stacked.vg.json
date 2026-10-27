@@ -2,7 +2,7 @@
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
   "description": "100% stacked bar chart: share of new digital camera models with a CCD or a CMOS image sensor, 1994-2025.",
   "width": 633,
-  "height": 280,
+  "height": 250,
   "data": {"url": "data/cameras.csv", "format": {"parse": {"year": "number"}}},
   "transform": [
     {

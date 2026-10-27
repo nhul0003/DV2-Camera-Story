@@ -99,7 +99,7 @@
     },
     {
       "width": 600,
-      "height": 360,
+      "height": 320,
       "transform": [
         {"joinaggregate": [{"op": "count", "as": "year_total"}], "groupby": ["year"]},
         {"joinaggregate": [{"op": "count", "as": "brand_total"}], "groupby": ["brand"]},

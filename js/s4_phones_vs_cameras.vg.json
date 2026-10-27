@@ -6,7 +6,7 @@
     {
       "name": "phones",
       "width": 620,
-      "height": 230,
+      "height": 200,
       "data": {
         "url": "data/ict-adoption-per-100-people.csv",
         "format": {
