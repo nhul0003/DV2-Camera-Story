@@ -221,16 +221,16 @@ footer strong { color: var(--ink); display: block; margin-bottom: 4px; }
 footer p { max-width: 29em; margin: 0 0 4px; }
 
 /* ---------- Tooltip cards (built in js/tooltips.js) ----------
-   Vega's own tooltip box is made transparent; the card inside has a top rule
-   in the colour of what you are pointing at (--tt), a small grey label, a bold
-   title, one big number, a tiny chart for context and a one-line note. */
+   Vega's own tooltip box is made transparent; the card inside has a small grey label,
+   a bold title, one big number in the colour of what you are pointing at (--tt),
+   a tiny chart for context and a one-line note. */
 #vg-tooltip-element.camera-theme {
   padding: 0; border: 0; background: transparent; box-shadow: none;
   font-family: var(--body); color: var(--ink);
 }
 .tt {
   width: max-content; max-width: 250px; padding: 12px 14px;
-  background: #FFFFFF; border: 1px solid var(--rule); border-top: 4px solid var(--tt); border-radius: 6px;
+  background: #FFFFFF; border: 1px solid var(--rule); border-radius: 6px;
   font-size: 13px; line-height: 1.35; color: var(--ink-soft);
 }
 .tt p { margin: 0; }
