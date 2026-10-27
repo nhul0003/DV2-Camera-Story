@@ -5,7 +5,7 @@
     "text": "Weight of new camera models, by era",
     "subtitle": "Grams, including battery · 3,711 models with a listed weight"
   },
-  "width": 663,
+  "width": 647,
   "height": 300,
   "data": {"url": "data/cameras.csv", "format": {"parse": {"year": "number", "weight_g": "number"}}},
   "transform": [
@@ -25,7 +25,8 @@
           "bandwidth": 30,
           "steps": 240,
           "as": ["weight", "density"]
-        }
+        },
+        {"calculate": "datum.density * 10", "as": "share10"}
       ],
       "mark": {"type": "area", "opacity": 0.28, "interpolate": "monotone"},
       "encoding": {
@@ -37,11 +38,11 @@
           "axis": {"values": [0, 200, 400, 600, 800, 1000, 1200], "grid": false, "labelPadding": 6}
         },
         "y": {
-          "field": "density",
+          "field": "share10",
           "type": "quantitative",
-          "title": "Share of models",
+          "title": "Share of models in each 10 g step",
           "stack": null,
-          "axis": {"labels": false, "grid": false}
+          "axis": {"format": "%", "values": [0, 0.02, 0.04, 0.06, 0.08], "grid": true, "gridColor": "#ECE8DF"}
         },
         "color": {
           "field": "era",
@@ -65,12 +66,13 @@
           "bandwidth": 30,
           "steps": 240,
           "as": ["weight", "density"]
-        }
+        },
+        {"calculate": "datum.density * 10", "as": "share10"}
       ],
       "mark": {"type": "line", "strokeWidth": 2.5, "interpolate": "monotone"},
       "encoding": {
         "x": {"field": "weight", "type": "quantitative", "scale": {"domain": [0, 1200], "nice": false}},
-        "y": {"field": "density", "type": "quantitative"},
+        "y": {"field": "share10", "type": "quantitative"},
         "color": {
           "field": "era",
           "type": "nominal",
