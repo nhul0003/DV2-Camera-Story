@@ -6,7 +6,7 @@
   "spacing": 20,
   "vconcat": [
     {
-      "width": 622,
+      "width": 628,
       "height": 300,
       "transform": [{"filter": {"param": "brush"}}],
       "encoding": {
@@ -39,7 +39,7 @@
               "field": "megapixels",
               "type": "quantitative",
               "title": "Megapixels",
-              "scale": {"domain": [0, 70]},
+              "scale": {"domain": [0, 80]},
               "axis": {
                 "values": [0, 10, 20, 30, 40, 50, 60],
                 "grid": true,
@@ -63,7 +63,7 @@
             "ticks": false,
             "outliers": false
           },
-          "encoding": {"y": {"field": "megapixels", "type": "quantitative", "scale": {"domain": [0, 70]}, "title": null}}
+          "encoding": {"y": {"field": "megapixels", "type": "quantitative", "scale": {"domain": [0, 80]}, "title": null}}
         },
         {
           "transform": [
@@ -74,14 +74,57 @@
           ],
           "mark": {"type": "text", "fontSize": 13, "fontWeight": 700, "color": "#0B4A52"},
           "encoding": {
-            "y": {"field": "ypos", "type": "quantitative", "scale": {"domain": [0, 70]}, "title": null},
+            "y": {"field": "ypos", "type": "quantitative", "scale": {"domain": [0, 80]}, "title": null},
             "text": {"field": "label"}
           }
+        },
+        {
+          "data": {"values": [{"k": 1}]},
+          "layer": [
+            {
+              "mark": {"type": "rule", "color": "#8FBFC5", "strokeWidth": 1},
+              "encoding": {"x": {"value": 6}, "y": {"value": 2}, "y2": {"value": 20}}
+            },
+            {
+              "mark": {"type": "rect", "color": "#64ADB6"},
+              "encoding": {"x": {"value": 0}, "x2": {"value": 13}, "y": {"value": 6}, "y2": {"value": 16}}
+            },
+            {
+              "mark": {"type": "rule", "color": "#FAF8F3", "strokeWidth": 2},
+              "encoding": {"x": {"value": 0}, "x2": {"value": 13}, "y": {"value": 11}}
+            },
+            {
+              "mark": {
+                "type": "text",
+                "align": "left",
+                "baseline": "middle",
+                "fontSize": 12,
+                "color": "#3A3A3A",
+                "text": "Box: middle half of that year's models · pale line: median · whiskers: usual range"
+              },
+              "encoding": {"x": {"value": 20}, "y": {"value": 11}}
+            },
+            {
+              "mark": {"type": "circle", "size": 20, "opacity": 0.6, "color": "#64ADB6"},
+              "encoding": {"x": {"value": 478}, "y": {"value": 11}}
+            },
+            {
+              "mark": {
+                "type": "text",
+                "align": "left",
+                "baseline": "middle",
+                "fontSize": 12,
+                "color": "#3A3A3A",
+                "text": "Dot: unusual model"
+              },
+              "encoding": {"x": {"value": 486}, "y": {"value": 11}}
+            }
+          ]
         }
       ]
     },
     {
-      "width": 622,
+      "width": 628,
       "height": 60,
       "transform": [{"aggregate": [{"op": "median", "field": "megapixels", "as": "med"}], "groupby": ["year"]}],
       "params": [{"name": "brush", "select": {"type": "interval", "encodings": ["x"]}}],
@@ -116,7 +159,7 @@
   "config": {
     "background": null,
     "view": {"stroke": null},
-    "font": "Source Sans 3",
+    "font": "'Source Sans 3', Helvetica, Arial, sans-serif",
     "axis": {"domain": false, "ticks": false, "labelColor": "#4A4A4A", "labelFontSize": 13}
   },
   "padding": {"left": 0, "right": 8, "top": 5, "bottom": 5}

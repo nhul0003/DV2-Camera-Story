@@ -5,7 +5,7 @@
   "spacing": 12,
   "vconcat": [
     {
-      "width": 968,
+      "width": 978,
       "height": 90,
       "layer": [
         {
@@ -98,7 +98,7 @@
       ]
     },
     {
-      "width": 968,
+      "width": 978,
       "height": 372,
       "transform": [
         {"joinaggregate": [{"op": "count", "as": "year_total"}], "groupby": ["year"]},
@@ -199,7 +199,7 @@
   "config": {
     "background": null,
     "view": {"stroke": null},
-    "font": "Source Sans 3",
+    "font": "'Source Sans 3', Helvetica, Arial, sans-serif",
     "axis": {"domain": false, "ticks": false, "labelColor": "#4A4A4A", "labelFontSize": 13},
     "legend": {
       "labelColor": "#4A4A4A",

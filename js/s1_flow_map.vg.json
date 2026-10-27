@@ -380,7 +380,7 @@
   "config": {
     "background": null,
     "view": {"stroke": null},
-    "font": "Source Sans 3",
+    "font": "'Source Sans 3', Helvetica, Arial, sans-serif",
     "axis": {"domain": false, "ticks": false, "labelColor": "#4A4A4A", "titleColor": "#4A4A4A", "labelFontSize": 13},
     "legend": {
       "labelColor": "#4A4A4A",

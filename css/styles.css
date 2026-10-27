@@ -75,7 +75,7 @@ h1 { font-weight: 700; font-size: clamp(48px, 7vw, 76px); line-height: 1.02; let
 .key-items { display: grid; gap: 4px; font-size: 15px; }
 .key-items span { display: inline-flex; align-items: center; gap: 8px; }
 .swatch { width: 16px; height: 16px; border-radius: 3px; display: inline-block; }
-/* One sequential scale for every amount shown by shading in a heatmap (light = less, dark = more) */
+/* One sequential scale for every amount shown by shading: both heatmaps and the phone map (light = less, dark = more) */
 .swatch-ramp { width: 40px; background: linear-gradient(90deg, #E3E7EE, #8797B2, #2C3A5A); }
 
 /* ---------- Sections ---------- */
@@ -102,7 +102,7 @@ h1 { font-weight: 700; font-size: clamp(48px, 7vw, 76px); line-height: 1.02; let
 
 .text h3 { font-size: 26px; font-weight: 700; line-height: 1.2; margin: 0 0 var(--s2); }
 .text p { margin: 0 0 var(--s2); }
-/* Row B text: heading in column 1, explanation in column 2, how-to-read in column 3 */
+/* Row B text: heading in column 1, paragraph across columns 2-3 in two newspaper-style columns */
 .text.grid h3 { margin: 0; }
 .text.grid p.span-2 { columns: 2; column-gap: var(--gap); }
 
@@ -112,8 +112,6 @@ h1 { font-weight: 700; font-size: clamp(48px, 7vw, 76px); line-height: 1.02; let
 .row-b { margin-bottom: var(--s5); }
 
 .how { font-size: 15px; line-height: 1.5; color: var(--muted); margin: var(--s1) 0 0; }
-.hint { display: flex; align-items: center; gap: 10px; font-size: 15px; color: var(--muted); }
-.pill { border: 1px solid; border-radius: 999px; padding: 3px 12px; font-weight: 600; white-space: nowrap; }
 
 .vis { width: 100%; margin-top: var(--s2); }
 /* Year selector under the symbol map */
@@ -150,7 +148,6 @@ footer p { margin: 0 0 4px; }
   background: #FFFFFF !important;
   border: 1px solid var(--rule) !important;
   border-radius: 8px !important;
-  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.12) !important;
   padding: 10px 14px !important;
   max-width: 320px;
 }

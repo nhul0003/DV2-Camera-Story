@@ -159,7 +159,7 @@
   "config": {
     "background": null,
     "view": {"fill": "#F1EEE7", "stroke": null},
-    "font": "Source Sans 3",
+    "font": "'Source Sans 3', Helvetica, Arial, sans-serif",
     "axis": {
       "domain": false,
       "ticks": false,

@@ -52,10 +52,6 @@
           "calculate": "datum.country == 'United States of America' ? 'USA' : datum.country",
           "as": "short_name"
         },
-        {
-          "calculate": "'#1 ' + datum.short_name + ' · world total US$' + format(datum.world_total, ',.0f') + 'm'",
-          "as": "lead_label"
-        },
         {"filter": "datum.Year == 2000"}
       ],
       "mark": {"type": "circle", "filled": false, "stroke": "#8A8A8A", "strokeWidth": 1, "strokeDash": [3, 2]},
@@ -103,10 +99,6 @@
         {
           "calculate": "datum.country == 'United States of America' ? 'USA' : datum.country",
           "as": "short_name"
-        },
-        {
-          "calculate": "'#1 ' + datum.short_name + ' · world total US$' + format(datum.world_total, ',.0f') + 'm'",
-          "as": "lead_label"
         },
         {"calculate": "datum.Year == 2000 ? datum.world_total : 0", "as": "t2000"},
         {"joinaggregate": [{"op": "max", "field": "t2000", "as": "total_2000"}]},
@@ -222,7 +214,7 @@
             "align": "left",
             "fontSize": 22,
             "fontWeight": 700,
-            "font": "Playfair Display",
+            "font": "'Playfair Display', Georgia, serif",
             "color": "#1F1F1F"
           },
           "encoding": {"text": {"field": "t1"}}
@@ -289,7 +281,7 @@
   "config": {
     "background": null,
     "view": {"stroke": null},
-    "font": "Source Sans 3",
+    "font": "'Source Sans 3', Helvetica, Arial, sans-serif",
     "axis": {"domain": false, "ticks": false, "labelColor": "#4A4A4A", "titleColor": "#4A4A4A", "labelFontSize": 13},
     "legend": {
       "labelColor": "#4A4A4A",

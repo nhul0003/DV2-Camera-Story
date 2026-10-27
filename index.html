@@ -37,7 +37,7 @@
           <span><i class="swatch" style="background: var(--phone);"></i>Mobile phones</span>
           <span><i class="swatch" style="background: var(--australia);"></i>Australia (always red)</span>
           <span><i class="swatch" style="background: var(--context);"></i>Everything else</span>
-          <span><i class="swatch swatch-ramp"></i>Heatmap shading: light = less, dark = more</span>
+          <span><i class="swatch swatch-ramp"></i>Shading in heatmaps and the phone map: light = less, dark = more</span>
         </div>
       </div>
 
@@ -181,7 +181,7 @@
       </div>
     </section>
 
-        <!-- ================= SECTION 3: THE DIGITAL BOOM ================= -->
+    <!-- ================= SECTION 3: THE DIGITAL BOOM ================= -->
     <section class="section" id="digital-boom">
       <div class="section-head digital">
         <span class="section-num">03</span>
@@ -254,6 +254,113 @@
         </div>
         <p class="how">Gantt chart · Each bar runs from a brand's first to last new model; the black dot marks its busiest year · Hover over a bar for details · Brands with at least 40 models (94% of all models) · Source: CameraDatabase.</p>
       </div>
+      <!-- Chart 9: density plot of camera weight by era (layout A) -->
+      <div class="row-a grid">
+        <div class="text span-1">
+          <h3>Small cameras <span class="digital">disappeared first</span></h3>
+          <p>During the boom, new cameras got lighter. The typical model of 2005–2012 weighed 150 g, small enough for a pocket.</p>
+          <p>After 2012 that peak of small cameras flattened out. The typical new model now weighs 370 g, two and a half times as much, because the cameras still being made are bigger ones.</p>
+        </div>
+        <div class="span-2">
+          <div id="vis_s3_weight" class="vis"></div>
+          <p class="how">Density plot · Each curve shows how the models of one era spread across weights; the dashed lines mark each era's median · Hover over a dashed line for details · 3,711 models with a listed weight · Source: CameraDatabase.</p>
+        </div>
+      </div>
+
+      <!-- Chart 10: 100% stacked bar chart of sensor type (layout A) -->
+      <div class="row-a grid">
+        <div class="text span-1">
+          <h3>A new kind of <span class="digital">image sensor</span></h3>
+          <p>Early digital cameras used CCD sensors. CMOS sensors use less power and became cheaper to make, and from 2011 they took over quickly.</p>
+          <p>CMOS passed half of all new models in 2012. Since 2017, every new model in the database uses one.</p>
+        </div>
+        <div class="span-2">
+          <div id="vis_s3_sensor" class="vis"></div>
+          <p class="how">100% stacked bar chart · Each bar is one year's new models, split by sensor type · Hover over a bar for numbers · Source: CameraDatabase.</p>
+        </div>
+      </div>
+    </section>
+    <!-- ================= SECTION 4: THE PHONE TAKES OVER ================= -->
+    <section class="section" id="phone-era">
+      <div class="section-head phone">
+        <span class="section-num">04</span>
+        <h2>The phone takes over</h2>
+      </div>
+
+      <!-- Chart 11: phone subscriptions vs camera models, two aligned charts (layout B) -->
+      <div class="row-b">
+        <div class="text grid">
+          <h3 class="span-1"><span class="phone">Phones</span> arrived as cameras peaked</h3>
+          <p class="span-2">Australians signed up for mobile phones fast. By 2007 there were more mobile subscriptions than people, the same year the first iPhone was released. Camera makers kept growing for three more years, then new models fell away while landlines halved.</p>
+        </div>
+        <div id="vis_s4_phones" class="vis"></div>
+        <div class="insights grid">
+          <div class="insight phone">
+            <div class="insight-label">2007 · 101 per 100</div>
+            <div class="insight-number">More mobiles than Australians</div>
+            <p>Up from 45 per 100 in 2000. By 2024 there were 113 mobile subscriptions for every 100 people.</p>
+          </div>
+          <div class="insight digital">
+            <div class="insight-label">2010 · 340 models</div>
+            <div class="insight-number">The camera peak came later</div>
+            <p>Three years after phones passed one per person, camera makers released the most new models. By 2015 it was 70.</p>
+          </div>
+          <div class="insight" style="border-color: var(--context);">
+            <div class="insight-label">Landlines · 53 → 22</div>
+            <div class="insight-number">Per 100 people, 2002 to 2024</div>
+            <p>The home phone faded too. Phones that can call, browse and take photos replaced several older devices.</p>
+          </div>
+        </div>
+        <p class="how">Line chart and bar chart on the same years · Hover over the top chart to highlight that year in both · Top: Australia's subscriptions per 100 people (ITU via Our World in Data) · Bottom: new digital camera models worldwide (CameraDatabase).</p>
+      </div>
+
+      <!-- Chart 12: choropleth map with a year selector (layout B) -->
+      <div class="row-b">
+        <div class="text grid">
+          <h3 class="span-1">Almost everyone <span class="phone">carries a phone</span></h3>
+          <p class="span-2">The map shows the share of people who own a mobile phone, not the number of phones, so countries of every size can be compared fairly. Most of the world is now dark. The lightest countries are in Central and East Africa, where fewer than half of people own one.</p>
+        </div>
+        <div id="vis_s4_map" class="vis"></div>
+        <div class="insights grid">
+          <div class="insight" style="border-color: var(--australia);">
+            <div class="insight-label aus">Australia · 97.5%</div>
+            <div class="insight-number">28th of 185 countries with data, 2024</div>
+            <p>Phone ownership in Australia has stayed between 94% and 98% every year since 2019.</p>
+          </div>
+          <div class="insight phone">
+            <div class="insight-label">World · 82%</div>
+            <div class="insight-number">Four in five people, 2024</div>
+            <p>In Bahrain, Saudi Arabia and the United Arab Emirates, the figure is 100%.</p>
+          </div>
+          <div class="insight phone">
+            <div class="insight-label">Burundi · 28%</div>
+            <div class="insight-number">The lowest in 2024</div>
+            <p>In the least developed countries as a group, 63% of people own a mobile phone.</p>
+          </div>
+        </div>
+        <p class="how">Choropleth map · Shade shows the share of people who own a mobile phone with an active SIM card · Choose a year below the map and hover over a country for details · Countries with no data are light beige · Source: International Telecommunication Union (ITU) via Our World in Data.</p>
+      </div>
+
+      <!-- Chart 13: waffle charts (layout A: text in column 1, chart in columns 2-3) -->
+      <div class="row-a grid">
+        <div class="text span-1">
+          <h3>A camera in <span class="aus">almost every Australian pocket</span></h3>
+          <p>Out of every 100 Australians, 98 own a mobile phone. Worldwide it is 82, and in the least developed countries 63.</p>
+          <p>Almost every phone is also a camera, so most Australians now carry one everywhere they go.</p>
+        </div>
+        <div class="span-2">
+          <div id="vis_s4_waffle" class="vis"></div>
+          <p class="how">Waffle charts · Each square is one person out of 100 · Hover over a square for the exact share · 2024 · Source: ITU via Our World in Data.</p>
+        </div>
+      </div>
+
+      <!-- Conclusion (layout B text row) -->
+      <div class="row-b conclusion">
+        <div class="text grid">
+          <h3 class="span-1">What it meant for <span class="aus">Australia</span></h3>
+          <p class="span-2">For a century, Australians bought cameras made overseas and film made in Melbourne. When digital arrived, Kodak's Coburg plant closed and the country's film exports fell 93% in five years. Digital cameras boomed and then faded within a decade. Today the camera most Australians use is the phone in their pocket.</p>
+        </div>
+      </div>
     </section>
 
     <!-- ================= FOOTER ================= -->
@@ -265,26 +372,34 @@
         <p><a href="https://wits.worldbank.org/" target="_blank">UN Comtrade via World Bank WITS</a>: exports of 35mm film cameras (HS 900653) and colour film (HS 370254), 2000–2023</p>
         <p><a href="https://github.com/leavestylecode/CameraDatabase" target="_blank">CameraDatabase (leavestylecode, GitHub)</a>: specifications of 3,860 digital camera models, 1994–2025</p>
         <p><a href="https://www.photoreview.com.au/news/kodak-to-close-coburg-plant/" target="_blank">Photo Review (2004), "Kodak to close Coburg plant"</a></p>
+        <p><a href="https://ourworldindata.org/grapher/share-population-mobile-phone" target="_blank">International Telecommunication Union (ITU) via Our World in Data</a>: share of the population that owns a mobile phone, 2019–2024</p>
+        <p><a href="https://ourworldindata.org/grapher/ict-adoption-per-100-people" target="_blank">ITU via World Bank and Our World in Data</a>: mobile and landline phone subscriptions per 100 people, 1994–2024</p>
         <p>Map: <a href="https://www.naturalearthdata.com/" target="_blank">Natural Earth</a> 1:110m countries (public domain)</p>
       </div>
       <div class="span-1">
         <strong>About</strong>
         <p>Created by Nevan Hulu for FIT3179 Data Visualisation 2, Monash University, October 2026.</p>
         <p>Charts built with Vega-Lite.</p>
+        <p>AI use: Claude (Anthropic) was used to help write and debug the Vega-Lite code, check data calculations and refine the layout. All data choices, design decisions and written analysis were reviewed by the author.</p>
       </div>
     </footer>
 
   </div>
 
   <script>
-    vegaEmbed('#vis_s1_types', 'js/s1_camera_types_heatmap.vg.json', { actions: false }).catch(console.error);
-    vegaEmbed('#vis_s1_flow', 'js/s1_flow_map.vg.json', { actions: false }).catch(console.error);
-    vegaEmbed('#vis_s2_exports', 'js/s2_film_camera_exports_map.vg.json', { actions: false }).catch(console.error);
-    vegaEmbed('#vis_s2_bump', 'js/s2_film_bump.vg.json', { actions: false }).catch(console.error);
-    vegaEmbed('#vis_s2_aus', 'js/s2_australia_film_line.vg.json', { actions: false }).catch(console.error);
-    vegaEmbed('#vis_s3_brands', 'js/s3_brand_heatmap.vg.json', { actions: false }).catch(console.error);
-    vegaEmbed('#vis_s3_mp', 'js/s3_megapixel_boxplot.vg.json', { actions: false }).catch(console.error);
-    vegaEmbed('#vis_s3_gantt', 'js/s3_brand_gantt.vg.json', { actions: false }).catch(console.error);
+    vegaEmbed('#vis_s1_types', 'js/s1_camera_types_heatmap.vg.json', { actions: false, renderer: 'svg' }).catch(console.error);
+    vegaEmbed('#vis_s1_flow', 'js/s1_flow_map.vg.json', { actions: false, renderer: 'svg' }).catch(console.error);
+    vegaEmbed('#vis_s2_exports', 'js/s2_film_camera_exports_map.vg.json', { actions: false, renderer: 'svg' }).catch(console.error);
+    vegaEmbed('#vis_s2_bump', 'js/s2_film_bump.vg.json', { actions: false, renderer: 'svg' }).catch(console.error);
+    vegaEmbed('#vis_s2_aus', 'js/s2_australia_film_line.vg.json', { actions: false, renderer: 'svg' }).catch(console.error);
+    vegaEmbed('#vis_s3_brands', 'js/s3_brand_heatmap.vg.json', { actions: false, renderer: 'svg' }).catch(console.error);
+    vegaEmbed('#vis_s3_mp', 'js/s3_megapixel_boxplot.vg.json', { actions: false, renderer: 'svg' }).catch(console.error);
+    vegaEmbed('#vis_s3_gantt', 'js/s3_brand_gantt.vg.json', { actions: false, renderer: 'svg' }).catch(console.error);
+    vegaEmbed('#vis_s3_weight', 'js/s3_weight_density.vg.json', { actions: false, renderer: 'svg' }).catch(console.error);
+    vegaEmbed('#vis_s3_sensor', 'js/s3_sensor_stacked.vg.json', { actions: false, renderer: 'svg' }).catch(console.error);
+    vegaEmbed('#vis_s4_phones', 'js/s4_phones_vs_cameras.vg.json', { actions: false, renderer: 'svg' }).catch(console.error);
+    vegaEmbed('#vis_s4_map', 'js/s4_phone_choropleth.vg.json', { actions: false, renderer: 'svg' }).catch(console.error);
+    vegaEmbed('#vis_s4_waffle', 'js/s4_phone_waffle.vg.json', { actions: false, renderer: 'svg' }).catch(console.error);
   </script>
 </body>
 
