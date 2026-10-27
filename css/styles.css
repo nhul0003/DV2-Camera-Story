@@ -169,9 +169,25 @@ h1 { font-weight: 700; font-size: clamp(48px, 7vw, 76px); line-height: 1.02; let
 .interlude p { max-width: 21em; font-size: 19px; line-height: 1.6; color: var(--ink-soft); margin: 0; }
 .interlude strong { font-weight: 700; color: var(--ink); }
 .interlude strong.aus { color: var(--australia); }
-.conclusion { --sec: var(--australia); border-top: 1px solid var(--ink); padding-top: var(--s4); margin-top: var(--s2); max-width: none; }
-.conclusion h3 { max-width: 20em; }
-.conclusion h3 { font-size: 38px; }
+/* Conclusion: summary in the first third, timeline of key moments in the other two thirds */
+.conclusion { --sec: var(--australia); border-top: 1px solid var(--ink); padding-top: var(--s4); margin-top: var(--s2); align-items: start; }
+.conclusion .interlude { margin: 0; }
+.conclusion .interlude h3 { font-size: 34px; }
+.conclusion .interlude p { max-width: none; margin-bottom: var(--s2); }
+
+/* Timeline: a vertical line with a dot per moment, in the colour of its part of the story */
+.timeline { list-style: none; margin: 0; padding: 0 0 0 var(--s3); border-left: 2px solid var(--rule); }
+.timeline li { position: relative; display: grid; grid-template-columns: 64px minmax(0, 1fr); gap: var(--s2); padding: 0 0 var(--s2); font-size: 17px; line-height: 1.5; color: var(--ink-soft); }
+.timeline li:last-child { padding-bottom: 0; }
+.timeline li::before { content: ""; position: absolute; left: calc(-1 * var(--s3) - 7px); top: 6px; width: 12px; height: 12px; border-radius: 50%; background: currentColor; border: 2px solid var(--paper); }
+.timeline li b { font-family: var(--serif); font-size: 20px; line-height: 1.2; }
+.timeline li span { max-width: 28em; }
+.timeline li strong { color: var(--ink); }
+.timeline li.film { color: var(--film); }
+.timeline li.digital { color: var(--digital); }
+.timeline li.phone { color: var(--phone); }
+.timeline li.aus { color: var(--australia); }
+.timeline li span { color: var(--ink-soft); }
 
 /* ---------- Section rail: fixed on the left edge ----------
    Wide screens show the section names; narrower screens show only the ticks,
@@ -218,7 +234,10 @@ h1 { font-weight: 700; font-size: clamp(48px, 7vw, 76px); line-height: 1.02; let
 /* ---------- Footer: sources in two thirds, about in one third ---------- */
 footer { border-top: 1px solid var(--rule); margin-top: var(--s4); padding: var(--s3) 0 var(--s4); font-size: 14px; line-height: 1.6; color: #4A4A4A; }
 footer strong { color: var(--ink); display: block; margin-bottom: 4px; }
-footer p { max-width: 29em; margin: 0 0 4px; }
+footer p { max-width: 29em; margin: 0 0 4px; break-inside: avoid; }
+/* Sources flow into two columns that sit on the grid, so the footer has no empty column */
+footer .span-2 { columns: 2; column-gap: var(--gap); }
+footer .span-2 strong { column-span: all; }
 
 /* ---------- Tooltip cards (built in js/tooltips.js) ----------
    Vega's own tooltip box is made transparent; the card inside has a small grey label,
@@ -265,6 +284,8 @@ footer p { max-width: 29em; margin: 0 0 4px; }
   .row .insight { margin-top: var(--s2); }
   .stat { margin-bottom: var(--s3); }
   .key { margin-top: var(--s3); grid-column: 1 / -1; grid-row: auto; }
+  footer .span-2 { columns: 1; }
+  .timeline { margin-top: var(--s3); }
   .section-head h2 { font-size: 36px; }
   .section-num { font-size: 48px; }
 }
